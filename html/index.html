@@ -1,553 +1,269 @@
-.von
-spicdiceroll
-In voice
-
-This is the start of the #web-ppko private channel.
-za — 22:11
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="id">
-
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Beranda Desa Cerdas KO AWIS</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#16a34a",
-                        "cocoa": "#7c3f1e",
-                        "cream": "#fef3c7",
-                        "light-green": "#dcfce7",
-                        "background-light": "#f6f8f7",
-                        "background-dark": "#112117",
-                    },
-                    fontFamily: {
-                        "display": ["Inter", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
-            },
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KO AWIS — Desa Cerdas Berbasis Potensi Lokal</title>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    /* COLOR PALETTE */
+    :root{
+      --primary-dark:#1a472a; /* header/footer */
+      --secondary:#2d6a4f; /* CTA */
+      --accent:#c8860a; /* gold */
+      --bg:#f9f6f0; /* warm cream */
+      --white:#ffffff;
+      --text:#1c1c1c;
+      --muted:#5f6b63;
+      --card-h:220px;
+      --radius:14px;
+      --gap:16px;
+    }
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
+    /* Reset */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:'Plus Jakarta Sans',system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%;height:auto}
+
+    /* Utilities */
+    .container{max-width:1200px;margin:0 auto;padding:0 16px}
+    .center{text-align:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:999px;border:0;cursor:pointer;font-weight:700}
+
+    /* NAVBAR */
+    header.nav{position:sticky;top:0;z-index:60;background:var(--white);border-bottom:1px solid rgba(0,0,0,0.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+    .brand{display:flex;align-items:center;gap:10px}
+    .leaf{width:44px;height:44px;border-radius:10px;background:var(--secondary);display:grid;place-items:center;color:var(--white);font-weight:900}
+    .brand .title{font-weight:900;font-size:18px}
+    nav.primary{display:none;gap:18px}
+    nav.primary a{color:var(--text);text-decoration:none;font-weight:600;padding:8px}
+    .nav-actions{display:flex;align-items:center;gap:8px}
+    .hamburger{display:inline-flex;border:0;background:transparent;font-size:22px}
+
+    /* HERO */
+    .hero{position:relative;min-height:500px;display:flex;align-items:center}
+    .hero .media{position:absolute;inset:0}
+    .hero .media img{width:100%;height:100%;object-fit:cover}
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.45),rgba(0,0,0,0.6))}
+    .hero .content{position:relative;z-index:2;padding:32px 16px;color:var(--white);text-align:center}
+    .label{display:inline-block;background:rgba(255,255,255,0.06);padding:6px 12px;border-radius:999px;color:var(--accent);font-weight:800;font-size:12px;margin-bottom:12px}
+    h1.title{font-family:'Fraunces',serif;font-weight:900;font-size:28px;margin:8px 0;line-height:1.02}
+    p.lead{max-width:820px;margin:12px auto 18px;color:rgba(255,255,255,0.94)}
+    .hero .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .btn-primary{background:var(--primary-dark);color:var(--white);padding:12px 18px}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.22);color:var(--white);padding:12px 18px;border-radius:12px}
+
+    /* ABOUT */
+    .about{padding:28px 0}
+    .about-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
+    .about-card{background:#3c2a1f;color:var(--white);padding:18px;border-radius:12px}
+    .about-card .vintage{font-family:'Fraunces',serif;font-weight:900;font-size:18px}
+    .about-content .kicker{color:var(--secondary);font-weight:800;font-size:12px;margin-bottom:6px}
+    .about-content h2{font-family:'Fraunces',serif;font-size:22px;margin:6px 0}
+    .points{display:grid;gap:10px}
+    .point{display:flex;gap:12px;align-items:center}
+    .point .dot{width:36px;height:36px;border-radius:999px;background:var(--secondary);color:var(--white);display:grid;place-items:center;font-weight:800}
+    .point p{margin:0;color:var(--muted)}
+
+    /* PROGRAM CARDS */
+    .modules{padding:20px 0}
+    .modules .head{margin-bottom:12px}
+    .program-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .program-card{background:var(--white);padding:16px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,0.06);transition:transform .18s ease,box-shadow .18s ease}
+    .program-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.12)}
+    .program-ico{font-size:28px;margin-bottom:8px}
+    .program-title{font-weight:800}
+    .program-desc{color:var(--muted);font-size:14px;margin:8px 0}
+    .badge-mod{display:inline-block;background:rgba(0,0,0,0.04);padding:6px 8px;border-radius:999px;font-weight:700}
+
+    /* MODULE GRID (dynamic) */
+    .modules-panel{display:none;margin-top:12px}
+    .modules-panel.active{display:block}
+    .module-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .module-card{background:var(--white);padding:12px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.06);opacity:0;transform:translateY(12px);transition:opacity .28s ease,transform .28s ease}
+    .module-card.visible{opacity:1;transform:none}
+    .module-num{font-size:12px;color:var(--muted);margin-bottom:8px}
+
+    /* STATS */
+    .stats{background:var(--primary-dark);color:var(--white);padding:20px 0;margin-top:18px}
+    .stats .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1200px;margin:0 auto}
+    .stats .num{font-weight:900;font-size:28px;color:var(--accent)}
+
+    /* CTA */
+    .cta{padding:28px 0}
+    .cta .box{max-width:900px;margin:0 auto;background:var(--secondary);color:var(--white);padding:22px;border-radius:14px;text-align:center}
+
+    /* FOOTER */
+    footer.site{background:var(--primary-dark);color:var(--white);padding:24px 0}
+    .footer-grid{display:grid;grid-template-columns:1fr;gap:10px;max-width:1200px;margin:0 auto}
+    .footer-grid a{color:rgba(255,255,255,0.95);text-decoration:none}
+
+    /* Responsive */
+    @media(min-width:768px){
+      nav.primary{display:flex}
+      .about-grid{grid-template-columns:1fr 1fr}
+      .program-grid{grid-template-columns:repeat(4,1fr)}
+      .module-grid{grid-template-columns:repeat(4,1fr)}
+      .nav-inner{height:72px}
+      h1.title{font-size:40px}
+    }
+  </style>
 </head>
+<body>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
-    <!-- Header -->
-    <header
-        class="sticky top-0 z-50 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-3">
-                    <div class="bg-primary p-2 rounded-lg text-white">
-                        <span class="material-symbols-outlined block">agriculture</span>
-                    </div>
-                    <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">PPK Ormawa <span
-                            class="text-primary">Desa Cerdas</span></span>
-                </div>
-                <nav class="hidden md:flex space-x-8">
-                    <a class="text-sm font-semibold text-primary" href="#">Beranda</a>
-                    <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                        href="#">Program</a>
-                    <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                        href="#">Modul KO AWIS</a>
-                    <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                        href="#">Profil</a>
-                    <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                        href="#">Informasi</a>
-                    <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                        href="#">Kontak</a>
-                </nav>
-                <div class="flex items-center">
-                    <button
-                        class="bg-primary hover:bg-green-700 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-md shadow-primary/20">
-                        Mulai Belajar
-                    </button>
-                </div>
-            </div>
+  <!-- NAVBAR -->
+  <header class="nav" role="banner">
+    <div class="container nav-inner">
+      <div class="brand"><div class="leaf" aria-hidden>🌿</div><div class="title">KO AWIS</div></div>
+      <nav class="primary" aria-label="Utama">
+        <a href="#beranda" data-nav>Beranda</a>
+        <a href="#program" data-nav>Program</a>
+        <a href="#modul" data-nav>Modul KO AWIS</a>
+        <a href="#profil" data-nav>Profil</a>
+        <a href="#informasi" data-nav>Informasi</a>
+      </nav>
+      <div class="nav-actions"><button class="btn btn-primary">Daftar Sekarang</button><button class="hamburger" id="hamburger" aria-label="Menu">☰</button></div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="beranda" class="hero" role="region" aria-label="Hero">
+    <div class="media"><img src="https://picsum.photos/1600/900?random=101" alt="Kebun kakao pedesaan"></div>
+    <div class="overlay"></div>
+    <div class="content container">
+      <div class="label">PROGRAM DESA CERDAS</div>
+      <h1 class="title">Desa Cerdas Berbasis Potensi Lokal</h1>
+      <p class="lead">Inisiasi budidaya kakao dan penerapan teknologi digital untuk pemberdayaan masyarakat desa. Membangun tradisi dengan inovasi generasi.</p>
+      <div class="actions"><button class="btn btn-primary" onclick="document.getElementById('program').scrollIntoView({behavior:'smooth'})">Pelajari Program Kami</button>
+      <button class="btn btn-outline" onclick="alert('Lihat video profil - placeholder')">Lihat Video Profil</button></div>
+    </div>
+  </main>
+
+  <!-- ABOUT -->
+  <section id="program" class="about">
+    <div class="container about-grid">
+      <div class="about-card">
+        <div class="vintage">ABOUT OUR COOP PRALM Cho & Coa</div>
+        <p>Ilustrasi &amp; pendekatan heritage untuk produk kakao berkualitas.</p>
+        <div style="margin-top:8px" class="badge">Sejak 2024</div>
+        <img src="https://picsum.photos/seed/cocoa/600/360" alt="Ilustrasi kakao" style="border-radius:10px;margin-top:12px;"/>
+      </div>
+      <div class="about-content">
+        <div class="kicker">MENGENAL KAMI</div>
+        <h2>Tentang Program PPK Ormawa</h2>
+        <div class="points">
+          <div class="point"><div class="dot">✓</div><div><strong>Pengembangan Kakao</strong><p>Peningkatan kualitas hasil panen melalui teknik berkelanjutan.</p></div></div>
+          <div class="point"><div class="dot">✓</div><div><strong>Kewirausahaan</strong><p>Pemberdayaan ekonomi lokal melalui unit bisnis komunitas.</p></div></div>
+          <div class="point"><div class="dot">✓</div><div><strong>Transformasi Digital</strong><p>Penerapan teknologi untuk pemasaran dan rantai pasok.</p></div></div>
+          <div class="point"><div class="dot">✓</div><div><strong>Ekonomi Sirkular</strong><p>Inovasi pengolahan limbah menjadi produk bernilai tambah.</p></div></div>
         </div>
-    </header>
-    <!-- Hero Section -->
-    <section class="relative w-full min-h-[600px] flex items-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent z-10"></div>
-            <img alt="Cocoa plantation landscape" class="w-full h-full object-cover"
-                data-alt="Lush green cocoa plantation landscape with sunlight"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp9BeD_fMkPBvmL1_dD2nTPa4Iy2EUS9BCT0lZuZfvLZvlO-PWUPP4uzAs43JCOWXSd_nRwQ8K0pwJpGEJMHKpXznggWKBviIcFocI0UuXcAH7gh8GD8MCpv99IKd_dwzCGPhZXNiUL0TOOld3sf1kfH01Ra6xSSwNGiMs1QNnlIn11tk9lrCAcLJpvGlIXaHlomIzcV3j-zBBZCOzWDr-KL1-Qhx1vF6N7WDBVsV5cGaUoPPw2jkjb8oiAJLHtzLd3qEHJvUFIIY" />
-        </div>
-        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-            <div class="max-w-2xl">
-                <span
-                    class="inline-block px-4 py-1.5 rounded-full bg-primary/20 text-primary font-bold text-xs uppercase tracking-widest mb-6 border border-primary/30 backdrop-blur-md">
-                    Program PPK Ormawa
-                </span>
-                <h1 class="text-5xl md:text-6xl font-black text-white leading-tight mb-6">
-                    Desa Cerdas Berbasis <span class="text-primary">Potensi Lokal</span>
-                </h1>
-                <p class="text-lg text-slate-200 mb-8 leading-relaxed">
-                    Inovasi budidaya kakao dan penerapan teknologi digital untuk pemberdayaan masyarakat desa.
-                    <i class="block mt-4 text-primary font-medium">"Membangun masa depan melalui optimalisasi potensi
-                        bumi pertiwi."</i>
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <button
-                        class="bg-primary hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-primary/30">
-                        Pelajari Program Kami
-                    </button>
-                    <button
-                        class="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/30 px-8 py-4 rounded-xl font-bold transition-all">
-                        Lihat Video Profil
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- About Section -->
-    <section class="py-24 bg-white dark:bg-background-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            ... (231 lines left)
+      </div>
+    </div>
+  </section>
 
-            message.txt
-            19 KB
-            ﻿
-            <!DOCTYPE html>
+  <!-- MODULES (program cards) -->
+  <section id="modul" class="modules">
+    <div class="container">
+      <div class="head"><h2>Modul Pembelajaran KO AWIS</h2><div class="sub">Pilih jalur pembelajaran yang sesuai dengan minat dan kebutuhan Anda dalam ekosistem lokal.</div></div>
+      <div id="programGrid" class="program-grid">
+        <div class="program-card" data-code="HILIR"><div class="program-ico">🍫</div><div class="program-title">KO AWIS HILIR</div><div class="program-desc">Fokus pada teknik pengolahan pasca panen dan rantai nilai kakao.</div><div class="badge-mod">7 Modul Belajar</div><div style="margin-top:8px"><button class="btn" onclick="showModules('HILIR')">Lihat Modul →</button></div></div>
+        <div class="program-card" data-code="ENTREPRENEUR"><div class="program-ico">💼</div><div class="program-title">KO AWIS ENTREPRENEUR</div><div class="program-desc">Strategi wirausaha lokal melalui pembentukan unit bisnis berkomunitas.</div><div class="badge-mod">7 Modul Belajar</div><div style="margin-top:8px"><button class="btn" onclick="showModules('ENTREPRENEUR')">Lihat Modul →</button></div></div>
+        <div class="program-card" data-code="DIGITAL"><div class="program-ico">📱</div><div class="program-title">KO AWIS DIGITAL</div><div class="program-desc">Optimalisasi pemasaran, pembuatan platform e-commerce, dan konten kreatif.</div><div class="badge-mod">6 Modul Belajar</div><div style="margin-top:8px"><button class="btn" onclick="showModules('DIGITAL')">Lihat Modul →</button></div></div>
+        <div class="program-card" data-code="SIRKULAR"><div class="program-ico">♻️</div><div class="program-title">KO AWIS SIRKULAR</div><div class="program-desc">Inovasi pengolahan limbah kakao untuk produk bernilai tinggi dan ekonomi.</div><div class="badge-mod">6 Modul Belajar</div><div style="margin-top:8px"><button class="btn" onclick="showModules('SIRKULAR')">Lihat Modul →</button></div></div>
+      </div>
 
-            <html lang="id">
+      <!-- Modules panel (shown when program selected) -->
+      <div id="modulesPanel" class="modules-panel" aria-live="polite">
+        <div style="display:flex;align-items:center;gap:12px;margin:12px 0"><div class="badge">📅 12 Pertemuan per Program</div><div style="margin-left:auto"><button class="btn" onclick="backToPrograms()">← Kembali</button></div></div>
+        <div id="moduleGrid" class="module-grid"></div>
+      </div>
+    </div>
+  </section>
 
-            <head>
-                <meta charset="utf-8" />
-                <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-                <title>Beranda Desa Cerdas KO AWIS</title>
-                <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-                    rel="stylesheet" />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-                    rel="stylesheet" />
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-                    rel="stylesheet" />
-                <script id="tailwind-config">
-                    tailwind.config = {
-                        darkMode: "class",
-                        theme: {
-                            extend: {
-                                colors: {
-                                    "primary": "#16a34a",
-                                    "cocoa": "#7c3f1e",
-                                    "cream": "#fef3c7",
-                                    "light-green": "#dcfce7",
-                                    "background-light": "#f6f8f7",
-                                    "background-dark": "#112117",
-                                },
-                                fontFamily: {
-                                    "display": ["Inter", "sans-serif"]
-                                },
-                                borderRadius: {
-                                    "DEFAULT": "0.25rem",
-                                    "lg": "0.5rem",
-                                    "xl": "0.75rem",
-                                    "full": "9999px"
-                                },
-                            },
-                        },
-                    }
-                </script>
-                <style>
-                    body {
-                        font-family: 'Inter', sans-serif;
-                    }
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container grid"><div class="center"><div class="num">4</div><div>Jalur Pembelajaran</div></div><div class="center"><div class="num">26</div><div>Total Modul Edukasi</div></div><div class="center"><div class="num">500+</div><div>Peserta Terdampak</div></div></div>
+  </section>
 
-                    .material-symbols-outlined {
-                        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-                    }
-                </style>
-            </head>
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container"><div class="box center"><h3>Siap Belajar Bersama KO AWIS?</h3><p>Tingkatkan kompetensi Anda dan berkontribusi langsung pada kemajuan ekonomi desa yang cerdas dan mandiri.</p><div style="margin-top:12px"><button class="btn" style="background:var(--white);color:var(--secondary);padding:12px 18px;border-radius:12px">Mulai Belajar Sekarang</button><button class="btn" style="background:transparent;border:2px solid rgba(255,255,255,0.12);color:var(--white);margin-left:8px" onclick="alert('Hubungi kami (placeholder)')">Hubungi Kami</button></div></div></div>
+  </section>
 
-            <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
-                <!-- Header -->
-                <header
-                    class="sticky top-0 z-50 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-800">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="flex justify-between items-center h-20">
-                            <div class="flex items-center gap-3">
-                                <div class="bg-primary p-2 rounded-lg text-white">
-                                    <span class="material-symbols-outlined block">agriculture</span>
-                                </div>
-                                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">PPK Ormawa
-                                    <span class="text-primary">Desa Cerdas</span></span>
-                            </div>
-                            <nav class="hidden md:flex space-x-8">
-                                <a class="text-sm font-semibold text-primary" href="#">Beranda</a>
-                                <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                                    href="#">Program</a>
-                                <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                                    href="#">Modul KO AWIS</a>
-                                <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                                    href="#">Profil</a>
-                                <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                                    href="#">Informasi</a>
-                                <a class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
-                                    href="#">Kontak</a>
-                            </nav>
-                            <div class="flex items-center">
-                                <button
-                                    class="bg-primary hover:bg-green-700 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-md shadow-primary/20">
-                                    Mulai Belajar
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-                <!-- Hero Section -->
-                <section class="relative w-full min-h-[600px] flex items-center overflow-hidden">
-                    <div class="absolute inset-0 z-0">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent z-10">
-                        </div>
-                        <img alt="Cocoa plantation landscape" class="w-full h-full object-cover"
-                            data-alt="Lush green cocoa plantation landscape with sunlight"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp9BeD_fMkPBvmL1_dD2nTPa4Iy2EUS9BCT0lZuZfvLZvlO-PWUPP4uzAs43JCOWXSd_nRwQ8K0pwJpGEJMHKpXznggWKBviIcFocI0UuXcAH7gh8GD8MCpv99IKd_dwzCGPhZXNiUL0TOOld3sf1kfH01Ra6xSSwNGiMs1QNnlIn11tk9lrCAcLJpvGlIXaHlomIzcV3j-zBBZCOzWDr-KL1-Qhx1vF6N7WDBVsV5cGaUoPPw2jkjb8oiAJLHtzLd3qEHJvUFIIY" />
-                    </div>
-                    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-                        <div class="max-w-2xl">
-                            <span
-                                class="inline-block px-4 py-1.5 rounded-full bg-primary/20 text-primary font-bold text-xs uppercase tracking-widest mb-6 border border-primary/30 backdrop-blur-md">
-                                Program PPK Ormawa
-                            </span>
-                            <h1 class="text-5xl md:text-6xl font-black text-white leading-tight mb-6">
-                                Desa Cerdas Berbasis <span class="text-primary">Potensi Lokal</span>
-                            </h1>
-                            <p class="text-lg text-slate-200 mb-8 leading-relaxed">
-                                Inovasi budidaya kakao dan penerapan teknologi digital untuk pemberdayaan masyarakat
-                                desa.
-                                <i class="block mt-4 text-primary font-medium">"Membangun masa depan melalui
-                                    optimalisasi potensi bumi pertiwi."</i>
-                            </p>
-                            <div class="flex flex-wrap gap-4">
-                                <button
-                                    class="bg-primary hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-primary/30">
-                                    Pelajari Program Kami
-                                </button>
-                                <button
-                                    class="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/30 px-8 py-4 rounded-xl font-bold transition-all">
-                                    Lihat Video Profil
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- About Section -->
-                <section class="py-24 bg-white dark:bg-background-dark">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="grid lg:grid-cols-2 gap-16 items-center">
-                            <div class="order-2 lg:order-1">
-                                <div class="relative">
-                                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-cream rounded-xl -z-10"></div>
-                                    <img alt="About our cocoa program"
-                                        class="rounded-2xl shadow-2xl object-cover aspect-video lg:aspect-square"
-                                        data-alt="Modern cocoa processing facility with farmers working"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYbW6m6RwpfOx2kKNyVzkhg2TvZ2MuwlukFrv02GE1_b4IkAasFCpAqmGo7LqvBa1UAv9_S1oWc_TeO-JlQYNNCV3w0eumgh6U3rQY1NAPGJ-Zptdv3D683fdr57Jv437_AVnNy3B8lmJsJB2NqhDwiuwZzVJFjAcIuSWDKzTz52716mMIMnoY35pjeQphKIRDix3WjIekL1JeU-MpqrfWPSdxBzPF1WRCUMg-zZRHukTcYqs0ljkUp6PWavzWqOc2YYZ8meaKBtw" />
-                                    <div
-                                        class="absolute -bottom-6 -right-6 bg-cocoa p-6 rounded-2xl shadow-xl text-white max-w-xs hidden sm:block">
-                                        <p class="font-bold text-lg">Sejak 2024</p>
-                                        <p class="text-sm opacity-80 leading-relaxed">Berkomitmen meningkatkan taraf
-                                            hidup petani kakao melalui edukasi berkelanjutan.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="order-1 lg:order-2">
-                                <h2 class="text-primary font-bold tracking-widest uppercase text-sm mb-4">Mengenal Kami
-                                </h2>
-                                <h3 class="text-4xl font-black text-slate-900 dark:text-white mb-8 leading-tight">
-                                    Tentang Program <span class="text-cocoa">PPK Ormawa</span></h3>
-                                <div class="space-y-6">
-                                    <div class="flex gap-4">
-                                        <div
-                                            class="flex-shrink-0 w-12 h-12 rounded-full bg-light-green flex items-center justify-center text-primary">
-                                            <span class="material-symbols-outlined">eco</span>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">
-                                                Pengembangan Kakao</h4>
-                                            <p class="text-slate-600 dark:text-slate-400">Peningkatan kualitas hasil
-                                                panen melalui teknik budidaya modern dan berkelanjutan.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-4">
-                                        <div
-                                            class="flex-shrink-0 w-12 h-12 rounded-full bg-cream flex items-center justify-center text-cocoa">
-                                            <span class="material-symbols-outlined">payments</span>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">
-                                                Kewirausahaan</h4>
-                                            <p class="text-slate-600 dark:text-slate-400">Pemberdayaan ekonomi lokal
-                                                melalui pembentukan unit bisnis berbasis komunitas.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-4">
-                                        <div
-                                            class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
-                                            <span class="material-symbols-outlined">devices</span>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">
-                                                Transformasi Digital</h4>
-                                            <p class="text-slate-600 dark:text-slate-400">Pemanfaatan teknologi tepat
-                                                guna untuk efisiensi rantai pasok dan pemasaran.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-4">
-                                        <div
-                                            class="flex-shrink-0 w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-800">
-                                            <span class="material-symbols-outlined">recycling</span>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Ekonomi
-                                                Sirkular</h4>
-                                            <p class="text-slate-600 dark:text-slate-400">Pengelolaan limbah kakao yang
-                                                berkelanjutan untuk nilai tambah ekonomi.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Module Section -->
-                <section class="py-24 bg-background-light dark:bg-background-dark/50">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="text-center max-w-3xl mx-auto mb-16">
-                            <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-4">Modul Pembelajaran KO
-                                AWIS</h2>
-                            <p class="text-slate-600 dark:text-slate-400">Pilih jalur pembelajaran yang sesuai dengan
-                                minat dan kebutuhan Anda dalam ekosistem kakao.</p>
-                        </div>
-                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            <!-- Card 1 -->
-                            <div
-                                class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border-b-4 border-cocoa shadow-xl hover:-translate-y-2 transition-all">
-                                <div
-                                    class="w-16 h-16 bg-cocoa/10 text-cocoa rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-4xl">factory</span>
-                                </div>
-                                <h4 class="text-xl font-black text-cocoa mb-3">KO AWIS HILIR</h4>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 leading-relaxed">Fokus pada
-                                    teknik pengolahan pasca panen dan pengolahan biji kakao berkualitas.</p>
-                                <div class="flex items-center gap-2 text-cocoa font-bold text-sm">
-                                    <span class="material-symbols-outlined text-sm">menu_book</span>
-                                    7 Modul Belajar
-                                </div>
-                            </div>
-                            <!-- Card 2 -->
-                            <div
-                                class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border-b-4 border-primary shadow-xl hover:-translate-y-2 transition-all">
-                                <div
-                                    class="w-16 h-16 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-4xl">monitoring</span>
-                                </div>
-                                <h4 class="text-xl font-black text-primary mb-3">KO AWIS ENTREPRENEUR</h4>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 leading-relaxed">Strategi
-                                    manajemen bisnis, tata kelola keuangan, dan perluasan jaringan pemasaran.</p>
-                                <div class="flex items-center gap-2 text-primary font-bold text-sm">
-                                    <span class="material-symbols-outlined text-sm">menu_book</span>
-                                    7 Modul Belajar
-                                </div>
-                            </div>
-                            <!-- Card 3 -->
-                            <div
-                                class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border-b-4 border-blue-500 shadow-xl hover:-translate-y-2 transition-all">
-                                <div
-                                    class="w-16 h-16 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-4xl">smartphone</span>
-                                </div>
-                                <h4 class="text-xl font-black text-blue-500 mb-3">KO AWIS DIGITAL</h4>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 leading-relaxed">Digitalisasi
-                                    pemasaran, pemanfaatan platform e-commerce, dan konten kreatif.</p>
-                                <div class="flex items-center gap-2 text-blue-500 font-bold text-sm">
-                                    <span class="material-symbols-outlined text-sm">menu_book</span>
-                                    6 Modul Belajar
-                                </div>
-                            </div>
-                            <!-- Card 4 -->
-                            <div
-                                class="group bg-white dark:bg-slate-800 rounded-2xl p-8 border-b-4 border-green-800 shadow-xl hover:-translate-y-2 transition-all">
-                                <div
-                                    class="w-16 h-16 bg-green-800/10 text-green-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-4xl">recycling</span>
-                                </div>
-                                <h4 class="text-xl font-black text-green-800 mb-3">KO AWIS SIRKULAR</h4>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 leading-relaxed">Inovasi
-                                    pengolahan limbah kakao menjadi produk baru yang bernilai ekonomis.</p>
-                                <div class="flex items-center gap-2 text-green-800 font-bold text-sm">
-                                    <span class="material-symbols-outlined text-sm">menu_book</span>
-                                    6 Modul Belajar
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Stats Section -->
-                <section class="py-20 bg-background-dark text-white relative overflow-hidden">
-                    <div class="absolute inset-0 bg-primary/5 opacity-30"></div>
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-                            <div>
-                                <div class="text-5xl font-black text-primary mb-2">4</div>
-                                <div class="text-xl font-medium text-slate-400">Jalur Pembelajaran</div>
-                            </div>
-                            <div>
-                                <div class="text-5xl font-black text-primary mb-2">26</div>
-                                <div class="text-xl font-medium text-slate-400">Total Modul Edukasi</div>
-                            </div>
-                            <div>
-                                <div class="text-5xl font-black text-primary mb-2">500+</div>
-                                <div class="text-xl font-medium text-slate-400">Peserta Terdampak</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- CTA Section -->
-                <section class="py-24 bg-white dark:bg-background-dark">
-                    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div
-                            class="bg-gradient-to-br from-primary to-green-800 rounded-3xl p-12 text-center shadow-2xl relative overflow-hidden">
-                            <div
-                                class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/10 rounded-full blur-3xl">
-                            </div>
-                            <div
-                                class="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-black/10 rounded-full blur-3xl">
-                            </div>
-                            <h2 class="text-3xl md:text-4xl font-black text-white mb-6">Siap Belajar Bersama KO AWIS?
-                            </h2>
-                            <p class="text-green-50 text-lg mb-10 max-w-2xl mx-auto">Tingkatkan kompetensi Anda dan
-                                berkontribusi langsung pada kemajuan ekonomi desa yang cerdas dan mandiri.</p>
-                            <div class="flex flex-wrap justify-center gap-4">
-                                <button
-                                    class="bg-white text-primary hover:bg-cream px-10 py-4 rounded-xl font-bold transition-all shadow-xl">
-                                    Mulai Belajar Sekarang
-                                </button>
-                                <button
-                                    class="bg-transparent border-2 border-white text-white hover:bg-white/10 px-10 py-4 rounded-xl font-bold transition-all">
-                                    Hubungi Kami
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Footer -->
-                <footer
-                    class="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pt-20 pb-10">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                            <div class="col-span-1 md:col-span-1">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <div class="bg-primary p-2 rounded-lg text-white">
-                                        <span class="material-symbols-outlined block">agriculture</span>
-                                    </div>
-                                    <span class="text-xl font-bold text-slate-900 dark:text-white">Desa Cerdas</span>
-                                </div>
-                                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-                                    Platform edukasi dan pemberdayaan masyarakat desa berbasis potensi lokal kakao
-                                    melalui program PPK Ormawa.
-                                </p>
-                            </div>
-                            <div>
-                                <h5 class="text-slate-900 dark:text-white font-bold mb-6">Tautan Cepat</h5>
-                                <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-400">
-                                    <li><a class="hover:text-primary transition-colors" href="#">Program Utama</a></li>
-                                    <li><a class="hover:text-primary transition-colors" href="#">Daftar Modul</a></li>
-                                    <li><a class="hover:text-primary transition-colors" href="#">Profil Tim</a></li>
-                                    <li><a class="hover:text-primary transition-colors" href="#">Galeri Kegiatan</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="text-slate-900 dark:text-white font-bold mb-6">Hubungi Kami</h5>
-                                <ul class="space-y-4 text-sm text-slate-600 dark:text-slate-400">
-                                    <li class="flex items-center gap-3">
-                                        <span class="material-symbols-outlined text-primary">mail</span>
-                                        info@desacerdas.id
-                                    </li>
-                                    <li class="flex items-center gap-3">
-                                        <span class="material-symbols-outlined text-primary">call</span>
-                                        +62 812-3456-7890
-                                    </li>
-                                    <li class="flex items-start gap-3">
-                                        <span class="material-symbols-outlined text-primary">location_on</span>
-                                        <span>Sekretariat PPK Ormawa,<br />Universitas Pembangunan Nasional</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="text-slate-900 dark:text-white font-bold mb-6">Ikuti Kami</h5>
-                                <div class="flex gap-4 mb-8">
-                                    <a class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white transition-all"
-                                        href="#">
-                                        <span class="material-symbols-outlined">share</span>
-                                    </a>
-                                    <a class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white transition-all"
-                                        href="#">
-                                        <span class="material-symbols-outlined">camera</span>
-                                    </a>
-                                    <a class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-primary hover:text-white transition-all"
-                                        href="#">
-                                        <span class="material-symbols-outlined">video_library</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Partner Logos -->
-                        <div
-                            class="border-t border-slate-200 dark:border-slate-800 pt-10 flex flex-wrap justify-center items-center gap-12 grayscale opacity-60">
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined">school</span>
-                                <span class="font-bold">Kampus Merdeka</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined">groups</span>
-                                <span class="font-bold">PPK Ormawa</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined">account_balance</span>
-                                <span class="font-bold">University Partner</span>
-                            </div>
-                        </div>
-                        <div class="text-center mt-12 text-sm text-slate-500">
-                            © 2024 PPK Ormawa Desa Cerdas. Seluruh Hak Cipta Dilindungi.
-                        </div>
-                    </div>
-                </footer>
-            </body>
+  <!-- FOOTER -->
+  <footer class="site">
+    <div class="footer-grid container">
+      <div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:40px;height:40px;border-radius:8px;background:var(--secondary);display:grid;place-items:center;color:var(--white)">K</div><strong>KO AWIS</strong></div><p style="max-width:360px;color:rgba(255,255,255,0.95)">Memberdayakan petani Indonesia melalui teknologi dan literasi kakao berkelanjutan.</p></div>
+      <div><h4>Ta​utan Cepat</h4><ul style="list-style:none;padding:0;margin:8px 0 0"><li><a href="#">Program Utama</a></li><li><a href="#">Daftar Modul</a></li><li><a href="#">Profil Tim</a></li><li><a href="#">Gerai Kejayan</a></li></ul></div>
+      <div><h4>Hubungi Kami</h4><ul style="list-style:none;padding:0;margin:8px 0 0"><li>info@desacerdas.id</li><li>+62 812-3456-7890</li><li>Sekretariat PPK Ormawa, UPN</li></ul></div>
+      <div><h4>Ikuti Kami</h4><div style="display:flex;gap:8px;margin-top:8px"><a href="#">IG</a><a href="#">FB</a><a href="#">YT</a></div></div>
+    </div>
+    <div style="max-width:1200px;margin:16px auto 0;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;color:rgba(255,255,255,0.85)"> <div>Kampus Merdeka • PPK Ormawa • University Partner</div> <div>© 2024 PPK Ormawa Desa Cerdas. Seluruh Hak Cipta Dilindungi.</div></div>
+  </footer>
 
-            </html>
-            message.txt
-            19 KB
+  <script>
+    // Data for modules per program
+    const PROGRAMS = {
+      HILIR:{color:'#8B5E3C', list:[
+        'Konsep Hilirisasi dan Value Chain Kakao','Kakao Pasca Panen','Perlakuan Pra-Olah','Mendapatkan Kakao Bubuk','Mengolah Kakao Pasta','Desain Produk Kemasan','Standardisasi dan Kualitas'
+      ]},
+      ENTREPRENEUR:{color:'#C8860A', list:[
+        'Kakao Entrepreneur','Konsep Business Model','Rencana Pasar Sederhana','Rencana Produksi Sederhana','Rencana Finansial Sederhana','Rencana Pemasaran Sederhana','Kakao Agility'
+      ]},
+      DIGITAL:{color:'#1a6b72', list:[
+        'Peluang dan Literasi Digital','Content Creator','Strategi Digital Marketing','Copywriting','Manajemen Sosial Media','Evaluasi Performa'
+      ]},
+      SIRKULAR:{color:'#2d6a4f', list:[
+        'Ekonomi Sirkular','Limbah dan Hasil Samping','Peluang Sirkular','Kakao di Kehidupan Kedua','Limbah Akhir','Evaluasi Lingkungan'
+      ]}
+    };
+
+    const programGrid = document.getElementById('programGrid');
+    const modulesPanel = document.getElementById('modulesPanel');
+    const moduleGrid = document.getElementById('moduleGrid');
+
+    function showModules(code){
+      // hide program grid
+      programGrid.style.display='none';
+      modulesPanel.classList.add('active');
+      moduleGrid.innerHTML='';
+      const items = PROGRAMS[code].list;
+      items.forEach((title,i)=>{
+        const el = document.createElement('div'); el.className='module-card';
+        const num = document.createElement('div'); num.className='module-num'; num.textContent='Modul '+(i+1);
+        const img = document.createElement('div'); img.style.height='110px'; img.style.background=PROGRAMS[code].color; img.style.borderRadius='8px'; img.style.margin='6px 0';
+        const h = document.createElement('h4'); h.textContent=title; h.style.margin='6px 0'; h.style.fontWeight='800';
+        const p = document.createElement('p'); p.textContent='Deskripsi singkat modul untuk memberi gambaran inti.'; p.style.margin='0 0 8px'; p.style.color='var(--muted)';
+        const btn = document.createElement('button'); btn.className='btn'; btn.textContent='Pelajari →'; btn.onclick=()=>alert('Pelajari: '+title);
+        el.appendChild(num); el.appendChild(img); el.appendChild(h); el.appendChild(p); el.appendChild(btn);
+        moduleGrid.appendChild(el);
+        setTimeout(()=>el.classList.add('visible'), i*100 + 100);
+      });
+      modulesPanel.scrollIntoView({behavior:'smooth'});
+    }
+
+    function backToPrograms(){
+      modulesPanel.classList.remove('active');
+      moduleGrid.innerHTML='';
+      programGrid.style.display='grid';
+      programGrid.scrollIntoView({behavior:'smooth'});
+    }
+
+    // Hamburger toggle
+    document.getElementById('hamburger').addEventListener('click', ()=>{
+      const nav = document.querySelector('nav.primary');
+      if(getComputedStyle(nav).display==='none') nav.style.display='flex'; else nav.style.display='none';
+    });
+
+    // Smooth scroll nav
+    document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click', e=>{e.preventDefault(); const id = a.getAttribute('href')?.slice(1) || a.textContent.trim().toLowerCase(); const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth'}); document.querySelectorAll('[data-nav]').forEach(x=>x.style.opacity='.7'); a.style.opacity='1';}));
+
+    // Accessibility: ensure button sizes
+    document.querySelectorAll('.btn').forEach(b=>b.style.minHeight='48px');
+  </script>
+
+</body>
+</html>
