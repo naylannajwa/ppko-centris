@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Daftar Modul — KO AWIS</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand" onclick="location.href='/html/index.html'"><div class="brand-icon">K</div>KO AWIS</div>
+    <div class="nav-links">
+      <a href="/html/index.html">Beranda</a>
+      <a href="/html/modul.html">Modul KO AWIS</a>
+      <a href="/html/informasi.html">Informasi</a>
+      <a href="/html/tentang.html">Tentang Kami</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-masuk" href="/html/login.html">Masuk</a>
+      <a class="btn-daftar" href="/html/register.html">Daftar</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/html/index.html">🏠 Beranda</a>
+    <a href="/html/modul.html">📚 Modul KO AWIS</a>
+    <a href="/html/informasi.html">📰 Informasi</a>
+    <a href="/html/tentang.html">👥 Tentang Kami</a>
+    <a href="/html/login.html">🔐 Masuk</a>
+    <a href="/html/register.html">✨ Daftar</a>
+  </div>
+
+  <div class="modul-list-page">
+    <div class="modul-list-header">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="/html/index.html">🏠 Beranda</a>
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          <a href="/html/modul.html">Modul KO AWIS</a>
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          <span id="modullist-breadcrumb">Track</span>
+        </div>
+        <h1 id="modullist-title">KO AWIS Hilir</h1>
+        <p id="modullist-desc" class="text-muted" style="margin-top:0.5rem;">Deskripsi singkat track.</p>
+        <div class="modul-count" id="modullist-count">📚 0 Modul</div>
+      </div>
+    </div>
+    <div class="modul-cards-grid" id="modullist-grid">
+      <!-- Diisi oleh JS -->
+    </div>
+  </div>
+
+  <script src="/js/site-data.js"></script>
+  <script src="/js/site-modul.js"></script>
+</body>
+</html>

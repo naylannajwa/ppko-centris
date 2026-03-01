@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Daftar — KO AWIS</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand" onclick="location.href='/html/index.html'"><div class="brand-icon">K</div>KO AWIS</div>
+    <div class="nav-links"><a href="/html/index.html">Beranda</a><a href="/html/modul.html">Modul</a><a href="/html/informasi.html">Informasi</a><a href="/html/tentang.html">Tentang</a></div>
+    <div class="nav-actions"><a class="btn-masuk" href="/html/login.html">Masuk</a></div>
+    <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')"><span></span><span></span><span></span></div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/html/index.html">🏠 Beranda</a>
+    <a href="/html/modul.html">📚 Modul KO AWIS</a>
+    <a href="/html/informasi.html">📰 Informasi</a>
+    <a href="/html/tentang.html">👥 Tentang Kami</a>
+  </div>
+
+  <main style="max-width:760px;margin:3rem auto;padding:1rem;">
+    <h1 style="font-size:1.6rem;margin-bottom:0.5rem;">Daftar Akun</h1>
+    <p class="text-muted" style="margin-bottom:1.5rem;">Isi data Anda untuk membuat akun. Pastikan menggunakan email yang aktif.</p>
+    <div style="background:var(--white);padding:2rem;border-radius:16px;border:1px solid var(--cream-dark);">
+      <label class="form-label">Nama Lengkap</label>
+      <input class="form-input" type="text" placeholder="Nama lengkap">
+      <label class="form-label" style="margin-top:1rem;">Email</label>
+      <input class="form-input" type="email" placeholder="nama@email.com">
+      <label class="form-label" style="margin-top:1rem;">Kata Sandi</label>
+      <input class="form-input" type="password" placeholder="Minimal 8 karakter">
+      <div style="display:flex;gap:0.5rem;margin-top:1rem;align-items:center;">
+        <button class="btn-daftar" style="flex:1;" onclick="alert('Demo: pendaftaran belum terhubung ke backend')">Daftar</button>
+        <a href="/html/login.html" class="bg-brown-100" style="display:inline-flex;align-items:center;padding:0.6rem 1rem;border-radius:8px;">Masuk</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-muted" style="margin-top:2rem;text-align:center;padding:2rem 0;">© 2024 KO AWIS</footer>
+</body>
+</html>
