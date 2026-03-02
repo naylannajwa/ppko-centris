@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="modul-card-title">${m.title}</div>
           <div class="modul-card-desc">${m.desc}</div>
           <div class="modul-meta">⏱️ ${m.time}</div>
-          <a class="btn-buka" href="login.html">Masuk untuk membuka materi →</a>
+          <a class="btn-buka" href="/html/isimodul.html?track=${track}&open=${i}" onclick="if(typeof openModul==='function'){ openModul('${track}', ${i}); return false; }">Buka Materi →</a>
         </div>
       </div>
     `).join('');

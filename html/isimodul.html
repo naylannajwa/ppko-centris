@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Modul — KO AWIS</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Navbar injected at runtime (no login/register) -->
+
+    <main class="page-isimodul" style="max-width:1200px;margin:2rem auto;padding:0 1rem;">
+        <div class="breadcrumb">
+            <a href="/html/index.html">🏠 Beranda</a>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+            <a href="/html/modul.html">Modul KO AWIS</a>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M9 18l6-6-6-6" />
+            </svg>
+            <a href="/html/modullist.html">Daftar Modul</a>
+        </div>
+
+        <div class="isi-modul-layout" style="margin-top:1rem;display:flex;gap:2rem;align-items:flex-start;">
+            <!-- Sidebar -->
+            <aside class="sidebar-modul" id="sidebarModul" style="width:260px;">
+                <div class="sidebar-title">DAFTAR MODUL</div>
+                <div class="sidebar-subtitle" id="sidebar-track-name">KO AWIS</div>
+                <div class="fs-08 mb-075 text-muted">Progres: <span id="sidebar-progress-text">0% Selesai</span></div>
+                <div class="sidebar-progress-bar">
+                    <div class="sidebar-progress-fill" id="sidebarProgressFill" style="width:0%"></div>
+                </div>
+                <nav class="sidebar-nav" id="sidebarNav"></nav>
+            </aside>
+
+            <!-- Main Content -->
+            <div style="flex:1;display:flex;flex-direction:column;">
+                <div class="modul-content" id="modulContent">
+                    <!-- Populated by app.js -->
+                </div>
+
+                <div class="modul-navigation" style="display:flex;gap:1rem;margin-top:1.5rem;justify-content:flex-end;">
+                    <button class="btn-prev" id="btnPrev" onclick="navigateModul(-1)" style="display:none;">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                        Kembali
+                    </button>
+                    <button class="btn-next" id="btnNext" onclick="navigateModul(1)">
+                        Selesaikan & Lanjutkan
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24">
+                            <path d="M9 18l6-6-6-6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-bar-bottom" style="margin-top:1.5rem;">
+            <div class="progress-bar-fill-bottom" id="progressBarBottom" style="width:0%"></div>
+        </div>
+    </main>
+
+    <script src="/js/include-navbar.js"></script>
+    <script src="/js/app.js"></script>
+    <script>
+        // If query params specify a track & open index, open the modul directly.
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(location.search);
+            const track = params.get('track') || 'hilir';
+            const open = params.get('open');
+            // wait a tick to ensure app.js functions are available
+            setTimeout(() => {
+                try {
+                    if (typeof showModulList === 'function') showModulList(track);
+                    if (open !== null && typeof openModul === 'function') {
+                        const idx = parseInt(open, 10);
+                        if (!isNaN(idx)) openModul(track, idx);
+                    }
+                } catch (e) { console.warn('Could not open modul', e); }
+            }, 50);
+        });
+    </script>
+</body>
+
+</html>

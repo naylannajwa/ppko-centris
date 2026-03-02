@@ -1,110 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KO AWIS — Platform Edukasi Kakao Desa Cerdas</title>
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233D2314'/><text y='.9em' font-size='65' x='12'>🍫</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%233D2314'/><text y='.9em' font-size='65' x='12'>🍫</text></svg>">
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-brand" onclick="location.href='/html/index.html'">
-    <div class="brand-icon">K</div>
-    <span>KO AWIS</span>
-  </div>
-  <div class="nav-links">
-    <a href="/html/index.html" class="active" id="nav-home">Beranda</a>
-    <a href="/html/modul.html" id="nav-modul">Modul KO AWIS</a>
-    <a href="/html/informasi.html" id="nav-informasi">Informasi</a>
-    <a href="/html/tentang.html" id="nav-tentang">Tentang Kami</a>
-  </div>
-  
-  <div class="hamburger" id="hamburger" onclick="toggleMobile()">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="/html/index.html">🏠 Beranda</a>
-  <a href="/html/modul.html">📚 Modul KO AWIS</a>
-  <a href="/html/informasi.html">📰 Informasi</a>
-  <a href="/html/tentang.html">👥 Tentang Kami</a>
-  <!-- Masuk/Daftar removed per request -->
-</div>
+  <!-- Navbar injected at runtime (no login/register buttons) -->
+  <!-- include via /js/include-navbar.js -->
 
-<!-- HERO: main landing image kept visible -->
-<section class="hero" aria-label="Hero KO AWIS">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-content">
-    <div class="hero-tag">UTAMA</div>
-    <h1>Modernisasi Desa Berbasis <span>Literasi Kakao</span></h1>
-    <p>Platform edukasi digital untuk meningkatkan kualitas hidup petani kakao Indonesia melalui empat pilar pembelajaran utama.</p>
-    <div class="hero-cta">
-      <button class="btn-primary" onclick="location.href='/html/modul.html'">📚 Mulai Belajar Sekarang</button>
-      <button class="btn-outline" onclick="location.href='/html/tentang.html'">📞 Lihat Kurikulum</button>
-    </div>
-  </div>
-</section>
-
-<!-- =============================== -->
-<!-- PAGE: HOME / BERANDA            -->
-<!-- =============================== -->
-<!-- Informasi dipindahkan ke halaman terpisah: /html/informasi.html -->
-<div class="page" id="page-informasi">
-  <div class="container max-w-1200 mx-auto">
-    <div class="info-hero">
-      <div class="info-hero-bg"></div>
-      <div class="info-hero-overlay"></div>
-      <div class="info-hero-content">
-        <div class="info-hero-tag">UTAMA</div>
-        <h1>Informasi Terbaru</h1>
-        <p>Berita terkini seputar pertanian kakao, program desa berkelanjutan, dan pembaruan kegiatan komunitas KO AWIS di Indonesia.</p>
-        <button class="btn-info-hero" onclick="showToast('Membuka artikel utama...')">
-          Baca Selengkapnya →
-        </button>
+  <!-- HERO: main landing image kept visible -->
+  <section class="hero" aria-label="Hero KO AWIS">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-tag">UTAMA</div>
+      <h1>Modernisasi Desa Berbasis <span>Literasi Kakao</span></h1>
+      <p>Platform edukasi digital untuk meningkatkan kualitas hidup petani kakao Indonesia melalui empat pilar
+        pembelajaran utama.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="location.href='/html/modul.html'">📚 Mulai Belajar Sekarang</button>
+        <button class="btn-outline" onclick="location.href='/html/tentang.html'">📞 Lihat Kurikulum</button>
       </div>
     </div>
+  </section>
 
-    <div class="category-tabs">
-      <button class="tab-btn active" onclick="filterArticles('semua', this)">Semua Berita</button>
-      <button class="tab-btn" onclick="filterArticles('pertanian', this)">🌱 Pertanian</button>
-      <button class="tab-btn" onclick="filterArticles('program', this)">🏘️ Program Desa</button>
-      <button class="tab-btn" onclick="filterArticles('komunitas', this)">👥 Komunitas</button>
-      <button class="tab-btn" onclick="filterArticles('pasar', this)">📈 Pasar Kakao</button>
-    </div>
+  <!-- =============================== -->
+  <!-- PAGE: HOME / BERANDA            -->
+  <!-- =============================== -->
+  <!-- Informasi dipindahkan ke halaman terpisah: /html/informasi.html -->
+  <div class="page" id="page-informasi">
+    <div class="container max-w-1200 mx-auto">
+      <div class="info-hero">
+        <div class="info-hero-bg"></div>
+        <div class="info-hero-overlay"></div>
+        <div class="info-hero-content">
+          <div class="info-hero-tag">UTAMA</div>
+          <h1>Informasi Terbaru</h1>
+          <p>Berita terkini seputar pertanian kakao, program desa berkelanjutan, dan pembaruan kegiatan komunitas KO
+            AWIS di Indonesia.</p>
+          <button class="btn-info-hero" onclick="showToast('Membuka artikel utama...')">
+            Baca Selengkapnya →
+          </button>
+        </div>
+      </div>
+
+      <div class="category-tabs">
+        <button class="tab-btn active" onclick="filterArticles('semua', this)">Semua Berita</button>
+        <button class="tab-btn" onclick="filterArticles('pertanian', this)">🌱 Pertanian</button>
+        <button class="tab-btn" onclick="filterArticles('program', this)">🏘️ Program Desa</button>
+        <button class="tab-btn" onclick="filterArticles('komunitas', this)">👥 Komunitas</button>
+        <button class="tab-btn" onclick="filterArticles('pasar', this)">📈 Pasar Kakao</button>
+      </div>
 
       <div class="px-2 pb-1">
-      <h2 class="section-article-title">Berita & Artikel Terkini</h2>
-    </div>
+        <h2 class="section-article-title">Berita & Artikel Terkini</h2>
+      </div>
 
-    <div class="articles-grid" id="articlesGrid">
-      <!-- Populated by JS -->
-    </div>
+      <div class="articles-grid" id="articlesGrid">
+        <!-- Populated by JS -->
+      </div>
 
-    <div class="pagination">
-      <div class="page-arrow">‹</div>
-      <div class="page-num active">1</div>
-      <div class="page-num" onclick="showToast('Halaman 2 akan tersedia segera!')">2</div>
-      <div class="page-num" onclick="showToast('Halaman 3 akan tersedia segera!')">3</div>
-      <div class="page-num">…</div>
-      <div class="page-num" onclick="showToast('Masih dalam pengembangan!')">12</div>
-      <div class="page-arrow">›</div>
+      <div class="pagination">
+        <div class="page-arrow">‹</div>
+        <div class="page-num active">1</div>
+        <div class="page-num" onclick="showToast('Halaman 2 akan tersedia segera!')">2</div>
+        <div class="page-num" onclick="showToast('Halaman 3 akan tersedia segera!')">3</div>
+        <div class="page-num">…</div>
+        <div class="page-num" onclick="showToast('Masih dalam pengembangan!')">12</div>
+        <div class="page-arrow">›</div>
+      </div>
     </div>
-  </div>
   </div>
 
   <!-- About Section -->
   <section class="section">
     <div class="container">
-    <div class="grid-2 gap-4rem items-center">
+      <div class="grid-2 gap-4rem items-center">
         <div class="reveal">
           <span class="section-label">Mengenal Kami</span>
           <h2 class="section-title">Tentang Program <span>PPK Ormawa</span></h2>
           <p class="text-muted lead">
-            Kami adalah tim mahasiswa yang berkomitmen membangun ekosistem kakao di Desa Merak melalui pendekatan edukatif, teknologi, dan pemberdayaan masyarakat secara berkelanjutan.
+            Kami adalah tim mahasiswa yang berkomitmen membangun ekosistem kakao di Desa Merak melalui pendekatan
+            edukatif, teknologi, dan pemberdayaan masyarakat secara berkelanjutan.
           </p>
           <div class="flex-col gap-075">
             <div class="flex items-center gap-075 fs-095 text-mid">
@@ -126,12 +110,13 @@
           </div>
         </div>
         <div class="reveal reveal-delay-2">
-            <div class="bg-brown-800 text-white rounded-xl p-2 pos-relative overflow-hidden">
+          <div class="bg-brown-800 text-white rounded-xl p-2 pos-relative overflow-hidden">
             <div class="decor-circle"></div>
             <div class="fs-3rem mb-1">🍫</div>
             <div class="playfair-strong">Sejak 2024</div>
             <p class="text-white-muted fs-095 mb-3">
-              Berkomitmen meningkatkan taraf hidup petani kakao Desa Merak melalui edukasi berkelanjutan dan teknologi tepat guna.
+              Berkomitmen meningkatkan taraf hidup petani kakao Desa Merak melalui edukasi berkelanjutan dan teknologi
+              tepat guna.
             </p>
             <div class="grid-2 gap-075">
               <div class="bg-card-cream rounded-md p-1 text-center">
@@ -160,17 +145,20 @@
         <div class="feature-card reveal reveal-delay-1">
           <div class="feature-icon">📖</div>
           <div class="feature-title">Kurikulum Berstandar</div>
-          <p class="feature-desc">Materi disusun sistematis mengikuti standar agronomi kakao modern untuk hasil panen dan produksi yang optimal.</p>
+          <p class="feature-desc">Materi disusun sistematis mengikuti standar agronomi kakao modern untuk hasil panen
+            dan produksi yang optimal.</p>
         </div>
         <div class="feature-card reveal reveal-delay-2">
           <div class="feature-icon">👨‍🏫</div>
           <div class="feature-title">Instruktur Berpengalaman</div>
-          <p class="feature-desc">Dibimbing langsung oleh praktisi dan akademisi yang berpengalaman di industri kakao selama puluhan tahun.</p>
+          <p class="feature-desc">Dibimbing langsung oleh praktisi dan akademisi yang berpengalaman di industri kakao
+            selama puluhan tahun.</p>
         </div>
         <div class="feature-card reveal reveal-delay-3">
           <div class="feature-icon">🏆</div>
           <div class="feature-title">Sertifikat Digital</div>
-          <p class="feature-desc">Dapatkan pengakuan resmi setelah menyelesaikan setiap modul sebagai validasi kompetensi keahlian kakao Anda.</p>
+          <p class="feature-desc">Dapatkan pengakuan resmi setelah menyelesaikan setiap modul sebagai validasi
+            kompetensi keahlian kakao Anda.</p>
         </div>
       </div>
     </div>
@@ -180,7 +168,7 @@
   <div class="cta-section reveal">
     <h2>Siap Belajar Bersama KO AWIS?</h2>
     <p>Tingkatkan kompetensi Anda dan berkontribusi langsung pada kemajuan ekonomi desa yang cerdas dan mandiri.</p>
-      <div class="cta-buttons">
+    <div class="cta-buttons">
       <button class="btn-cta-white" onclick="location.href='/html/modul.html'">
         📚 Mulai Belajar Sekarang
       </button>
@@ -192,13 +180,14 @@
 
   <!-- Footer -->
   <footer>
-      <div class="footer-grid">
+    <div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
           <div class="brand-icon">K</div>
           KO AWIS
         </div>
-        <p class="footer-desc">Platform edukasi dan pemberdayaan masyarakat desa berbasis potensi lokal kakao melalui program PPK Ormawa Desa Cerdas.</p>
+        <p class="footer-desc">Platform edukasi dan pemberdayaan masyarakat desa berbasis potensi lokal kakao melalui
+          program PPK Ormawa Desa Cerdas.</p>
       </div>
       <div class="footer-col">
         <h4>Tautan Cepat</h4>
@@ -225,16 +214,16 @@
           <li><a onclick="showToast('Facebook page coming soon!')">👍 Facebook</a></li>
         </ul>
       </div>
-        <div class="footer-col">
-          <h4>Berlangganan</h4>
-          <ul>
-            <li><a>📧 info@desacerdas.id</a></li>
-            <li><a>📱 +62 812-3456-7890</a></li>
-            <li><a>📍 Desa Merak, Jawa Barat</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <h4>Berlangganan</h4>
+        <ul>
+          <li><a>📧 info@desacerdas.id</a></li>
+          <li><a>📱 +62 812-3456-7890</a></li>
+          <li><a>📍 Desa Merak, Jawa Barat</a></li>
+        </ul>
+      </div>
     </div>
-        <div class="footer-bottom">
+    <div class="footer-bottom">
       <span>© 2024 PPK Ormawa Desa Cerdas. Seluruh Hak Cipta Dilindungi.</span>
       <div class="footer-partners">
         <span>🎓 Kampus Merdeka</span>
@@ -243,409 +232,584 @@
       </div>
     </div>
   </footer>
-</div>
-
-<!-- =============================== -->
-<!-- PAGE: MODUL KO AWIS             -->
-<!-- =============================== -->
-<div class="page" id="page-modul">
-  <div class="page-header">
-    <div class="page-label">KURIKULUM TERINTEGRASI</div>
-    <h1>Eksplorasi Modul Pembelajaran</h1>
-    <p>Tingkatkan kompetensi Anda melalui empat pilar utama pendidikan KO AWIS yang dirancang untuk masa depan yang berkelanjutan.</p>
   </div>
 
-  <section class="section">
-    <div class="container">
-      <div class="kurikulum-grid">
-        <!-- Hilir -->
-        <div class="kurikulum-card">
-          <div class="kurikulum-header">
-            <div class="k-icon bg-brown-100 k-icon-lg">🏭</div>
-            <div>
-              <div class="k-title text-brown-600">KO AWIS Hilir</div>
-              <div class="k-sub">Optimalisasi Produk & Pasca Panen</div>
-            </div>
-          </div>
-          <div class="kurikulum-body">
-            <div class="modul-list">
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 1: Konsep Hilirisasi dan Value Chain Kakao</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 2: Kakao Pasca Panen</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 3: Perlakuan Pra-Olah</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 4: Mendapatkan Kakao Bubuk</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 5: Mengolah Kakao Pasta</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 6: Desain Produk Kemasan</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 7: Standardisasi dan Kualitas</div>
-            </div>
-            <button class="btn-explore card-hilir" onclick="showModulList('hilir')">Pelajari Selengkapnya →</button>
-          </div>
-        </div>
-
-        <!-- Entrepreneur -->
-        <div class="kurikulum-card">
-          <div class="kurikulum-header">
-            <div class="k-icon bg-brown-50 k-icon-lg">💰</div>
-            <div>
-              <div class="k-title text-brown-700">KO AWIS Entrepreneur</div>
-              <div class="k-sub">Pembangunan Mentalitas Bisnis</div>
-            </div>
-          </div>
-          <div class="kurikulum-body">
-            <div class="modul-list">
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 1: Kakao Entrepreneur</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 2: Konsep Business Model</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 3: Rencana Pasar Sederhana</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 4: Rencana Produksi Sederhana</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 5: Rencana Finansial Sederhana</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 6: Rencana Pemasaran Sederhana</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 7: Kakao Agility</div>
-            </div>
-            <button class="btn-explore card-entre" onclick="showModulList('entrepreneur')">Pelajari Selengkapnya →</button>
-          </div>
-        </div>
-
-        <!-- Digital -->
-        <div class="kurikulum-card">
-          <div class="kurikulum-header">
-            <div class="k-icon bg-brown-100 k-icon-lg">💻</div>
-            <div>
-              <div class="k-title text-brown-500">KO AWIS Digital</div>
-              <div class="k-sub">Transformasi Teknologi & Konten</div>
-            </div>
-          </div>
-          <div class="kurikulum-body">
-            <div class="modul-list">
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 1: Peluang dan Literasi Digital</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 2: Content Creator</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 3: Strategi Digital Marketing</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 4: Copywriting</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 5: Manajemen Sosial Media</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 6: Evaluasi Performa</div>
-            </div>
-            <button class="btn-explore card-digital" onclick="showModulList('digital')">Pelajari Selengkapnya →</button>
-          </div>
-        </div>
-
-        <!-- Sirkular -->
-        <div class="kurikulum-card">
-          <div class="kurikulum-header">
-            <div class="k-icon bg-brown-50 k-icon-lg">♻️</div>
-            <div>
-              <div class="k-title text-brown-600">KO AWIS Sirkular</div>
-              <div class="k-sub">Ekosistem Ramah Lingkungan</div>
-            </div>
-          </div>
-          <div class="kurikulum-body">
-            <div class="modul-list">
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 1: Ekonomi Sirkular</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 2: Limbah dan Hasil Samping</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 3: Peluang Sirkular</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 4: Kakao di Kehidupan Kedua</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 5: Limbah Akhir</div>
-              <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Modul 6: Evaluasi Lingkungan</div>
-            </div>
-            <button class="btn-explore card-sirkular" onclick="showModulList('sirkular')">Pelajari Selengkapnya →</button>
-          </div>
-        </div>
-      </div>
+  <!-- =============================== -->
+  <!-- PAGE: MODUL KO AWIS             -->
+  <!-- =============================== -->
+  <div class="page" id="page-modul">
+    <div class="page-header">
+      <div class="page-label">KURIKULUM TERINTEGRASI</div>
+      <h1>Eksplorasi Modul Pembelajaran</h1>
+      <p>Tingkatkan kompetensi Anda melalui empat pilar utama pendidikan KO AWIS yang dirancang untuk masa depan yang
+        berkelanjutan.</p>
     </div>
-  </section>
 
-  <!-- Footer identical -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo"><div class="brand-icon">K</div>KO AWIS</div>
-        <p class="footer-desc">Platform edukasi dan pemberdayaan masyarakat desa berbasis potensi lokal kakao melalui program PPK Ormawa.</p>
-      </div>
-      <div class="footer-col"><h4>Navigasi</h4><ul><li><a href="/html/index.html">Beranda</a></li><li><a href="/html/modul.html">Modul KO AWIS</a></li><li><a href="/html/informasi.html">Informasi</a></li><li><a href="/html/tentang.html">Tentang Kami</a></li></ul></div>
-      <div class="footer-col"><h4>Informasi</h4><ul><li><a onclick="showToast('Halaman segera tersedia!')">Kebijakan Privasi</a></li><li><a onclick="showToast('Halaman segera tersedia!')">Syarat & Ketentuan</a></li><li><a onclick="showToast('Halaman segera tersedia!')">Bantuan</a></li><li><a onclick="showPage('tentang')">Kontak</a></li></ul></div>
-      <div class="footer-col">
-        <h4>Berlangganan</h4>
-        <p class="text-white-muted fs-085 mb-075">Dapatkan update berita kakao langsung di email Anda.</p>
-        <div class="flex gap-05">
-          <input placeholder="Email Anda" class="input-rounded flex-1 fs-085">
-          <button class="btn-brown" onclick="showToast('Terima kasih telah berlangganan!')">Kirim</button>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom"><span>© 2024 KO AWIS Platform. Seluruh Hak Cipta Dilindungi.</span><span>Instagram · LinkedIn · Kontak</span></div>
-  </footer>
-</div>
-
-<!-- =============================== -->
-<!-- PAGE: DAFTAR MODUL (LIST)        -->
-<!-- =============================== -->
-<div class="page" id="page-modullist">
-  <div class="modul-list-page">
-    <div class="modul-list-header">
+    <section class="section">
       <div class="container">
-        <div class="breadcrumb">
-          <a onclick="showPage('home')">🏠 Beranda</a>
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-          <a onclick="showPage('modul')">Modul KO AWIS</a>
-          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-          <span id="modullist-breadcrumb">Hilir</span>
-        </div>
-        <h1 id="modullist-title">KO AWIS Hilir</h1>
-        <p id="modullist-desc" class="text-muted mt-1">Daftar modul pembelajaran yang dirancang khusus untuk penguatan kompetensi.</p>
-        <div class="modul-count" id="modullist-count">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          7 Modul Tersedia
-        </div>
-      </div>
-    </div>
-    <div class="modul-cards-grid" id="modullist-grid">
-      <!-- Populated by JS -->
-    </div>
-  </div>
-</div>
+        <div class="kurikulum-grid">
+          <!-- Hilir -->
+          <div class="kurikulum-card">
+            <div class="kurikulum-header">
+              <div class="k-icon bg-brown-100 k-icon-lg">🏭</div>
+              <div>
+                <div class="k-title text-brown-600">KO AWIS Hilir</div>
+                <div class="k-sub">Optimalisasi Produk & Pasca Panen</div>
+              </div>
+            </div>
+            <div class="kurikulum-body">
+              <div class="modul-list">
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 1: Konsep Hilirisasi dan Value Chain Kakao</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 2: Kakao Pasca Panen</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 3: Perlakuan Pra-Olah</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 4: Mendapatkan Kakao Bubuk</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 5: Mengolah Kakao Pasta</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 6: Desain Produk Kemasan</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 7: Standardisasi dan Kualitas</div>
+              </div>
+              <button class="btn-explore card-hilir" onclick="showModulList('hilir')">Pelajari Selengkapnya →</button>
+            </div>
+          </div>
 
-<!-- =============================== -->
-<!-- PAGE: ISI MODUL                 -->
-<!-- =============================== -->
-<div class="page" id="page-isimodul">
-  <div class="isi-modul-layout">
-    <!-- Sidebar -->
-    <aside class="sidebar-modul" id="sidebarModul">
-      <div class="sidebar-title">DAFTAR MODUL</div>
-      <div class="sidebar-subtitle" id="sidebar-track-name">KO AWIS Hilir</div>
-      <div class="fs-08 mb-075 text-muted">Progres: <span id="sidebar-progress-text">25% Selesai</span></div>
-      <div class="sidebar-progress-bar">
-        <div class="sidebar-progress-fill" id="sidebarProgressFill" style="width:25%;"></div>
+          <!-- Entrepreneur -->
+          <div class="kurikulum-card">
+            <div class="kurikulum-header">
+              <div class="k-icon bg-brown-50 k-icon-lg">💰</div>
+              <div>
+                <div class="k-title text-brown-700">KO AWIS Entrepreneur</div>
+                <div class="k-sub">Pembangunan Mentalitas Bisnis</div>
+              </div>
+            </div>
+            <div class="kurikulum-body">
+              <div class="modul-list">
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 1: Kakao Entrepreneur</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 2: Konsep Business Model</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 3: Rencana Pasar Sederhana</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 4: Rencana Produksi Sederhana</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 5: Rencana Finansial Sederhana</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 6: Rencana Pemasaran Sederhana</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 7: Kakao Agility</div>
+              </div>
+              <button class="btn-explore card-entre" onclick="showModulList('entrepreneur')">Pelajari Selengkapnya
+                →</button>
+            </div>
+          </div>
+
+          <!-- Digital -->
+          <div class="kurikulum-card">
+            <div class="kurikulum-header">
+              <div class="k-icon bg-brown-100 k-icon-lg">💻</div>
+              <div>
+                <div class="k-title text-brown-500">KO AWIS Digital</div>
+                <div class="k-sub">Transformasi Teknologi & Konten</div>
+              </div>
+            </div>
+            <div class="kurikulum-body">
+              <div class="modul-list">
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 1: Peluang dan Literasi Digital</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 2: Content Creator</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 3: Strategi Digital Marketing</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 4: Copywriting</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 5: Manajemen Sosial Media</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 6: Evaluasi Performa</div>
+              </div>
+              <button class="btn-explore card-digital" onclick="showModulList('digital')">Pelajari Selengkapnya
+                →</button>
+            </div>
+          </div>
+
+          <!-- Sirkular -->
+          <div class="kurikulum-card">
+            <div class="kurikulum-header">
+              <div class="k-icon bg-brown-50 k-icon-lg">♻️</div>
+              <div>
+                <div class="k-title text-brown-600">KO AWIS Sirkular</div>
+                <div class="k-sub">Ekosistem Ramah Lingkungan</div>
+              </div>
+            </div>
+            <div class="kurikulum-body">
+              <div class="modul-list">
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 1: Ekonomi Sirkular</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 2: Limbah dan Hasil Samping</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 3: Peluang Sirkular</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 4: Kakao di Kehidupan Kedua</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 5: Limbah Akhir</div>
+                <div class="modul-item"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg> Modul 6: Evaluasi Lingkungan</div>
+              </div>
+              <button class="btn-explore card-sirkular" onclick="showModulList('sirkular')">Pelajari Selengkapnya
+                →</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <nav class="sidebar-nav" id="sidebarNav">
+    </section>
+
+    <!-- Footer identical -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="brand-icon">K</div>KO AWIS
+          </div>
+          <p class="footer-desc">Platform edukasi dan pemberdayaan masyarakat desa berbasis potensi lokal kakao melalui
+            program PPK Ormawa.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a href="/html/index.html">Beranda</a></li>
+            <li><a href="/html/modul.html">Modul KO AWIS</a></li>
+            <li><a href="/html/informasi.html">Informasi</a></li>
+            <li><a href="/html/tentang.html">Tentang Kami</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Informasi</h4>
+          <ul>
+            <li><a onclick="showToast('Halaman segera tersedia!')">Kebijakan Privasi</a></li>
+            <li><a onclick="showToast('Halaman segera tersedia!')">Syarat & Ketentuan</a></li>
+            <li><a onclick="showToast('Halaman segera tersedia!')">Bantuan</a></li>
+            <li><a onclick="showPage('tentang')">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Berlangganan</h4>
+          <p class="text-white-muted fs-085 mb-075">Dapatkan update berita kakao langsung di email Anda.</p>
+          <div class="flex gap-05">
+            <input placeholder="Email Anda" class="input-rounded flex-1 fs-085">
+            <button class="btn-brown" onclick="showToast('Terima kasih telah berlangganan!')">Kirim</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2024 KO AWIS Platform. Seluruh Hak Cipta Dilindungi.</span><span>Instagram ·
+          LinkedIn · Kontak</span></div>
+    </footer>
+  </div>
+
+  <!-- =============================== -->
+  <!-- PAGE: DAFTAR MODUL (LIST)        -->
+  <!-- =============================== -->
+  <div class="page" id="page-modullist">
+    <div class="modul-list-page">
+      <div class="modul-list-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <a onclick="showPage('home')">🏠 Beranda</a>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+            <a onclick="showPage('modul')">Modul KO AWIS</a>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+            <span id="modullist-breadcrumb">Hilir</span>
+          </div>
+          <h1 id="modullist-title">KO AWIS Hilir</h1>
+          <p id="modullist-desc" class="text-muted mt-1">Daftar modul pembelajaran yang dirancang khusus untuk penguatan
+            kompetensi.</p>
+          <div class="modul-count" id="modullist-count">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            7 Modul Tersedia
+          </div>
+        </div>
+      </div>
+      <div class="modul-cards-grid" id="modullist-grid">
         <!-- Populated by JS -->
-      </nav>
-    </aside>
+      </div>
+    </div>
+  </div>
 
-    <!-- Main Content -->
-    <div class="flex flex-col flex-1">
-      <div class="modul-content" id="modulContent">
+  <!-- =============================== -->
+  <!-- PAGE: ISI MODUL                 -->
+  <!-- =============================== -->
+  <div class="page" id="page-isimodul">
+    <div class="isi-modul-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar-modul" id="sidebarModul">
+        <div class="sidebar-title">DAFTAR MODUL</div>
+        <div class="sidebar-subtitle" id="sidebar-track-name">KO AWIS Hilir</div>
+        <div class="fs-08 mb-075 text-muted">Progres: <span id="sidebar-progress-text">25% Selesai</span></div>
+        <div class="sidebar-progress-bar">
+          <div class="sidebar-progress-fill" id="sidebarProgressFill" style="width:25%;"></div>
+        </div>
+        <nav class="sidebar-nav" id="sidebarNav">
+          <!-- Populated by JS -->
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex flex-col flex-1">
+        <div class="modul-content" id="modulContent">
+          <!-- Populated by JS -->
+        </div>
+        <div class="modul-navigation">
+          <button class="btn-prev" id="btnPrev" onclick="navigateModul(-1)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+            Kembali
+          </button>
+          <button class="btn-next" id="btnNext" onclick="navigateModul(1)">
+            Selesai & Lanjut ke Modul Berikutnya
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="progress-bar-bottom">
+      <div class="progress-bar-fill-bottom" id="progressBarBottom" style="width:25%;"></div>
+    </div>
+  </div>
+
+  <!-- =============================== -->
+  <!-- PAGE: INFORMASI                 -->
+  <!-- =============================== -->
+  <div class="page" id="page-informasi">
+    <div class="container max-w-1200 mx-auto">
+      <div class="info-hero">
+        <div class="info-hero-bg"></div>
+        <div class="info-hero-overlay"></div>
+        <div class="info-hero-content">
+          <div class="info-hero-tag">UTAMA</div>
+          <h1>Informasi Terbaru</h1>
+          <p>Berita terkini seputar pertanian kakao, program desa berkelanjutan, dan pembaruan kegiatan komunitas KO
+            AWIS di Indonesia.</p>
+          <button class="btn-info-hero" onclick="showToast('Membuka artikel utama...')">
+            Baca Selengkapnya →
+          </button>
+        </div>
+      </div>
+
+      <div class="category-tabs">
+        <button class="tab-btn active" onclick="filterArticles('semua', this)">Semua Berita</button>
+        <button class="tab-btn" onclick="filterArticles('pertanian', this)">🌱 Pertanian</button>
+        <button class="tab-btn" onclick="filterArticles('program', this)">🏘️ Program Desa</button>
+        <button class="tab-btn" onclick="filterArticles('komunitas', this)">👥 Komunitas</button>
+        <button class="tab-btn" onclick="filterArticles('pasar', this)">📈 Pasar Kakao</button>
+      </div>
+
+      <div class="px-2 pb-1">
+        <h2 class="section-article-title">Berita & Artikel Terkini</h2>
+      </div>
+
+      <div class="articles-grid" id="articlesGrid">
         <!-- Populated by JS -->
       </div>
-      <div class="modul-navigation">
-        <button class="btn-prev" id="btnPrev" onclick="navigateModul(-1)">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-          Kembali
-        </button>
-        <button class="btn-next" id="btnNext" onclick="navigateModul(1)">
-          Selesai & Lanjut ke Modul Berikutnya
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="progress-bar-bottom"><div class="progress-bar-fill-bottom" id="progressBarBottom" style="width:25%;"></div></div>
-</div>
 
-<!-- =============================== -->
-<!-- PAGE: INFORMASI                 -->
-<!-- =============================== -->
-<div class="page" id="page-informasi">
-  <div class="container max-w-1200 mx-auto">
-    <div class="info-hero">
-      <div class="info-hero-bg"></div>
-      <div class="info-hero-overlay"></div>
-      <div class="info-hero-content">
-        <div class="info-hero-tag">UTAMA</div>
-        <h1>Informasi Terbaru</h1>
-        <p>Berita terkini seputar pertanian kakao, program desa berkelanjutan, dan pembaruan kegiatan komunitas KO AWIS di Indonesia.</p>
-        <button class="btn-info-hero" onclick="showToast('Membuka artikel utama...')">
-          Baca Selengkapnya →
-        </button>
+      <div class="pagination">
+        <div class="page-arrow">‹</div>
+        <div class="page-num active">1</div>
+        <div class="page-num" onclick="showToast('Halaman 2 akan tersedia segera!')">2</div>
+        <div class="page-num" onclick="showToast('Halaman 3 akan tersedia segera!')">3</div>
+        <div class="page-num">…</div>
+        <div class="page-num" onclick="showToast('Masih dalam pengembangan!')">12</div>
+        <div class="page-arrow">›</div>
       </div>
     </div>
 
-    <div class="category-tabs">
-      <button class="tab-btn active" onclick="filterArticles('semua', this)">Semua Berita</button>
-      <button class="tab-btn" onclick="filterArticles('pertanian', this)">🌱 Pertanian</button>
-      <button class="tab-btn" onclick="filterArticles('program', this)">🏘️ Program Desa</button>
-      <button class="tab-btn" onclick="filterArticles('komunitas', this)">👥 Komunitas</button>
-      <button class="tab-btn" onclick="filterArticles('pasar', this)">📈 Pasar Kakao</button>
-    </div>
-
-    <div class="px-2 pb-1">
-      <h2 class="section-article-title">Berita & Artikel Terkini</h2>
-    </div>
-
-    <div class="articles-grid" id="articlesGrid">
-      <!-- Populated by JS -->
-    </div>
-
-    <div class="pagination">
-      <div class="page-arrow">‹</div>
-      <div class="page-num active">1</div>
-      <div class="page-num" onclick="showToast('Halaman 2 akan tersedia segera!')">2</div>
-      <div class="page-num" onclick="showToast('Halaman 3 akan tersedia segera!')">3</div>
-      <div class="page-num">…</div>
-      <div class="page-num" onclick="showToast('Masih dalam pengembangan!')">12</div>
-      <div class="page-arrow">›</div>
-    </div>
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="brand-icon">K</div>KO AWIS
+          </div>
+          <p class="footer-desc">Koperasi Kakao Indonesia — Membangun masa depan petani kakao yang sejahtera.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a onclick="showPage('home')">Beranda</a></li>
+            <li><a onclick="showPage('modul')">Modul KO AWIS</a></li>
+            <li><a onclick="showPage('informasi')">Informasi</a></li>
+            <li><a onclick="showPage('tentang')">Tentang Kami</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Informasi</h4>
+          <ul>
+            <li><a>Kebijakan Privasi</a></li>
+            <li><a>Syarat & Ketentuan</a></li>
+            <li><a>Bantuan</a></li>
+            <li><a href="/html/tentang.html">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Berlangganan</h4>
+          <p class="text-white-muted fs-085 mb-075">Update berita kakao ke email Anda.</p>
+          <div class="flex gap-05">
+            <input placeholder="Email Anda" class="input-rounded flex-1 fs-085">
+            <button class="btn-brown" onclick="showToast('Berhasil berlangganan!')">Kirim</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2024 KO AWIS (Koperasi Kakao Indonesia). Hak Cipta Dilindungi.</span></div>
+    </footer>
   </div>
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo"><div class="brand-icon">K</div>KO AWIS</div><p class="footer-desc">Koperasi Kakao Indonesia — Membangun masa depan petani kakao yang sejahtera.</p></div>
-      <div class="footer-col"><h4>Navigasi</h4><ul><li><a onclick="showPage('home')">Beranda</a></li><li><a onclick="showPage('modul')">Modul KO AWIS</a></li><li><a onclick="showPage('informasi')">Informasi</a></li><li><a onclick="showPage('tentang')">Tentang Kami</a></li></ul></div>
-      <div class="footer-col"><h4>Informasi</h4><ul><li><a>Kebijakan Privasi</a></li><li><a>Syarat & Ketentuan</a></li><li><a>Bantuan</a></li><li><a href="/html/tentang.html">Kontak</a></li></ul></div>
-      <div class="footer-col">
-        <h4>Berlangganan</h4>
-        <p class="text-white-muted fs-085 mb-075">Update berita kakao ke email Anda.</p>
-        <div class="flex gap-05">
-          <input placeholder="Email Anda" class="input-rounded flex-1 fs-085">
-          <button class="btn-brown" onclick="showToast('Berhasil berlangganan!')">Kirim</button>
-        </div>
+  <!-- =============================== -->
+  <!-- PAGE: TENTANG KAMI              -->
+  <!-- =============================== -->
+  <div class="page" id="page-tentang">
+    <!-- About Hero -->
+    <div class="about-hero">
+      <div class="about-hero-bg"></div>
+      <div class="about-hero-overlay"></div>
+      <div class="about-hero-content">
+        <h1>Tentang Kami</h1>
+        <p>Membangun masa depan pendidikan yang inklusif dan berkualitas bagi seluruh lapisan masyarakat.</p>
       </div>
     </div>
-    <div class="footer-bottom"><span>© 2024 KO AWIS (Koperasi Kakao Indonesia). Hak Cipta Dilindungi.</span></div>
-  </footer>
-</div>
 
-<!-- =============================== -->
-<!-- PAGE: TENTANG KAMI              -->
-<!-- =============================== -->
-<div class="page" id="page-tentang">
-  <!-- About Hero -->
-  <div class="about-hero">
-    <div class="about-hero-bg"></div>
-    <div class="about-hero-overlay"></div>
-    <div class="about-hero-content">
-      <h1>Tentang Kami</h1>
-      <p>Membangun masa depan pendidikan yang inklusif dan berkualitas bagi seluruh lapisan masyarakat.</p>
+    <!-- Visi Misi -->
+    <section class="section">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="section-title">Visi & Misi <span>Kami</span></h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="vision-misi-grid">
+          <div class="visi-card">
+            <div class="vm-icon">👁️</div>
+            <div class="vm-title">Visi</div>
+            <p class="vm-text">Menjadi platform edukasi terdepan yang memberdayakan potensi setiap individu melalui
+              akses informasi dan pengetahuan yang setara dan berkelanjutan di seluruh Indonesia.</p>
+          </div>
+          <div class="misi-card">
+            <div class="vm-icon">🚀</div>
+            <div class="vm-title">Misi</div>
+            <div class="vm-list">
+              <div class="vm-list-item"><span class="vm-check">✅</span> Mengembangkan kurikulum pembelajaran yang
+                adaptif dan relevan dengan perkembangan industri terkini.</div>
+              <div class="vm-list-item"><span class="vm-check">✅</span> Menyediakan akses platform yang ramah pengguna
+                untuk memastikan keberlanjutan proses belajar.</div>
+              <div class="vm-list-item"><span class="vm-check">✅</span> Membangun komunitas pembelajaran yang saling
+                mendukung dan berbagi wawasan.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="text-center">
+          <h2 class="section-title">Tim <span>Kami</span></h2>
+          <p class="section-sub">Dibalik kesuksesan KO AWIS, ada tim yang berdedikasi tinggi.</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card reveal">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Dr. Ahmad Wijaya">
+            </div>
+            <div class="team-name">Dr. Ahmad Wijaya</div>
+            <div class="team-role">Chief Executive Officer</div>
+          </div>
+          <div class="team-card reveal reveal-delay-1">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Siti Rahmawati">
+            </div>
+            <div class="team-name">Siti Rahmawati</div>
+            <div class="team-role">Head of Education</div>
+          </div>
+          <div class="team-card reveal reveal-delay-2">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Budi Santoso">
+            </div>
+            <div class="team-name">Budi Santoso</div>
+            <div class="team-role">Technical Director</div>
+          </div>
+          <div class="team-card reveal reveal-delay-3">
+            <div class="team-img">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Larasati Putri">
+            </div>
+            <div class="team-name">Larasati Putri</div>
+            <div class="team-role">Community Manager</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <div class="contact-section">
+      <div class="contact-info">
+        <h2>Hubungi Kami</h2>
+        <p>Punya pertanyaan atau ingin bekerja sama? Jangan ragu untuk menghubungi tim kami.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📧</div> kontak@koawis.id
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div> +62 21 555 0123
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div> Desa Merak, Jawa Barat
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Nama Lengkap</label>
+          <input class="form-input" placeholder="Masukkan nama Anda" type="text">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" placeholder="nama@email.com" type="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Pesan</label>
+          <textarea class="form-textarea" placeholder="Bagaimana kami bisa membantu Anda?"></textarea>
+        </div>
+        <button class="btn-submit" onclick="handleFormSubmit()">Kirim Pesan</button>
+      </div>
     </div>
+
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="brand-icon">K</div>KO AWIS
+          </div>
+          <p class="footer-desc">Platform edukasi pemberdayaan masyarakat desa berbasis potensi lokal kakao.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul>
+            <li><a onclick="showPage('home')">Beranda</a></li>
+            <li><a onclick="showPage('modul')">Modul KO AWIS</a></li>
+            <li><a onclick="showPage('informasi')">Informasi</a></li>
+            <li><a onclick="showPage('tentang')">Tentang Kami</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a>Kebijakan Privasi</a></li>
+            <li><a>Syarat & Ketentuan</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Sosial Media</h4>
+          <ul>
+            <li><a>Instagram</a></li>
+            <li><a>Facebook</a></li>
+            <li><a>YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© 2024 KO AWIS. Hak Cipta Dilindungi.</span></div>
+    </footer>
   </div>
 
-  <!-- Visi Misi -->
-  <section class="section">
-    <div class="container">
-      <div class="text-center">
-        <h2 class="section-title">Visi & Misi <span>Kami</span></h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="vision-misi-grid">
-        <div class="visi-card">
-          <div class="vm-icon">👁️</div>
-          <div class="vm-title">Visi</div>
-          <p class="vm-text">Menjadi platform edukasi terdepan yang memberdayakan potensi setiap individu melalui akses informasi dan pengetahuan yang setara dan berkelanjutan di seluruh Indonesia.</p>
-        </div>
-        <div class="misi-card">
-          <div class="vm-icon">🚀</div>
-          <div class="vm-title">Misi</div>
-          <div class="vm-list">
-            <div class="vm-list-item"><span class="vm-check">✅</span> Mengembangkan kurikulum pembelajaran yang adaptif dan relevan dengan perkembangan industri terkini.</div>
-            <div class="vm-list-item"><span class="vm-check">✅</span> Menyediakan akses platform yang ramah pengguna untuk memastikan keberlanjutan proses belajar.</div>
-            <div class="vm-list-item"><span class="vm-check">✅</span> Membangun komunitas pembelajaran yang saling mendukung dan berbagi wawasan.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="text-center">
-        <h2 class="section-title">Tim <span>Kami</span></h2>
-        <p class="section-sub">Dibalik kesuksesan KO AWIS, ada tim yang berdedikasi tinggi.</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card reveal">
-          <div class="team-img">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80" alt="Dr. Ahmad Wijaya">
-          </div>
-          <div class="team-name">Dr. Ahmad Wijaya</div>
-          <div class="team-role">Chief Executive Officer</div>
-        </div>
-        <div class="team-card reveal reveal-delay-1">
-          <div class="team-img">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Siti Rahmawati">
-          </div>
-          <div class="team-name">Siti Rahmawati</div>
-          <div class="team-role">Head of Education</div>
-        </div>
-        <div class="team-card reveal reveal-delay-2">
-          <div class="team-img">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80" alt="Budi Santoso">
-          </div>
-          <div class="team-name">Budi Santoso</div>
-          <div class="team-role">Technical Director</div>
-        </div>
-        <div class="team-card reveal reveal-delay-3">
-          <div class="team-img">
-            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Larasati Putri">
-          </div>
-          <div class="team-name">Larasati Putri</div>
-          <div class="team-role">Community Manager</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <div class="contact-section">
-    <div class="contact-info">
-      <h2>Hubungi Kami</h2>
-      <p>Punya pertanyaan atau ingin bekerja sama? Jangan ragu untuk menghubungi tim kami.</p>
-      <div class="contact-items">
-        <div class="contact-item"><div class="contact-item-icon">📧</div> kontak@koawis.id</div>
-        <div class="contact-item"><div class="contact-item-icon">📞</div> +62 21 555 0123</div>
-        <div class="contact-item"><div class="contact-item-icon">📍</div> Desa Merak, Jawa Barat</div>
-      </div>
-    </div>
-    <div class="contact-form">
-      <div class="form-group">
-        <label class="form-label">Nama Lengkap</label>
-        <input class="form-input" placeholder="Masukkan nama Anda" type="text">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" placeholder="nama@email.com" type="email">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Pesan</label>
-        <textarea class="form-textarea" placeholder="Bagaimana kami bisa membantu Anda?"></textarea>
-      </div>
-      <button class="btn-submit" onclick="handleFormSubmit()">Kirim Pesan</button>
-    </div>
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span>✅</span>
+    <span id="toastMsg">Pesan</span>
   </div>
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo"><div class="brand-icon">K</div>KO AWIS</div><p class="footer-desc">Platform edukasi pemberdayaan masyarakat desa berbasis potensi lokal kakao.</p></div>
-      <div class="footer-col"><h4>Navigasi</h4><ul><li><a onclick="showPage('home')">Beranda</a></li><li><a onclick="showPage('modul')">Modul KO AWIS</a></li><li><a onclick="showPage('informasi')">Informasi</a></li><li><a onclick="showPage('tentang')">Tentang Kami</a></li></ul></div>
-      <div class="footer-col"><h4>Legal</h4><ul><li><a>Kebijakan Privasi</a></li><li><a>Syarat & Ketentuan</a></li></ul></div>
-      <div class="footer-col"><h4>Sosial Media</h4><ul><li><a>Instagram</a></li><li><a>Facebook</a></li><li><a>YouTube</a></li></ul></div>
-    </div>
-    <div class="footer-bottom"><span>© 2024 KO AWIS. Hak Cipta Dilindungi.</span></div>
-  </footer>
-</div>
-
-<!-- Toast Notification -->
-<div class="toast" id="toast">
-  <span>✅</span>
-  <span id="toastMsg">Pesan</span>
-</div>
-
-<script src="/js/app.js"></script>
-<script>
-  // Compatibility shim: only install when `showPage` is NOT already provided
-  // by `/js/app.js`. This avoids overriding the SPA `showPage` which would
-  // trigger a redirect on DOMContentLoaded and cause a reload loop.
-  if (typeof window.showPage !== 'function') {
-    window.showPage = function(page) {
-      const map = {
-        home: '/html/index.html',
-        modul: '/html/modul.html',
-        modullist: '/html/modullist.html',
-        isimodul: '/html/modullist.html',
-        informasi: '/html/informasi.html',
-        tentang: '/html/tentang.html'
+  <script src="/js/include-navbar.js"></script>
+  <script src="/js/app.js"></script>
+  <script>
+    // Compatibility shim: only install when `showPage` is NOT already provided
+    // by `/js/app.js`. This avoids overriding the SPA `showPage` which would
+    // trigger a redirect on DOMContentLoaded and cause a reload loop.
+    if (typeof window.showPage !== 'function') {
+      window.showPage = function (page) {
+        const map = {
+          home: '/html/index.html',
+          modul: '/html/modul.html',
+          modullist: '/html/modullist.html',
+          isimodul: '/html/isimodul.html',
+          informasi: '/html/informasi.html',
+          tentang: '/html/tentang.html'
+        };
+        const target = map[page];
+        if (target && location.pathname !== target) location.href = target;
       };
-      const target = map[page];
-      if (target && location.pathname !== target) location.href = target;
-    };
-  }
-</script>
+    }
+  </script>
 </body>
+
 </html>
