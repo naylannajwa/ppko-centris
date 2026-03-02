@@ -77,6 +77,13 @@ const ARTICLES = [
   { cat: 'pertanian', catLabel: 'PERTANIAN', date: '12 Mei 2024', readTime: '7 min baca', title: 'Sekolah Lapang: Edukasi Manajemen Hama Terpadu (PHT)', excerpt: 'Membekali petani dengan pengendalian biologis untuk mengatasi penggerek buah kakao tanpa menggunakan bahan kimia berbahaya.', author: 'Dedi Nugroho', img: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&q=80' },
 ];
 
+// Optional HTML partials for modules (track -> index -> partial path)
+const MODULE_PARTIALS = {
+  hilir: {
+    0: '/html/partials/modul-hilir-1.html'
+  }
+};
+
 // ---- STATE ----
 let currentTrack = 'hilir';
 let currentModulIdx = 0;
@@ -154,15 +161,15 @@ function showModulList(track) {
 }
 
 // ---- OPEN MODUL ----
-function openModul(track, idx) {
+async function openModul(track, idx) {
   currentTrack = track;
   currentModulIdx = idx;
-  renderIsiModul();
+  await renderIsiModul();
   showPage('isimodul');
   document.getElementById('nav-modul').classList.add('active');
 }
 
-function renderIsiModul() {
+async function renderIsiModul() {
   const track = currentTrack;
   const data = DATA[track];
   const modul = data.modules[currentModulIdx];
@@ -199,9 +206,9 @@ function renderIsiModul() {
   document.getElementById('btnPrev').style.display = currentModulIdx <= 0 ? 'none' : 'flex';
   document.getElementById('btnNext').textContent = currentModulIdx >= total - 1 ? '✅ Selesaikan Track' : 'Selesai & Lanjut ke Modul Berikutnya →';
 
-  // Main content
+  // Main content (render base frame first)
   const content = document.getElementById('modulContent');
-  content.innerHTML = `
+  const baseHtml = `
     <div class="modul-breadcrumb">
       <a onclick="showPage('modul')" style="cursor:pointer;">Modul KO AWIS</a>
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
@@ -221,9 +228,27 @@ function renderIsiModul() {
       <div class="video-progress"><div class="video-progress-fill"></div></div>
       <div class="video-time">05:24 / ${modul.time.replace(' Menit', ':00')}</div>
     </div>
-
-    ${getModulContent(track, currentModulIdx)}
   `;
+
+  // Insert base and a fallback/generic content immediately
+  content.innerHTML = baseHtml + getModulContent(track, currentModulIdx);
+
+  // If a partial exists for this module, fetch and replace content
+  try {
+    const partialForTrack = MODULE_PARTIALS[track] || {};
+    const partialPath = partialForTrack[currentModulIdx];
+    if (partialPath) {
+      const resp = await fetch(partialPath);
+      if (resp.ok) {
+        const partialHtml = await resp.text();
+        content.innerHTML = baseHtml + partialHtml;
+      } else {
+        console.warn('Failed to load module partial', partialPath, resp.status);
+      }
+    }
+  } catch (e) {
+    console.warn('Error loading module partial', e);
+  }
 
   content.style.animation = 'none';
   content.offsetHeight; // reflow
@@ -234,26 +259,64 @@ function getModulContent(track, idx) {
   // Generic rich content for each module
   const contents = {
     hilir: [
-      `<h2 class="content-section-title"><span>1.</span> Pengantar Hilirisasi</h2>
-      <p class="content-text">Hilirisasi kakao adalah proses pengolahan biji kakao (raw material) menjadi produk setengah jadi maupun produk jadi. Strategi ini sangat penting bagi petani dan pengusaha lokal untuk meningkatkan nilai ekonomi dari hasil panen. Tanpa hilirisasi, kita hanya mengekspor bahan mentah dengan harga komoditas yang fluktuatif.</p>
+      `<h2 class="content-section-title">Modul 1: Konsep Hilirisasi &amp; Value Chain Kakao</h2>
+      <p class="content-text">Modul ini memperkenalkan konsep hilirisasi: bagaimana biji kakao mentah diproses menjadi produk bernilai tambah (mis. pasta, bubuk, lemak kakao, cokelat). Fokus pada pemahaman rantai nilai (value chain) sehingga peserta dapat melihat peluang bisnis pada setiap tahap pengolahan.</p>
+
+      <h3>Tujuan Pembelajaran</h3>
+      <ul>
+        <li>Memahami definisi dan manfaat hilirisasi bagi petani dan komunitas desa.</li>
+        <li>Mengidentifikasi tahapan value chain kakao: upstream, midstream, downstream.</li>
+        <li>Mengenali peluang produk bernilai tambah dan model usaha sederhana.</li>
+      </ul>
+
+      <h3>1. Tahapan Value Chain</h3>
+      <ol>
+        <li><strong>Upstream</strong> — Budidaya, pemanenan, seleksi bibit. Praktik terbaik: pemilihan klon unggul, waktu panen tepat, sanitasi kebun.</li>
+        <li><strong>Midstream</strong> — Fermentasi, pengeringan, pengolahan awal (sangrai, penggilingan). Titik penting: kontrol fermentasi untuk profil rasa, pengeringan merata untuk mencegah jamur.</li>
+        <li><strong>Downstream</strong> — Pengolahan lanjut (pasta, bubuk, produk siap pakai), pengemasan, pemasaran. Di sinilah nilai jual meningkat signifikan.</li>
+      </ol>
+
+      <h3>2. Praktik Utama &amp; Rangkaian Proses</h3>
       <div class="info-cards-row">
-        <div class="info-card"><div class="info-card-icon">📈</div><div class="info-card-title">Peningkatan Nilai</div><p class="info-card-desc">Transformasi dari biji kering menjadi bubuk atau lemak kakao dapat meningkatkan nilai jual hingga 3–4 kali lipat.</p></div>
-        <div class="info-card"><div class="info-card-icon">👥</div><div class="info-card-title">Peluang Lapangan Kerja</div><p class="info-card-desc">Industri pengolahan menciptakan lebih banyak lapangan kerja di tingkat lokal dibanding sekadar bertani.</p></div>
-      </div>
-      <h2 class="content-section-title"><span>2.</span> Rantai Nilai (Value Chain)</h2>
-      <p class="content-text">Rantai nilai kakao mencakup seluruh rangkaian aktivitas, mulai dari penyediaan bibit, penanaman, pemanenan, fermentasi, hingga distribusi produk akhir ke konsumen.</p>
-      <div class="tahapan-box">
-        <div class="tahapan-title">TAHAPAN UTAMA RANTAI NILAI</div>
-        <div class="tahapan-list">
-          <div class="tahapan-item"><div class="tahapan-num">1</div><div class="tahapan-content"><strong>Budidaya & Panen</strong><span>Pemilihan klon unggul dan teknik pemanenan buah matang sempurna.</span></div></div>
-          <div class="tahapan-item"><div class="tahapan-num">2</div><div class="tahapan-content"><strong>Pasca Panen (Fermentasi)</strong><span>Kunci pembentukan aroma dan rasa cokelat yang khas.</span></div></div>
-          <div class="tahapan-item"><div class="tahapan-num">3</div><div class="tahapan-content"><strong>Pengolahan Sekunder</strong><span>Pemanggangan, pemampatan, dan pengolahan menjadi pasta atau lemak.</span></div></div>
+        <div class="info-card">
+          <div class="info-card-icon">🔬</div>
+          <div class="info-card-title">Fermentasi yang Konsisten</div>
+          <p class="info-card-desc">Pemantauan suhu &amp; waktu fermentasi untuk mendapat aroma dan rasa yang stabil.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">☀️</div>
+          <div class="info-card-title">Pengeringan Aman</div>
+          <p class="info-card-desc">Pengeringan mencegah jamur dan menstabilkan kadar air; gunakan rak atau mesin solar dryer jika memungkinkan.</p>
         </div>
       </div>
+
+      <h3>3. Contoh Produk &amp; Peluang Usaha Sederhana</h3>
+      <ul>
+        <li>Kakao sangrai &amp; bubuk untuk pasar lokal dan kafe kecil.</li>
+        <li>Pasta kakao untuk UMKM cokelat olahan.</li>
+        <li>By-product: kompos dari kulit buah untuk pupuk komunal.</li>
+      </ul>
+
+      <h3>4. Langkah Praktik Lapangan (Tugas)</h3>
+      <ol>
+        <li>Kunjungi satu kebun dan catat proses panen &amp; penanganan pasca-panen.</li>
+        <li>Lakukan uji fermentasi sederhana — catat aroma, suhu, dan durasi selama 4 hari.</li>
+        <li>Buat rencana mini untuk satu produk down‑stream (mis. bubuk kakao 250g): estimasi biaya, harga jual, kemasan sederhana.</li>
+      </ol>
+
       <div class="key-takeaway">
-        <div class="key-takeaway-header">🔑 POIN KUNCI</div>
-        <p>Hilirisasi bukan sekadar membangun pabrik, melainkan membangun ekosistem nilai tambah yang berkelanjutan. Semakin jauh produk diolah ke tahap hilir, semakin besar dampak pengganda (multiplier effect) yang dihasilkan bagi perekonomian desa.</p>
-      </div>`,
+        <div class="key-takeaway-header">🔑 POIN PENTING</div>
+        <p>Hilirisasi bukan hanya produksi massal — ini soal menambahkan nilai secara bertahap dan membangun rantai pasok lokal yang berkelanjutan. Fokus pada kualitas pasca panen akan membuka akses pasar yang lebih baik.</p>
+      </div>
+
+      <h3>Cek Diri (Kuiz Singkat)</h3>
+      <ol>
+        <li>Sebutkan tiga tahapan utama value chain kakao.</li>
+        <li>Mengapa fermentasi penting untuk kualitas kakao?</li>
+        <li>Tuliskan satu ide produk down‑stream yang bisa dibuat di desa Anda.</li>
+      </ol>
+
+      <p style="margin-top:1rem;font-style:italic;color:var(--text-muted);">Durasi estimasi penyelesaian modul: 45–60 menit (termasuk tugas praktik sederhana).</p>`,
     ],
     entrepreneur: [],
     digital: [],
@@ -291,7 +354,7 @@ function getModulContent(track, idx) {
   return genericContent;
 }
 
-function navigateModul(dir) {
+async function navigateModul(dir) {
   const total = DATA[currentTrack].modules.length;
   if (dir === 1) {
     completedModuls.add(currentTrack + '-' + currentModulIdx);
@@ -305,7 +368,7 @@ function navigateModul(dir) {
     if (currentModulIdx <= 0) return;
     currentModulIdx--;
   }
-  renderIsiModul();
+  await renderIsiModul();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -406,4 +469,17 @@ document.addEventListener('DOMContentLoaded', () => {
   showPage('home');
   renderArticles('semua');
   setTimeout(triggerReveal, 100);
+  // support opening module via query params from static pages
+  const params = new URLSearchParams(location.search);
+  const qTrack = params.get('track');
+  const qOpen = params.get('open');
+  if (qTrack) {
+    try {
+      showModulList(qTrack);
+      if (qOpen !== null) {
+        const idx = parseInt(qOpen, 10);
+        if (!isNaN(idx)) openModul(qTrack, idx);
+      }
+    } catch (e) { /* ignore if functions not available on this page */ }
+  }
 });

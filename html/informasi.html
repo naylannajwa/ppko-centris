@@ -7,26 +7,8 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-brand" onclick="location.href='/html/index.html'"><div class="brand-icon">K</div>KO AWIS</div>
-    <div class="nav-links">
-      <a href="/html/index.html">Beranda</a>
-      <a href="/html/modul.html">Modul KO AWIS</a>
-      <a class="active" href="/html/informasi.html">Informasi</a>
-      <a href="/html/tentang.html">Tentang Kami</a>
-    </div>
-    <div class="nav-actions">
-      <a class="btn-masuk" href="/html/login.html">Masuk</a>
-      <a class="btn-daftar" href="/html/register.html">Daftar</a>
-    </div>
-    <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')"><span></span><span></span><span></span></div>
-  </nav>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="/html/index.html">🏠 Beranda</a>
-    <a href="/html/modul.html">📚 Modul KO AWIS</a>
-    <a href="/html/informasi.html">📰 Informasi</a>
-    <a href="/html/tentang.html">👥 Tentang Kami</a>
-  </div>
+  <!-- Navbar injected at runtime (no login/register buttons) -->
+  <!-- include via /js/include-navbar.js -->
 
   <main style="max-width:1200px;margin:0 auto;padding:2rem 0;">
     <div class="info-hero">
@@ -84,6 +66,7 @@
     <div class="footer-bottom"><span>© 2024 KO AWIS (Koperasi Kakao Indonesia). Hak Cipta Dilindungi.</span></div>
   </footer>
 
+  <script src="/js/include-navbar.js"></script>
   <script src="/js/site-data.js"></script>
   <script>
     function renderArticles(filter) {
