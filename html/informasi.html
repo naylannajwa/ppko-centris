@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Informasi — KO AWIS</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <!-- Navbar injected at runtime (no login/register buttons) -->
@@ -17,7 +17,7 @@
       <div class="info-hero-content">
         <div class="info-hero-tag">UTAMA</div>
         <h1>Informasi Terbaru</h1>
-        <p>Berita terkini seputar pertanian kakao, program desa berkelanjutan, dan pembaruan kegiatan komunitas KO AWIS di Indonesia.</p>
+        <p>Berita terkini seputar pertanian kakao, program desa berkelanjutan, dan pembaruan kegiatan komunitas KO AWIS.</p>
         <button class="btn-info-hero" onclick="alert('Membuka artikel utama...')">Baca Selengkapnya →</button>
       </div>
     </div>
@@ -49,25 +49,9 @@
     </div>
   </main>
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand"><div class="footer-logo"><div class="brand-icon">K</div>KO AWIS</div><p class="footer-desc">Koperasi Kakao Indonesia — Membangun masa depan petani kakao yang sejahtera.</p></div>
-      <div class="footer-col"><h4>Navigasi</h4><ul><li><a href="/html/index.html">Beranda</a></li><li><a href="/html/modul.html">Modul KO AWIS</a></li><li><a href="/html/informasi.html">Informasi</a></li><li><a href="/html/tentang.html">Tentang Kami</a></li></ul></div>
-      <div class="footer-col"><h4>Informasi</h4><ul><li><a>Kebijakan Privasi</a></li><li><a>Syarat & Ketentuan</a></li><li><a>Bantuan</a></li><li><a href="/html/tentang.html">Kontak</a></li></ul></div>
-      <div class="footer-col">
-        <h4>Berlangganan</h4>
-        <p class="text-white-muted" style="font-size:0.85rem;margin-bottom:0.75rem;">Update berita kakao ke email Anda.</p>
-        <div style="display:flex;gap:0.5rem;">
-          <input placeholder="Email Anda" class="input-rounded" style="flex:1;font-size:0.95rem;border:none;">
-          <button class="btn-brown" onclick="alert('Berhasil berlangganan!')">Kirim</button>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom"><span>© 2024 KO AWIS (Koperasi Kakao Indonesia). Hak Cipta Dilindungi.</span></div>
-  </footer>
-
-  <script src="/js/include-navbar.js"></script>
-  <script src="/js/site-data.js"></script>
+  <script src="../js/include-navbar.js"></script>
+  <script src="../js/include-footer.js"></script>
+  <script src="../js/site-data.js"></script>
   <script>
     function renderArticles(filter) {
       const grid = document.getElementById('articlesGrid');

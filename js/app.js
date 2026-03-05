@@ -80,7 +80,7 @@ const ARTICLES = [
 // Optional HTML partials for modules (track -> index -> partial path)
 const MODULE_PARTIALS = {
   hilir: {
-    0: '/html/partials/modul-hilir-1.html'
+    0: 'partials/modul-hilir-1.html'
   }
 };
 

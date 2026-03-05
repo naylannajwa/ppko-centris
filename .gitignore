@@ -1,0 +1,20 @@
+# Konfigurasi Sensitif
+admin/admin-config.php
+
+# Sistem & IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.log
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build & Temp
+dist/
+build/
+*.tmp
