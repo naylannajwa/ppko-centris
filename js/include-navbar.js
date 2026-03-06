@@ -1,8 +1,8 @@
 (async function(){
   try{
-    const mobileResp = await fetch('/html/partials/mobile-menu?v=2');
+    const mobileResp = await fetch('/partials/mobile-menu?v=2');
     const mobileHtml = await mobileResp.text();
-    const navResp = await fetch('/html/partials/navbar?v=2');
+    const navResp = await fetch('/partials/navbar?v=2');
     const navHtml = await navResp.text();
 
     // 1. Hapus navbar/mobile-menu hardcoded jika ada (agar navbar satu aja)

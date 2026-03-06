@@ -18,6 +18,8 @@
     { "source": "/admin/login", "destination": "/admin/login.html" },
     { "source": "/admin/modul", "destination": "/admin/modul.html" },
     { "source": "/admin/berita", "destination": "/admin/berita.html" },
+    { "source": "/partials/navbar", "destination": "/html/partials/navbar.html" },
+    { "source": "/partials/mobile-menu", "destination": "/html/partials/mobile-menu.html" },
     { "source": "/api/(.*)", "destination": "/api/$1" }
   ]
 }
