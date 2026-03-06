@@ -1,8 +1,8 @@
 (async function(){
   try{
-    const mobileResp = await fetch('../html/partials/mobile-menu.html');
+    const mobileResp = await fetch('../html/partials/mobile-menu.html?v=2');
     const mobileHtml = await mobileResp.text();
-    const navResp = await fetch('../html/partials/navbar.html');
+    const navResp = await fetch('../html/partials/navbar.html?v=2');
     const navHtml = await navResp.text();
 
     // insert so order is: nav then mobile

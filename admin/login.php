@@ -34,11 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Admin Login — KO AWIS</title>
   <link rel="stylesheet" href="../css/styleadmin.css">
+  <link rel="icon" type="image/png" href="assets/logo-koawis-brand.png">
 </head>
 <body class="login-page-bg">
   <div class="login-container">
     <div class="login-header">
-      <h1>Admin KO AWIS</h1>
+      <img src="assets/logo-koawis-rectangle.png" alt="Logo KO AWIS" style="height: 130px; margin-bottom: 0px;">
       <p>Login untuk mengelola modul pembelajaran</p>
     </div>
 

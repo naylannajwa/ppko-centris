@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // Fetch footer from partials
-  fetch('../html/partials/footer.html')
+  fetch('../html/partials/footer.html?v=2')
     .then(response => response.text())
     .then(html => {
       // Find all existing footers or create a footer container if none exist

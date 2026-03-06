@@ -15,7 +15,8 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Admin Dashboard — KO AWIS</title>
   <link rel="stylesheet" href="../css/styleadmin.css">
-  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<link rel="icon" type="image/png" href="assets/logo-koawis-brand.png">  
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
   <style>
     /* Sedikit perbaikan tampilan agar editornya tinggi dan rapi */
     .ck-editor__editable { min-height: 250px; font-family: 'Poppins', sans-serif; }
@@ -24,14 +25,16 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
 <body>
   <div class="admin-container">
     <div class="admin-header">
-      <h1>Admin Dashboard — KO AWIS</h1>
+      <img src="assets/logo-koawis-rectangle.png" alt="Logo KO AWIS" style="height: 130px; margin-bottom: 0px;">
+      <h1 style="margin-top: 0; color: #3D2314; font-size: 1.5rem;">Admin Dashboard</h1>
       <p>Halo, <strong><?= $admin_username ?></strong>! Kelola modul pembelajaran dan konten.</p>
+      
       <div class="admin-nav">
         <button onclick="showSection('modules', this)" class="active">Manajemen Modul</button>
-
         <button onclick="showSection('articles', this)">Artikel</button>
         <a href="logout.php"><button class="btn-logout">Logout</button></a>
       </div>
+
     </div>
 
     <!-- MODULES SECTION -->
@@ -39,7 +42,8 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
       <div class="card">
         <h2 style="margin-top:0; color:#3D2314;">Tambah Modul Baru</h2>
         <div id="alertBox"></div>
-        <form id="moduleForm" onsubmit="addModule(event)">
+        <form id="moduleForm" onsubmit="saveModule(event)">
+          <input type="hidden" id="moduleIdInput" value="">
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Pilar Pembelajaran</label>
@@ -72,7 +76,10 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
             <label class="form-label">Konten Lengkap Modul</label>
             <textarea class="form-textarea" id="contentInput" placeholder="Konten modul" required style="min-height:200px;"></textarea>
           </div>
-          <button type="submit" class="btn-submit">➕ Tambah Modul</button>
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="btn-submit" id="btnSubmitForm">➕ Tambah Modul</button>
+            <button type="button" class="btn-submit" id="btnCancelEdit" style="display: none; background: #666;" onclick="cancelEdit()">❌ Batal Edit</button>
+          </div>
         </form>
       </div>
 
@@ -165,36 +172,82 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
       }
     }
 
-    async function addModule(e) {
+    // 1. Fungsi Batal Edit (Mereset form kembali ke mode Tambah)
+    function cancelEdit() {
+      document.getElementById('moduleForm').reset();
+      document.getElementById('moduleIdInput').value = '';
+      contentEditor.setData(''); // Kosongkan text editor
+      document.getElementById('btnSubmitForm').innerHTML = '➕ Tambah Modul';
+      document.getElementById('btnCancelEdit').style.display = 'none';
+    }
+
+    // 2. Fungsi Klik Tombol Edit (Memuat data dari database ke form)
+    async function editModule(id) {
+      try {
+        const res = await fetch(`../api/modules/get.php?id=${id}`);
+        const result = await res.json();
+
+        if (result.success && result.data) {
+          const m = result.data;
+          // Isi data ke dalam form
+          document.getElementById('moduleIdInput').value = m.id;
+          document.getElementById('trackSelect').value = m.track_id;
+          document.getElementById('titleInput').value = m.title;
+          document.getElementById('slugInput').value = m.slug;
+          document.getElementById('iconInput').value = m.icon || '📚';
+          document.getElementById('subtitleInput').value = m.subtitle || '';
+          document.getElementById('descriptionInput').value = m.description || '';
+          
+          // Isi data ke CKEditor
+          contentEditor.setData(m.content || '');
+
+          // Ubah tombol jadi "Update"
+          document.getElementById('btnSubmitForm').innerHTML = '💾 Update Modul';
+          document.getElementById('btnCancelEdit').style.display = 'inline-block';
+
+          // Scroll ke atas agar admin bisa langsung edit
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert('Gagal mengambil data modul.');
+        }
+      } catch (e) {
+        alert('Error memuat data: ' + e.message);
+      }
+    }
+
+    // 3. Fungsi Simpan (Menangani Tambah Baru ATAU Update)
+    async function saveModule(e) {
       e.preventDefault();
       const alertBox = document.getElementById('alertBox');
+      const id = document.getElementById('moduleIdInput').value; // Cek apakah ada ID
+      
       const data = {
         track_id: document.getElementById('trackSelect').value,
         title: document.getElementById('titleInput').value,
         slug: document.getElementById('slugInput').value,
         subtitle: document.getElementById('subtitleInput').value,
         description: document.getElementById('descriptionInput').value,
-        // Ubah bagian ini agar mengambil teks dari Editor:
         content: contentEditor.getData(), 
         icon: document.getElementById('iconInput').value,
         is_published: 1
       };
-      
+
+      // Tentukan URL berdasarkan mode (Update atau Create)
+      if (id) data.id = id;
+      const url = id ? '../api/modules/update.php' : '../api/modules/create.php';
+
       try {
-        const res = await fetch('../api/modules/create.php', {
-          method: 'POST',
+        const res = await fetch(url, {
+          method: 'POST', // Backend update.php kamu sudah support method POST untuk update
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
         const result = await res.json();
+        
         if (result.success) {
-          alertBox.innerHTML = '<div class="alert alert-success">✅ Modul berhasil dibuat!</div>';
-          document.getElementById('moduleForm').reset();
-          
-          // Tambahkan ini untuk mengosongkan editor setelah berhasil simpan:
-          contentEditor.setData(''); 
-          
-          loadModules();
+          alertBox.innerHTML = `<div class="alert alert-success">✅ Modul berhasil ${id ? 'diperbarui' : 'dibuat'}!</div>`;
+          cancelEdit(); // Reset form & kembalikan ke mode tambah
+          loadModules(); // Refresh tabel
           setTimeout(() => alertBox.innerHTML = '', 5000);
         } else {
           alertBox.innerHTML = '<div class="alert alert-error">❌ Error: ' + result.error + '</div>';
@@ -202,10 +255,6 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
       } catch(e) {
         alertBox.innerHTML = '<div class="alert alert-error">❌ Error: ' + e.message + '</div>';
       }
-    }
-
-    function editModule(id) {
-      alert('Fitur edit modul akan segera tersedia (ID: ' + id + ')');
     }
 
     async function deleteModule(id, title) {
@@ -229,11 +278,6 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
         alert('Error: ' + e.message);
       }
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      loadTracks();
-      loadModules();
-    });
 
     // Auto-generate slug from title
     document.addEventListener('DOMContentLoaded', () => {
