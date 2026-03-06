@@ -1,16 +1,16 @@
 <?php
-
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');       // XAMPP default: kosong
-define('DB_NAME', 'ppkocentris');
-define('DB_PORT', 3306);
+$host = "db.cpwasxmabuixklvudzji.supabase.co";
+$port = "5432"; 
+$db   = "postgres";
+$user = "postgres";
+$pass = "ppkoawisCentris1";
 
 try {
+    // Perhatikan: Menggunakan pgsql: (PostgreSQL) bukan mysql:
     $pdo = new PDO(
-        "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4",
-        DB_USER,
-        DB_PASS,
+        "pgsql:host=$host;port=$port;dbname=$db",
+        $user,
+        $pass,
         [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

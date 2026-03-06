@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png" style="height: 165px; width: auto;">
 
+    <!-- Tambahkan Library Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -70,6 +72,7 @@
 
     <script src="../js/include-navbar.js"></script>
     <script src="../js/include-footer.js"></script>
+    <script src="../js/supabase-client.js"></script> <!-- Load Client Config -->
     <script src="../js/app.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
@@ -78,15 +81,25 @@
 
             if (modulId) {
                 try {
-                    // Panggil API untuk mendapatkan isi spesifik modul ini
-                    const response = await fetch(`../api/modules/get.php?id=${modulId}`);
-                    const result = await response.json();
+                    // GANTI: Fetch PHP lama dihapus, ganti dengan Supabase Query
+                    // const response = await fetch(`../api/modules/get.php?id=${modulId}`);
+                    
+                    // Query ke Supabase: Select modules dan join ke tracks
+                    const { data: modul, error } = await supabase
+                        .from('modules')
+                        .select(`
+                            *,
+                            tracks ( title, slug )
+                        `)
+                        .eq('id', modulId)
+                        .single();
 
-                    if (result.success && result.data) {
-                        const modul = result.data;
+                    if (error) throw error;
+
+                    if (modul) {
                         
                         // Update Judul di Sidebar
-                        document.getElementById('sidebar-track-name').textContent = modul.track_title;
+                        document.getElementById('sidebar-track-name').textContent = modul.tracks.title;
                         
                         // Tampilkan isi Konten HTML yang dibuat dari Admin ke div modulContent
                         const contentDiv = document.getElementById('modulContent');
@@ -94,7 +107,7 @@
                             <div class="modul-breadcrumb">
                                 <a href="modul.html">Modul KO AWIS</a>
                                 <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
-                                <a href="modullist.html?track=${modul.track_slug}">${modul.track_title}</a>
+                                <a href="modullist.html?track=${modul.tracks.slug}">${modul.tracks.title}</a>
                             </div>
                             
                             <h1>${modul.title}</h1>
@@ -110,7 +123,8 @@
                         document.getElementById('btnNext').style.display = 'none';
                     }
                 } catch (e) {
-                    document.getElementById('modulContent').innerHTML = "<p>Gagal memuat materi dari database.</p>";
+                    console.error(e);
+                    document.getElementById('modulContent').innerHTML = "<p>Gagal memuat materi. Pastikan koneksi internet lancar.</p>";
                 }
             } else {
                 document.getElementById('modulContent').innerHTML = "<p>Modul tidak ditemukan.</p>";

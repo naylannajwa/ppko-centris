@@ -53,27 +53,44 @@
 
   <script src="../js/include-navbar.js"></script>
   <script src="../js/include-footer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase-client.js"></script>
   <script src="../js/site-data.js"></script>
   <script>
-    function renderArticles(filter) {
+    async function renderArticles(filter) {
       const grid = document.getElementById('articlesGrid');
-      const ARTICLES = window.SITE_DATA && window.SITE_DATA.ARTICLES ? window.SITE_DATA.ARTICLES : [];
-      const filtered = (filter === 'semua') ? ARTICLES : ARTICLES.filter(a => a.cat === filter);
-      if (filtered.length === 0) {
+      grid.innerHTML = '<p style="text-align:center; grid-column:1/-1;">Memuat artikel...</p>';
+      
+      try {
+        let query = supabase.from('articles').select('*').eq('is_published', true);
+        if (filter !== 'semua') {
+          query = query.eq('category', filter);
+        }
+        
+        const { data: articles, error } = await query;
+        
+        if (error) throw error;
+        
+        if (!articles || articles.length === 0) {
         grid.innerHTML = `<div class="no-articles" style="grid-column:1/-1;text-align:center;padding:3rem;"><div style="font-size:3rem;margin-bottom:1rem;">📭</div><p class="text-muted">Belum ada artikel untuk kategori ini.</p></div>`;
         return;
       }
-      grid.innerHTML = filtered.map(a => `
+      
+      grid.innerHTML = articles.map(a => `
         <div class="article-card" onclick="alert('Membuka artikel: ${a.title.substring(0,30)}...')">
-          <div class="article-img"><img src="${a.img}" alt="${a.title}" loading="lazy"><span class="article-cat-badge">${a.catLabel}</span></div>
+          <div class="article-img"><img src="${a.image_url || 'https://via.placeholder.com/400x200'}" alt="${a.title}" loading="lazy"><span class="article-cat-badge">${a.category}</span></div>
           <div class="article-body">
-            <div class="article-meta"><span>📅 ${a.date}</span><span>⏱️ ${a.readTime}</span></div>
+            <div class="article-meta"><span>📅 ${new Date(a.created_at).toLocaleDateString('id-ID')}</span><span>⏱️ ${a.read_time || 5} min baca</span></div>
             <div class="article-title">${a.title}</div>
             <p class="article-excerpt">${a.excerpt}</p>
-            <div class="article-footer"><div class="article-author"><div class="author-avatar">${a.author.charAt(0)}</div><span>${a.author}</span></div><span class="article-link">Selengkapnya ›</span></div>
+            <div class="article-footer"><div class="article-author"><div class="author-avatar">${(a.author || 'A').charAt(0)}</div><span>${a.author || 'Admin'}</span></div><span class="article-link">Selengkapnya ›</span></div>
           </div>
         </div>
       `).join('');
+      } catch (e) {
+        console.error(e);
+        grid.innerHTML = '<p style="text-align:center; grid-column:1/-1;">Gagal memuat artikel.</p>';
+      }
     }
     function filterArticles(cat, btn) { document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); if (btn) btn.classList.add('active'); renderArticles(cat); }
     document.addEventListener('DOMContentLoaded', () => { renderArticles('semua'); });

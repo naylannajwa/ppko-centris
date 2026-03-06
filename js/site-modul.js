@@ -2,46 +2,67 @@ document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const track = params.get('track') || 'hilir';
   
-  // 1. Ambil info dasar track (Judul & Deskripsi) dari site-data.js
-  const trackInfo = window.SITE_DATA && window.SITE_DATA.DATA && window.SITE_DATA.DATA[track];
-  if (!trackInfo) return;
-
   const titleEl = document.getElementById('modullist-title');
   const descEl = document.getElementById('modullist-desc');
   const countEl = document.getElementById('modullist-count');
   const grid = document.getElementById('modullist-grid');
 
-  if (titleEl) titleEl.textContent = trackInfo.title;
-  if (descEl) descEl.textContent = trackInfo.desc;
-
-  // 2. AMBIL DATA MODUL DARI DATABASE (API)
+  // 1. Ambil Info Track & Modul dari Supabase
   try {
-    const response = await fetch(`../api/modules/get.php?track=${track}`);
-    const result = await response.json();
+    // Jika elemen grid ada (artinya kita di halaman modullist.html)
+    if (grid) {
+      // Ambil Track Info
+      const { data: trackData, error: trackError } = await supabase
+        .from('tracks')
+        .select('*')
+        .eq('slug', track)
+        .single();
+        
+      if (trackError) throw trackError;
+      
+      if (trackData) {
+        if (titleEl) titleEl.textContent = trackData.title;
+        if (descEl) descEl.textContent = trackData.description;
+      }
 
-    if (result.success && result.data && result.data.length > 0) {
-      if (countEl) countEl.innerHTML = `📚 ${result.data.length} Modul Tersedia`;
+      // Ambil Modules
+      const { data: modules, error: modulError } = await supabase
+        .from('modules')
+        .select('*')
+        .eq('track_id', trackData.id)
+        .eq('is_published', true)
+        .order('order', { ascending: true });
 
-      grid.innerHTML = result.data.map((m, i) => `
-        <div class="modul-card-item">
-          <div class="modul-card-img">
-            <img src="https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=80" alt="${m.title}" loading="lazy">
-            <div class="modul-badge">MODUL ${i + 1}</div>
+      if (modulError) throw modulError;
+
+      if (modules && modules.length > 0) {
+        if (countEl) countEl.innerHTML = `📚 ${modules.length} Modul Tersedia`;
+
+        grid.innerHTML = modules.map((m, i) => `
+          <div class="modul-card-item">
+            <div class="modul-card-img">
+              <img src="https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=80" alt="${m.title}" loading="lazy">
+              <div class="modul-badge">MODUL ${i + 1}</div>
+            </div>
+            <div class="modul-card-body">
+              <div class="modul-card-title">${m.title}</div>
+              <div class="modul-card-desc">${m.description || ''}</div>
+              <div class="modul-meta">⏱️ Estimasi 45 Menit</div>
+              <a class="btn-buka" href="isimodul.html?id=${m.id}">Buka Materi →</a>
+            </div>
           </div>
-          <div class="modul-card-body">
-            <div class="modul-card-title">${m.title}</div>
-            <div class="modul-card-desc">${m.description}</div>
-            <div class="modul-meta">⏱️ Estimasi 45 Menit</div>
-            <a class="btn-buka" href="isimodul.html?id=${m.id}">Buka Materi →</a>
-          </div>
-        </div>
-      `).join('');
-    } else {
-      if (countEl) countEl.innerHTML = `📚 0 Modul Tersedia`;
-      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted);">Belum ada modul di pilar ini.</div>`;
+        `).join('');
+      } else {
+        if (countEl) countEl.innerHTML = `📚 0 Modul Tersedia`;
+        grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted);">Belum ada modul di pilar ini.</div>`;
+      }
     }
+    
+    // Update jumlah modul di halaman landing (modul.html) jika ada
+    // (Opsional, jika ingin dinamis di halaman depan)
+    
   } catch (e) {
     console.error("Gagal memuat modul.", e);
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:red;">Gagal memuat modul.</div>`;
+    if (grid) grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:red;">Gagal memuat modul. Pastikan koneksi internet lancar.</div>`;
   }
 });

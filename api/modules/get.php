@@ -58,7 +58,7 @@ try {
             FROM modules m
             JOIN tracks t ON m.track_id = t.id
             WHERE t.slug = ? AND m.is_published = 1
-            ORDER BY m.`order` ASC
+            ORDER BY m."order" ASC
         ");
         $stmt->execute([$_GET['track']]);
         $modules = $stmt->fetchAll();
@@ -73,7 +73,7 @@ try {
             FROM modules m
             LEFT JOIN tracks t ON m.track_id = t.id
             $where
-            ORDER BY t.id, m.`order` ASC
+            ORDER BY t.id, m."order" ASC
         ");
         $modules = $stmt->fetchAll();
         echo json_encode(['success' => true, 'data' => $modules]);
