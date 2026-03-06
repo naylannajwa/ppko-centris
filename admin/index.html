@@ -39,15 +39,18 @@
 <body>
 
   <div class="admin-container">
-    <div class="card" style="display:flex; align-items:center; justify-content:space-between;">
+    <div class="card" style="display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 1rem;">
       <div style="display:flex; align-items:center; gap:20px;">
         <img src="../assets/logo-koawis-rectangle.png" alt="Logo" style="height: 50px;">
         <div>
           <h1 style="font-size:1.5rem; margin:0;">Admin Dashboard</h1>
-          <p style="margin:0; color:#666; font-size:0.9rem;">Kelola konten KO AWIS</p>
+          <p style="margin:0; color:#666; font-size:0.9rem;">Kelola Modul Pembelajaran</p>
         </div>
       </div>
-      <button class="btn btn-logout" onclick="handleLogout()">Logout</button>
+      <div>
+        <a href="berita.html" class="btn btn-secondary" style="text-decoration: none; margin-right: 10px;">Kelola Berita</a>
+        <button class="btn btn-logout" onclick="handleLogout()">Logout</button>
+      </div>
     </div>
 
     <div class="card">
