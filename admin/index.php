@@ -15,6 +15,11 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Admin Dashboard — KO AWIS</title>
   <link rel="stylesheet" href="../css/styleadmin.css">
+  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+  <style>
+    /* Sedikit perbaikan tampilan agar editornya tinggi dan rapi */
+    .ck-editor__editable { min-height: 250px; font-family: 'Poppins', sans-serif; }
+  </style>
 </head>
 <body>
   <div class="admin-container">
@@ -64,8 +69,8 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
             <textarea class="form-textarea" id="descriptionInput" placeholder="Deskripsi singkat modul" required></textarea>
           </div>
           <div class="form-group">
-            <label class="form-label">Konten HTML</label>
-            <textarea class="form-textarea" id="contentInput" placeholder="Konten HTML modul" required style="min-height:200px;"></textarea>
+            <label class="form-label">Konten Lengkap Modul</label>
+            <textarea class="form-textarea" id="contentInput" placeholder="Konten modul" required style="min-height:200px;"></textarea>
           </div>
           <button type="submit" class="btn-submit">➕ Tambah Modul</button>
         </form>
@@ -94,6 +99,23 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
   </div>
 
   <script>
+    let contentEditor;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mengubah textarea biasa menjadi Editor ala Word
+      ClassicEditor
+        .create(document.querySelector('#contentInput'))
+        .then(editor => {
+            contentEditor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+      loadTracks();
+      loadModules();
+    });
+    
     function showSection(section, btn) {
       document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
       document.getElementById('section-' + section).classList.add('active');
@@ -152,10 +174,12 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
         slug: document.getElementById('slugInput').value,
         subtitle: document.getElementById('subtitleInput').value,
         description: document.getElementById('descriptionInput').value,
-        content: document.getElementById('contentInput').value,
+        // Ubah bagian ini agar mengambil teks dari Editor:
+        content: contentEditor.getData(), 
         icon: document.getElementById('iconInput').value,
         is_published: 1
       };
+      
       try {
         const res = await fetch('../api/modules/create.php', {
           method: 'POST',
@@ -166,6 +190,10 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
         if (result.success) {
           alertBox.innerHTML = '<div class="alert alert-success">✅ Modul berhasil dibuat!</div>';
           document.getElementById('moduleForm').reset();
+          
+          // Tambahkan ini untuk mengosongkan editor setelah berhasil simpan:
+          contentEditor.setData(''); 
+          
           loadModules();
           setTimeout(() => alertBox.innerHTML = '', 5000);
         } else {

@@ -70,21 +70,49 @@
     <script src="../js/include-footer.js"></script>
     <script src="../js/app.js"></script>
     <script>
-        // If query params specify a track & open index, open the modul directly.
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             const params = new URLSearchParams(location.search);
-            const track = params.get('track') || 'hilir';
-            const open = params.get('open');
-            // wait a tick to ensure app.js functions are available
-            setTimeout(() => {
+            const modulId = params.get('id'); // Ambil ID modul dari URL
+
+            if (modulId) {
                 try {
-                    if (typeof showModulList === 'function') showModulList(track);
-                    if (open !== null && typeof openModul === 'function') {
-                        const idx = parseInt(open, 10);
-                        if (!isNaN(idx)) openModul(track, idx);
+                    // Panggil API untuk mendapatkan isi spesifik modul ini
+                    const response = await fetch(`../api/modules/get.php?id=${modulId}`);
+                    const result = await response.json();
+
+                    if (result.success && result.data) {
+                        const modul = result.data;
+                        
+                        // Update Judul di Sidebar
+                        document.getElementById('sidebar-track-name').textContent = modul.track_title;
+                        
+                        // Tampilkan isi Konten HTML yang dibuat dari Admin ke div modulContent
+                        const contentDiv = document.getElementById('modulContent');
+                        contentDiv.innerHTML = `
+                            <div class="modul-breadcrumb">
+                                <a href="modul.html">Modul KO AWIS</a>
+                                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                                <a href="modullist.html?track=${modul.track_slug}">${modul.track_title}</a>
+                            </div>
+                            
+                            <h1>${modul.title}</h1>
+                            <p class="modul-desc">${modul.description}</p>
+                            
+                            <div style="margin-top: 2rem;">
+                                ${modul.content}
+                            </div>
+                        `;
+                        
+                        // Sembunyikan navigasi default app.js sementara waktu
+                        document.getElementById('btnPrev').style.display = 'none';
+                        document.getElementById('btnNext').style.display = 'none';
                     }
-                } catch (e) { console.warn('Could not open modul', e); }
-            }, 50);
+                } catch (e) {
+                    document.getElementById('modulContent').innerHTML = "<p>Gagal memuat materi dari database.</p>";
+                }
+            } else {
+                document.getElementById('modulContent').innerHTML = "<p>Modul tidak ditemukan.</p>";
+            }
         });
     </script>
 </body>
