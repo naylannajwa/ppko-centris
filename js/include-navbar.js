@@ -94,6 +94,7 @@
     if (page.includes('modul') || page.includes('isimodul')) document.getElementById('nav-modul')?.classList.add('active');
     else if (page.includes('informasi')) document.getElementById('nav-informasi')?.classList.add('active');
     else if (page.includes('tentang')) document.getElementById('nav-tentang')?.classList.add('active');
+    else if (page.includes('luaran')) document.getElementById('nav-luaran')?.classList.add('active');
     else document.getElementById('nav-home')?.classList.add('active'); // Default home
 
   } catch(e) { console.error('include-navbar failed', e); }
