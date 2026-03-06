@@ -6,261 +6,125 @@
   <title>Admin Dashboard — KO AWIS</title>
   <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png">
   
-  <!-- Library -->
-  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
-    .admin-container { max-width: 1200px; margin: 0 auto; }
-    .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
-    h1, h2 { margin-top: 0; color: #2c1a0e; }
-    .form-group { margin-bottom: 15px; }
-    .form-label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
-    .form-input, .form-select, .form-textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: inherit; }
-    .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.2s; }
-    .btn-primary { background: #3D2314; color: white; }
-    .btn-primary:hover { background: #5c3317; }
-    .btn-secondary { background: #e0e0e0; color: #333; }
-    .btn-danger { background: #dc3545; color: white; padding: 5px 10px; font-size: 0.85rem; }
-    .btn-edit { background: #ffc107; color: #333; padding: 5px 10px; font-size: 0.85rem; margin-right: 5px; }
-    .btn-logout { background: #dc3545; color: white; float: right; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; margin: 0; color: #333; }
     
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
-    th { background: #f9f9f9; font-weight: 600; }
+    /* Navbar Admin */
+    .admin-nav { background: #fff; padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: #3D2314; text-decoration: none; }
+    .nav-brand img { height: 36px; }
+    .nav-menu { display: flex; gap: 20px; align-items: center; }
+    .nav-item { text-decoration: none; color: #666; font-weight: 600; font-size: 0.95rem; transition: 0.2s; cursor: pointer; }
+    .nav-item:hover, .nav-item.active { color: #3D2314; }
+    .nav-item.active { border-bottom: 2px solid #3D2314; }
+    .btn-logout-nav { background: #dc3545; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-size: 0.9rem; cursor: pointer; }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #3D2314; }
+
+    /* Dashboard Content */
+    .admin-container { max-width: 1200px; margin: 2rem auto; padding: 0 20px; }
+    .welcome-banner { background: linear-gradient(135deg, #3D2314, #5C3317); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem; }
+    .welcome-banner h1 { margin: 0 0 0.5rem 0; font-size: 1.8rem; }
+    .welcome-banner p { margin: 0; opacity: 0.9; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 2rem; }
+    .stat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; }
+    .stat-icon { width: 50px; height: 50px; border-radius: 10px; background: #f4f6f8; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .stat-info h3 { margin: 0; font-size: 2rem; color: #3D2314; }
+    .stat-info p { margin: 0; color: #666; font-size: 0.9rem; }
+
+    .quick-actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .action-card { background: white; padding: 20px; border-radius: 12px; text-align: center; text-decoration: none; color: inherit; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: 0.2s; border: 1px solid transparent; }
+    .action-card:hover { transform: translateY(-5px); border-color: #3D2314; }
+    .action-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .action-title { font-weight: 700; display: block; }
     
-    .ck-editor__editable { min-height: 200px; }
-    .alert { padding: 15px; border-radius: 6px; margin-bottom: 20px; display: none; }
-    .alert.success { background: #d4edda; color: #155724; display: block; }
-    .alert.error { background: #f8d7da; color: #721c24; display: block; }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-nav { padding: 1rem; position: relative; }
+      .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); gap: 15px; align-items: flex-start; }
+      .nav-menu.open { display: flex; }
+      .nav-toggle { display: block; }
+      .nav-item { width: 100%; padding: 5px 0; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Navbar -->
+  <nav class="admin-nav">
+    <a href="index.html" class="nav-brand">
+      <img src="../assets/logo-koawis-brand.png" alt="Logo">
+      <span>Admin Panel</span>
+    </a>
+    <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html" class="nav-item active">Dashboard</a>
+      <a href="modul.html" class="nav-item">Kelola Modul</a>
+      <a href="berita.html" class="nav-item">Kelola Berita</a>
+      <button onclick="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
+    </div>
+  </nav>
+
   <div class="admin-container">
-    <div class="card" style="display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 1rem;">
-      <div style="display:flex; align-items:center; gap:20px;">
-        <img src="../assets/logo-koawis-rectangle.png" alt="Logo" style="height: 50px;">
-        <div>
-          <h1 style="font-size:1.5rem; margin:0;">Admin Dashboard</h1>
-          <p style="margin:0; color:#666; font-size:0.9rem;">Kelola Modul Pembelajaran</p>
+    <div class="welcome-banner">
+      <h1>Selamat Datang, Admin! 👋</h1>
+      <p>Kelola konten website KO AWIS dengan mudah dari sini.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-info">
+          <h3 id="countModul">-</h3>
+          <p>Total Modul</p>
         </div>
       </div>
-      <div>
-        <a href="berita.html" class="btn btn-secondary" style="text-decoration: none; margin-right: 10px;">Kelola Berita</a>
-        <button class="btn btn-logout" onclick="handleLogout()">Logout</button>
+      <div class="stat-card">
+        <div class="stat-icon">📰</div>
+        <div class="stat-info">
+          <h3 id="countBerita">-</h3>
+          <p>Total Berita</p>
+        </div>
       </div>
     </div>
 
-    <div class="card">
-      <h2>📝 Tambah / Edit Modul</h2>
-      <div id="alertBox" class="alert"></div>
-      
-      <form id="moduleForm">
-        <input type="hidden" id="moduleId">
-        
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-          <div class="form-group">
-            <label class="form-label">Pilar Pembelajaran (Track)</label>
-            <select class="form-select" id="trackSelect" required>
-              <option value="">Memuat data...</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Judul Modul</label>
-            <input class="form-input" id="titleInput" required placeholder="Contoh: Teknik Fermentasi">
-          </div>
-        </div>
-
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-          <div class="form-group">
-            <label class="form-label">Slug (URL)</label>
-            <input class="form-input" id="slugInput" required placeholder="teknik-fermentasi">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Urutan (Order)</label>
-            <input type="number" class="form-input" id="orderInput" value="1">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Deskripsi Singkat</label>
-          <textarea class="form-textarea" id="descInput" rows="2"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Konten Lengkap</label>
-          <div id="editor"></div>
-        </div>
-
-        <div style="display:flex; gap:10px;">
-          <button type="submit" class="btn btn-primary" id="btnSave">💾 Simpan Modul</button>
-          <button type="button" class="btn btn-secondary" id="btnCancel" style="display:none;" onclick="resetForm()">❌ Batal</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="card">
-      <h2>📚 Daftar Modul</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Judul</th>
-            <th>Track</th>
-            <th>Status</th>
-            <th style="width:150px;">Aksi</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <tr><td colspan="4">Memuat data...</td></tr>
-        </tbody>
-      </table>
+    <h2 style="margin-bottom: 1rem;">Akses Cepat</h2>
+    <div class="quick-actions">
+      <a href="modul.html" class="action-card">
+        <span class="action-icon">📝</span>
+        <span class="action-title">Kelola Modul</span>
+      </a>
+      <a href="berita.html" class="action-card">
+        <span class="action-icon">📢</span>
+        <span class="action-title">Kelola Berita</span>
+      </a>
+      <a href="../index.html" class="action-card" target="_blank">
+        <span class="action-icon">🌐</span>
+        <span class="action-title">Lihat Website</span>
+      </a>
     </div>
   </div>
 
-  <!-- Load Config Supabase -->
   <script src="../js/supabase-client.js"></script>
-
   <script>
-    let editorInstance;
-
-    // Init CKEditor
-    ClassicEditor
-      .create(document.querySelector('#editor'))
-      .then(editor => { editorInstance = editor; })
-      .catch(error => { console.error(error); });
-
-    // --- APP LOGIC ---
     document.addEventListener('DOMContentLoaded', async () => {
-      // Cek Auth
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         window.location.href = 'login.html';
         return;
       }
-
-      loadTracks();
-      loadModules();
-
-      // Auto-slug generator
-      document.getElementById('titleInput').addEventListener('input', function() {
-        const slug = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-        document.getElementById('slugInput').value = slug;
-      });
+      
+      // Load Stats
+      const { count: modulCount } = await supabase.from('modules').select('*', { count: 'exact', head: true });
+      const { count: beritaCount } = await supabase.from('articles').select('*', { count: 'exact', head: true });
+      
+      document.getElementById('countModul').textContent = modulCount || 0;
+      document.getElementById('countBerita').textContent = beritaCount || 0;
     });
 
-    async function handleLogout() {
-      await supabase.auth.signOut();
-      window.location.href = 'login.html';
-    }
-
-    async function loadTracks() {
-      const { data, error } = await supabase.from('tracks').select('*');
-      if (data) {
-        const select = document.getElementById('trackSelect');
-        select.innerHTML = '<option value="">-- Pilih Track --</option>' + 
-          data.map(t => `<option value="${t.id}">${t.title}</option>`).join('');
-      }
-    }
-
-    async function loadModules() {
-      const tbody = document.getElementById('tableBody');
-      const { data, error } = await supabase
-        .from('modules')
-        .select('*, tracks(title)')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        tbody.innerHTML = `<tr><td colspan="4" style="color:red;">Error: ${error.message}</td></tr>`;
-        return;
-      }
-
-      if (data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Belum ada modul.</td></tr>`;
-        return;
-      }
-
-      tbody.innerHTML = data.map(m => `
-        <tr>
-          <td><strong>${m.title}</strong><br><small style="color:#666;">/${m.slug}</small></td>
-          <td>${m.tracks?.title || '-'}</td>
-          <td>${m.is_published ? '<span style="color:green;">Terbit</span>' : '<span style="color:orange;">Draft</span>'}</td>
-          <td>
-            <button class="btn btn-edit" onclick="editModule(${m.id})">Edit</button>
-            <button class="btn btn-danger" onclick="deleteModule(${m.id})">Hapus</button>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    async function editModule(id) {
-      const { data, error } = await supabase.from('modules').select('*').eq('id', id).single();
-      if (data) {
-        document.getElementById('moduleId').value = data.id;
-        document.getElementById('trackSelect').value = data.track_id;
-        document.getElementById('titleInput').value = data.title;
-        document.getElementById('slugInput').value = data.slug;
-        document.getElementById('orderInput').value = data.order || 1;
-        document.getElementById('descInput').value = data.description || '';
-        editorInstance.setData(data.content || '');
-
-        document.getElementById('btnSave').textContent = '🔄 Update Modul';
-        document.getElementById('btnCancel').style.display = 'inline-block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-
-    async function deleteModule(id) {
-      if(!confirm('Yakin hapus modul ini?')) return;
-      const { error } = await supabase.from('modules').delete().eq('id', id);
-      if (!error) loadModules();
-      else alert('Gagal hapus: ' + error.message);
-    }
-
-    document.getElementById('moduleForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const id = document.getElementById('moduleId').value;
-      const payload = {
-        track_id: document.getElementById('trackSelect').value,
-        title: document.getElementById('titleInput').value,
-        slug: document.getElementById('slugInput').value,
-        order: document.getElementById('orderInput').value,
-        description: document.getElementById('descInput').value,
-        content: editorInstance.getData(),
-        is_published: true
-      };
-
-      let error;
-      if (id) {
-        ({ error } = await supabase.from('modules').update(payload).eq('id', id));
-      } else {
-        ({ error } = await supabase.from('modules').insert([payload]));
-      }
-
-      if (!error) {
-        showAlert('success', '✅ Data berhasil disimpan!');
-        resetForm();
-        loadModules();
-      } else {
-        showAlert('error', '❌ Error: ' + error.message);
-      }
-    });
-
-    function resetForm() {
-      document.getElementById('moduleForm').reset();
-      document.getElementById('moduleId').value = '';
-      editorInstance.setData('');
-      document.getElementById('btnSave').textContent = '💾 Simpan Modul';
-      document.getElementById('btnCancel').style.display = 'none';
-    }
-
-    function showAlert(type, msg) {
-      const box = document.getElementById('alertBox');
-      box.className = `alert ${type}`;
-      box.textContent = msg;
-      setTimeout(() => { box.style.display = 'none'; }, 3000);
-    }
+    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login.html'; }
   </script>
 </body>
 </html>
