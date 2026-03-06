@@ -1,81 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login - KO AWIS</title>
-  <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Login — KO AWIS</title>
   <link rel="stylesheet" href="../css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png">
   <style>
-    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--cream); margin: 0; }
-    .login-card { background: white; padding: 2.5rem; border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; border: 1px solid rgba(0,0,0,0.05); }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--brown-800); font-size: 0.9rem; }
-    .form-input { width: 100%; padding: 0.85rem; border: 1px solid #ddd; border-radius: 0.5rem; font-family: inherit; transition: 0.3s; }
-    .form-input:focus { border-color: var(--brown-600); outline: none; }
-    .btn-login { width: 100%; padding: 0.85rem; background: var(--brown-800); color: white; border: none; border-radius: 0.5rem; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 0.5rem; }
-    .btn-login:hover { background: var(--brown-600); transform: translateY(-2px); }
-    .error-msg { background: #fee2e2; color: #b91c1c; padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 1.5rem; display: none; font-size: 0.9rem; text-align: center; }
-    .brand-header { text-align: center; margin-bottom: 2rem; }
-    .brand-header img { height: 60px; margin: 0 auto 1rem; }
-    .brand-header h2 { color: var(--brown-900); margin: 0; font-size: 1.5rem; }
-    .brand-header p { color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem; }
+    body { background: var(--brown-100); display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-card { background: var(--white); padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: 100%; max-width: 400px; text-align: center; }
+    .login-logo { height: 80px; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1rem; text-align: left; }
+    .btn-full { width: 100%; justify-content: center; margin-top: 1rem; }
+    .error-msg { color: #d32f2f; background: #ffebee; padding: 0.5rem; border-radius: var(--radius-sm); font-size: 0.9rem; margin-bottom: 1rem; display: none; }
   </style>
 </head>
 <body>
+
   <div class="login-card">
-    <div class="brand-header">
-      <img src="../assets/logo-koawis-rectangle.png" alt="Logo">
-      <h2>Admin Portal</h2>
-      <p>Masuk untuk mengelola konten</p>
-    </div>
-    
+    <img src="../assets/logo-koawis-brand.png" alt="Logo KO AWIS" class="login-logo">
+    <h2 style="margin-bottom: 0.5rem; color: var(--brown-800);">Login Admin</h2>
+    <p class="text-muted" style="margin-bottom: 2rem; font-size: 0.9rem;">Masuk untuk mengelola konten</p>
+
     <div id="errorMsg" class="error-msg"></div>
-    
+
     <form id="loginForm">
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input type="email" id="email" class="form-input" required placeholder="admin@koawis.local">
+        <input type="email" id="email" class="form-input" placeholder="admin@koawis.id" required>
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input type="password" id="password" class="form-input" required placeholder="••••••••">
+        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
       </div>
-      <button type="submit" class="btn-login">Masuk Dashboard</button>
+      <button type="submit" class="btn-daftar btn-full" id="btnSubmit">Masuk</button>
     </form>
+    
+    <div style="margin-top: 1.5rem;">
+      <a href="../index.html" class="text-muted" style="font-size: 0.85rem;">← Kembali ke Beranda</a>
+    </div>
   </div>
 
-  <!-- Load Config Supabase -->
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/supabase-client.js"></script>
   
   <script>
-    // Cek jika sudah login, langsung ke index
+    const loginForm = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    // Cek jika sudah login
     document.addEventListener('DOMContentLoaded', async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) window.location.href = 'index.html';
+      const { data } = await supabase.auth.getSession();
+      if (data.session) {
+        window.location.href = 'index.html'; // Redirect ke dashboard
+      }
     });
 
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      btnSubmit.textContent = 'Memproses...';
+      btnSubmit.disabled = true;
+      errorMsg.style.display = 'none';
+
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-      const btn = document.querySelector('.btn-login');
-      const errorMsg = document.getElementById('errorMsg');
 
-      btn.textContent = 'Memproses...';
-      btn.disabled = true;
-      errorMsg.style.display = 'none';
-      
       try {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
-        window.location.href = 'index.html';
-      } catch (error) {
-        errorMsg.textContent = 'Login gagal: ' + error.message;
+        // Cek apakah library Supabase sudah siap
+        if (typeof supabase === 'undefined') throw new Error('Gagal memuat Supabase. Cek koneksi internet.');
+
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+        if (error) throw error; // Lempar error agar ditangkap catch di bawah
+
+        // Jika sukses
+        window.location.href = 'index.html'; 
+
+      } catch (err) {
+        console.error(err);
+        errorMsg.textContent = 'Login gagal: ' + (err.message || 'Terjadi kesalahan.');
         errorMsg.style.display = 'block';
-        btn.textContent = 'Masuk Dashboard';
-        btn.disabled = false;
+        btnSubmit.textContent = 'Masuk';
+        btnSubmit.disabled = false;
       }
     });
   </script>

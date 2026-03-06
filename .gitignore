@@ -18,3 +18,5 @@ vendor/
 dist/
 build/
 *.tmp
+.vercel
+.env*.local

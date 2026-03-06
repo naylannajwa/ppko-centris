@@ -1092,6 +1092,10 @@ modul-content h1 {
   .nav-links, .nav-actions { display: none; }
   .hamburger { display: flex; }
 
+  /* Fix: Grid 2 kolom jadi 1 kolom di mobile (untuk About Section) */
+  .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+  .gap-4rem { gap: 2rem; }
+
   .stats-bar { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; padding: 1.5rem 1rem; }
   .stat-num { font-size: 1.8rem; }
 

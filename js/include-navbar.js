@@ -28,25 +28,61 @@
     }
 
     // 2. Inject Tombol Login Admin (Desktop & Mobile)
-    // Desktop
-    const navActions = document.querySelector('.nav-actions');
-    if (navActions) {
-      const btnAdmin = document.createElement('a');
-      btnAdmin.href = '../admin/login.php'; // Sesuaikan path login admin
-      btnAdmin.className = 'btn-masuk'; // Gunakan style yang sama agar konsisten
-      btnAdmin.textContent = 'Login Admin';
-      btnAdmin.style.marginLeft = '0.5rem';
-      navActions.appendChild(btnAdmin);
-    }
+    // --- PERBAIKAN: Render tombol langsung (jangan tunggu cek login) ---
+    const renderButton = (text, url) => {
+        // Desktop
+        let navActions = document.querySelector('.nav-actions');
+        // Buat container jika hilang
+        if (!navActions) {
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navActions = document.createElement('div');
+                navActions.className = 'nav-actions';
+                const hamburger = document.querySelector('.hamburger');
+                if (hamburger) navbar.insertBefore(navActions, hamburger);
+                else navbar.appendChild(navActions);
+            }
+        }
 
-    // Mobile
-    if (mobileMenu) {
-      const linkAdmin = document.createElement('a');
-      linkAdmin.href = '../admin/login.php';
-      linkAdmin.textContent = 'Login Admin';
-      linkAdmin.style.color = 'var(--brown-700)';
-      linkAdmin.style.fontWeight = '700';
-      mobileMenu.appendChild(linkAdmin);
+        if (navActions) {
+            // Cari tombol lama atau buat baru
+            let btn = navActions.querySelector('#btn-login-dynamic');
+            if (!btn) {
+                btn = document.createElement('a');
+                btn.id = 'btn-login-dynamic';
+                btn.className = 'btn-masuk';
+                btn.style.marginLeft = '0.5rem';
+                navActions.appendChild(btn);
+            }
+            btn.textContent = text;
+            btn.href = url;
+        }
+
+        // Mobile
+        if (mobileMenu) {
+            let link = mobileMenu.querySelector('#link-login-dynamic');
+            if (!link) {
+                link = document.createElement('a');
+                link.id = 'link-login-dynamic';
+                link.style.color = 'var(--brown-700)';
+                link.style.fontWeight = '700';
+                mobileMenu.appendChild(link);
+            }
+            link.textContent = text;
+            link.href = url;
+        }
+    };
+
+    // 1. Render Default "Login Admin" SEGERA
+    renderButton('Login Admin', '../admin/login.html');
+
+    // 2. Cek Supabase (Async) -> Update jadi "Dashboard" kalau login
+    if (typeof supabase !== 'undefined' && supabase.auth) {
+        supabase.auth.getSession().then(({ data }) => {
+            if (data?.session) {
+                renderButton('Dashboard', '../admin/index.html');
+            }
+        });
     }
 
     // mark active link based on pathname (works for static pages)
