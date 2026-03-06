@@ -15,7 +15,7 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Admin Dashboard — KO AWIS</title>
   <link rel="stylesheet" href="../css/styleadmin.css">
-<link rel="icon" type="image/png" href="assets/logo-koawis-brand.png">  
+<link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png">  
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
   <style>
     /* Sedikit perbaikan tampilan agar editornya tinggi dan rapi */
