@@ -594,6 +594,7 @@ footer {
   padding: 2rem;
   display: flex; align-items: flex-start; gap: 1rem;
   border-bottom: 1px solid var(--cream-dark);
+  z-index: 99; /* Pastikan di atas elemen lain */
 }
 .k-icon {
   width: 56px; height: 56px; border-radius: var(--radius-sm);
@@ -746,6 +747,7 @@ modul-content h1 {
   aspect-ratio: 16/9; background: var(--brown-900);
   position: relative; margin-bottom: 2.5rem;
   cursor: pointer;
+  display: block; /* Pastikan link memenuhi lebar container */
 }
 .video-player img {
   width: 100%; height: 100%; object-fit: cover; opacity: 0.8;
