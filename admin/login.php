@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="login-page-bg">
   <div class="login-container">
     <div class="login-header">
-      <img src="assets/logo-koawis-rectangle.png" alt="Logo KO AWIS" style="height: 130px; margin-bottom: 0px;">
+      <img src="../assets/logo-koawis-rectangle.png" alt="Logo KO AWIS" style="height: 130px; margin-bottom: 0px;">
       <p>Login untuk mengelola modul pembelajaran</p>
     </div>
 
