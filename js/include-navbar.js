@@ -1,8 +1,26 @@
 (async function(){
   try{
-    const mobileResp = await fetch('/partials/mobile-menu?v=2');
+    // Deteksi base path untuk support XAMPP (subfolder) dan Vercel (root)
+    const getBasePath = () => {
+      const path = window.location.pathname;
+      // Jika di localhost dan ada folder project (misal /ppko-centris/), ambil folder itu
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        const segments = path.split('/').filter(Boolean);
+        if (segments.length > 0 && segments[0] !== 'html' && segments[0] !== 'admin') {
+           return '/' + segments[0];
+        }
+      }
+      return ''; // Di Vercel atau root domain, kosongkan
+    };
+
+    const base = getBasePath();
+    
+    const mobileResp = await fetch(`${base}/partials/mobile-menu?v=2`);
+    if (!mobileResp.ok) throw new Error(`Gagal load mobile-menu: ${mobileResp.status}`);
     const mobileHtml = await mobileResp.text();
-    const navResp = await fetch('/partials/navbar?v=2');
+    
+    const navResp = await fetch(`${base}/partials/navbar?v=2`);
+    if (!navResp.ok) throw new Error(`Gagal load navbar: ${navResp.status}`);
     const navHtml = await navResp.text();
 
     // 1. Hapus navbar/mobile-menu hardcoded jika ada (agar navbar satu aja)
@@ -74,13 +92,13 @@
     };
 
     // 1. Render Default "Login Admin" SEGERA
-    renderButton('Login Admin', '/admin/login');
+    renderButton('Login Admin', `${base}/admin/login`);
 
     // 2. Cek Supabase (Async) -> Update jadi "Dashboard" kalau login
     if (typeof supabase !== 'undefined' && supabase.auth) {
         supabase.auth.getSession().then(({ data }) => {
             if (data?.session) {
-                renderButton('Dashboard', '/admin/index');
+                renderButton('Dashboard', `${base}/admin/index`);
             }
         });
     }

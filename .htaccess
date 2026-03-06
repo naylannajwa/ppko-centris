@@ -1,0 +1,25 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+
+# PENTING: Sesuaikan baris ini dengan nama folder project Anda di htdocs
+# Jika folder Anda bernama 'ppko-centris', biarkan seperti ini.
+RewriteBase /ppko-centris/
+
+# 1. Redirect halaman depan (root) ke html/index.html
+RewriteRule ^$ html/index.html [L]
+
+# 2. Routing untuk Partials (Navbar/Menu)
+# Mengarahkan /partials/namafile ke /html/partials/namafile.html
+RewriteRule ^partials/([^/]+)/?$ html/partials/$1.html [L]
+
+# 3. Routing untuk Admin (contoh: /admin/login -> /admin/login.html)
+# Mencegah error 404 saat akses URL bersih di folder admin
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^admin/([^/]+)/?$ admin/$1.html [L]
+
+# 4. Routing untuk Halaman User (contoh: /modul -> /html/modul.html)
+# Mengarahkan URL bersih ke file asli di dalam folder html/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)/?$ html/$1.html [L]
