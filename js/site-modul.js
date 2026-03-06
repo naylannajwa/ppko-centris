@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <div class="modul-card-title">${m.title}</div>
               <div class="modul-card-desc">${m.description || ''}</div>
               <div class="modul-meta">⏱️ Estimasi 45 Menit</div>
-              <a class="btn-buka" href="isimodul.html?id=${m.id}">Buka Materi →</a>
+              <a class="btn-buka" href="isimodul?id=${m.id}">Buka Materi →</a>
             </div>
           </div>
         `).join('');

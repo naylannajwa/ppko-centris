@@ -60,9 +60,9 @@
     </a>
     <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
     <div class="nav-menu" id="navMenu">
-      <a href="index.html" class="nav-item active">Dashboard</a>
-      <a href="modul.html" class="nav-item">Kelola Modul</a>
-      <a href="berita.html" class="nav-item">Kelola Berita</a>
+      <a href="index" class="nav-item active">Dashboard</a>
+      <a href="modul" class="nav-item">Kelola Modul</a>
+      <a href="berita" class="nav-item">Kelola Berita</a>
       <button onclick="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
     </div>
   </nav>
@@ -92,15 +92,15 @@
 
     <h2 style="margin-bottom: 1rem;">Akses Cepat</h2>
     <div class="quick-actions">
-      <a href="modul.html" class="action-card">
+      <a href="modul" class="action-card">
         <span class="action-icon">📝</span>
         <span class="action-title">Kelola Modul</span>
       </a>
-      <a href="berita.html" class="action-card">
+      <a href="berita" class="action-card">
         <span class="action-icon">📢</span>
         <span class="action-title">Kelola Berita</span>
       </a>
-      <a href="../index.html" class="action-card" target="_blank">
+      <a href="/" class="action-card" target="_blank">
         <span class="action-icon">🌐</span>
         <span class="action-title">Lihat Website</span>
       </a>
@@ -112,7 +112,7 @@
     document.addEventListener('DOMContentLoaded', async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        window.location.href = 'login.html';
+        window.location.href = 'login';
         return;
       }
       
@@ -124,7 +124,7 @@
       document.getElementById('countBerita').textContent = beritaCount || 0;
     });
 
-    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login.html'; }
+    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login'; }
   </script>
 </body>
 </html>

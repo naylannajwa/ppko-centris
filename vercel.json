@@ -4,15 +4,19 @@
   },
   "rewrites": [
     { "source": "/", "destination": "/html/index.html" },
-    { "source": "/index.html", "destination": "/html/index.html" },
-    { "source": "/modul.html", "destination": "/html/modul.html" },
-    { "source": "/modullist.html", "destination": "/html/modullist.html" },
-    { "source": "/isimodul.html", "destination": "/html/isimodul.html" },
-    { "source": "/informasi.html", "destination": "/html/informasi.html" },
-    { "source": "/tentang.html", "destination": "/html/tentang.html" },
+    { "source": "/index", "destination": "/html/index.html" },
+    { "source": "/modul", "destination": "/html/modul.html" },
+    { "source": "/modullist", "destination": "/html/modullist.html" },
+    { "source": "/isimodul", "destination": "/html/isimodul.html" },
+    { "source": "/informasi", "destination": "/html/informasi.html" },
+    { "source": "/tentang", "destination": "/html/tentang.html" },
+    { "source": "/luaran", "destination": "/html/luaran.html" },
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/admin/", "destination": "/admin/index.html" },
+    { "source": "/admin/index", "destination": "/admin/index.html" },
     { "source": "/admin/login", "destination": "/admin/login.html" },
+    { "source": "/admin/modul", "destination": "/admin/modul.html" },
+    { "source": "/admin/berita", "destination": "/admin/berita.html" },
     { "source": "/api/(.*)", "destination": "/api/$1" }
   ]
 }

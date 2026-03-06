@@ -73,9 +73,9 @@
     </a>
     <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
     <div class="nav-menu" id="navMenu">
-      <a href="index.html" class="nav-item">Dashboard</a>
-      <a href="modul.html" class="nav-item">Kelola Modul</a>
-      <a href="berita.html" class="nav-item active">Kelola Berita</a>
+      <a href="index" class="nav-item">Dashboard</a>
+      <a href="modul" class="nav-item">Kelola Modul</a>
+      <a href="berita" class="nav-item active">Kelola Berita</a>
       <button onclick="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
     </div>
   </nav>
@@ -179,7 +179,7 @@
 
     document.addEventListener('DOMContentLoaded', async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { window.location.href = 'login.html'; return; }
+      if (!session) { window.location.href = 'login'; return; }
 
       loadArticles();
 
@@ -188,7 +188,7 @@
       });
     });
 
-    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login.html'; }
+    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login'; }
 
     async function loadArticles() {
       const tbody = document.getElementById('tableBody');

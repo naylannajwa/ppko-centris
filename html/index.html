@@ -24,8 +24,8 @@
       <h1>Desa Cerdas<span> Ngawis </span></h1>
       <p>KO AWIS: Penguatan Kapasitas Masyarakat dan Ekosistem Hilirisasi Kakao Berbasis Kewirausahaan Melalui Pojok Literasi Terpadu </p>
       <div class="hero-cta">
-        <button class="btn-primary" onclick="location.href='modul.html'">Jelajahi Modul</button>
-        <button class="btn-outline" onclick="location.href='tentang.html'">Lihat Kurikulum</button>
+        <button class="btn-primary" onclick="location.href='modul'">Jelajahi Modul</button>
+        <button class="btn-outline" onclick="location.href='tentang'">Lihat Kurikulum</button>
       </div>
     </div>
   </section>
@@ -163,10 +163,10 @@
     <h2>Bersama KO AWIS, Ngawis Siap Melangkah Lebih Jauh</h2>
     <p>Bergabunglah bersama masyarakat Desa Ngawis dalam membangun ekosistem kakao yang berdaya saing melalui edukasi dan pemberdayaan berkelanjutan.</p>
     <div class="cta-buttons">
-      <button class="btn-cta-white" onclick="location.href='modul.html'">
+      <button class="btn-cta-white" onclick="location.href='modul'">
         Jelajahi Modul
       </button>
-      <button class="btn-cta-outline" onclick="location.href='tentang.html'">
+      <button class="btn-cta-outline" onclick="location.href='tentang'">
         Hubungi Kami
       </button>
     </div>
@@ -629,12 +629,12 @@
     if (typeof window.showPage !== 'function') {
       window.showPage = function (page) {
         const map = {
-          home: 'index.html',
-          modul: 'modul.html',
-          modullist: 'modullist.html',
-          isimodul: 'isimodul.html',
-          informasi: 'informasi.html',
-          tentang: 'tentang.html'
+          home: '/',
+          modul: 'modul',
+          modullist: 'modullist',
+          isimodul: 'isimodul',
+          informasi: 'informasi',
+          tentang: 'tentang'
         };
         const target = map[page];
         if (target && location.pathname !== target) location.href = target;

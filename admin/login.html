@@ -37,7 +37,7 @@
     </form>
     
     <div style="margin-top: 1.5rem;">
-      <a href="../index.html" class="text-muted" style="font-size: 0.85rem;">← Kembali ke Beranda</a>
+      <a href="/" class="text-muted" style="font-size: 0.85rem;">← Kembali ke Beranda</a>
     </div>
   </div>
 
@@ -54,7 +54,7 @@
     document.addEventListener('DOMContentLoaded', async () => {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
-        window.location.href = 'index.html'; // Redirect ke dashboard
+        window.location.href = 'index'; // Redirect ke dashboard
       }
     });
 
@@ -79,7 +79,7 @@
         if (error) throw error; // Lempar error agar ditangkap catch di bawah
 
         // Jika sukses
-        window.location.href = 'index.html'; 
+        window.location.href = 'index'; 
 
       } catch (err) {
         console.error(err);
