@@ -1,94 +1,190 @@
 -- =============================================
--- Database Schema untuk KO AWIS CRUD
+-- Database Schema untuk KO AWIS CRUD (Supabase/Postgres)
 -- =============================================
--- Jalankan script ini di phpMyAdmin
+-- Jalankan script ini di SQL editor Supabase (Postgres)
+-- Table: tracks (Jalur Pembelajaran)
+create table if not exists public.tracks (
+  id bigserial primary key,
+  slug varchar(50) unique not null,
+  title varchar(100) not null,
+  subtitle text not null,
+  icon varchar(50),
+  color_class varchar(50),
+  description text,
+  lesson_count int default 0,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
 
-CREATE DATABASE IF NOT EXISTS `ppkocentris` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `ppkocentris`;
+-- Table: modules (Modul Pembelajaran)
+create table if not exists public.modules (
+  id bigserial primary key,
+  track_id bigint not null references public.tracks (id) on delete CASCADE,
+  title varchar(200) not null,
+  slug varchar(200) unique not null,
+  subtitle text,
+  description text,
+  content text,
+  "order" int default 0,
+  icon varchar(50),
+  is_published boolean default true,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
 
--- Table: Tracks (Jalur Pembelajaran)
-CREATE TABLE `tracks` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `slug` VARCHAR(50) UNIQUE NOT NULL,
-  `title` VARCHAR(100) NOT NULL,
-  `subtitle` TEXT NOT NULL,
-  `icon` VARCHAR(50),
-  `color_class` VARCHAR(50),
-  `description` TEXT,
-  `lesson_count` INT DEFAULT 0,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB;
+create index IF not exists idx_modules_track_id on public.modules (track_id);
 
--- Table: Modules (Modul Pembelajaran)
-CREATE TABLE `modules` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `track_id` INT NOT NULL,
-  `title` VARCHAR(200) NOT NULL,
-  `slug` VARCHAR(200) UNIQUE NOT NULL,
-  `subtitle` TEXT,
-  `description` TEXT,
-  `content` LONGTEXT,
-  `order` INT DEFAULT 0,
-  `icon` VARCHAR(50),
-  `is_published` BOOLEAN DEFAULT 1,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  FOREIGN KEY (`track_id`) REFERENCES `tracks`(`id`) ON DELETE CASCADE,
-  KEY `idx_track_id` (`track_id`),
-  KEY `idx_slug` (`slug`)
-) ENGINE=InnoDB;
+create index IF not exists idx_modules_slug on public.modules (slug);
 
--- Table: Articles (Artikel & Informasi)
-CREATE TABLE `articles` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `title` VARCHAR(200) NOT NULL,
-  `slug` VARCHAR(200) UNIQUE NOT NULL,
-  `category` VARCHAR(50) NOT NULL,
-  `excerpt` TEXT,
-  `content` LONGTEXT,
-  `author` VARCHAR(100),
-  `image_url` VARCHAR(255),
-  `read_time` INT,
-  `is_published` BOOLEAN DEFAULT 1,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY `idx_category` (`category`),
-  KEY `idx_published` (`is_published`)
-) ENGINE=InnoDB;
+create index IF not exists idx_module_status on public.modules (is_published);
 
--- Insert sample data untuk Tracks
-INSERT INTO `tracks` (`slug`, `title`, `subtitle`, `icon`, `color_class`, `description`, `lesson_count`) VALUES
-('hilir', 'KO AWIS Hilir', 'Optimalisasi Produk & Pasca Panen', '🏭', 'card-hilir', 'Pelajari teknik pengolahan kakao modern untuk meningkatkan nilai produk', 7),
-('entrepreneur', 'KO AWIS Entrepreneur', 'Pembangunan Mentalitas Bisnis', '💰', 'card-entre', 'Kembangkan keterampilan bisnis dan entrepreneurship Anda', 7),
-('digital', 'KO AWIS Digital', 'Transformasi Teknologi & Konten', '💻', 'card-digital', 'Kuasai teknologi digital untuk memasarkan produk kakao', 6),
-('sirkular', 'KO AWIS Sirkular', 'Ekosistem Ramah Lingkungan', '♻️', 'card-sirkular', 'Pembangunan berkelanjutan dan ekonomi sirkular untuk kakao', 6);
+-- Table: articles (Artikel & Informasi)
+create table if not exists public.articles (
+  id bigserial primary key,
+  title varchar(200) not null,
+  slug varchar(200) unique not null,
+  category varchar(50) not null,
+  excerpt text,
+  content text,
+  author varchar(100),
+  image_url varchar(255),
+  read_time int,
+  is_published boolean default true,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
 
--- Insert sample modules untuk Hilir track
-INSERT INTO `modules` (`track_id`, `title`, `slug`, `subtitle`, `description`, `content`, `order`, `is_published`) VALUES
-(1, 'Standar Kualitas Kakao', 'standar-kualitas-kakao', 'Memahami standar internasional', 'Pelajari standar ISO dan SOP pengolahan kakao berkualitas tinggi', '<h2>Standar Kualitas Kakao</h2><p>Kakao berkualitas tinggi memerlukan standar tertentu...</p>', 1, 1),
-(1, 'Fermentasi & Pengeringan', 'fermentasi-pengeringan', 'Teknik dasar pengolahan', 'Proses fermentasi dan pengeringan yang tepat untuk hasil optimal', '<h2>Fermentasi & Pengeringan</h2><p>Fermentasi adalah kunci utama...</p>', 2, 1);
+create index IF not exists idx_articles_category on public.articles (category);
 
--- Table: Admin Users (untuk login admin)
-CREATE TABLE `admin_users` (
-  `id` INT AUTO_INCREMENT PRIMARY KEY,
-  `username` VARCHAR(100) UNIQUE NOT NULL,
-  `email` VARCHAR(100) UNIQUE NOT NULL,
-  `password_hash` VARCHAR(255) NOT NULL,
-  `name` VARCHAR(100),
-  `role` ENUM('admin', 'editor') DEFAULT 'editor',
-  `is_active` BOOLEAN DEFAULT 1,
-  `last_login` TIMESTAMP NULL,
-  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY `idx_username` (`username`),
-  KEY `idx_email` (`email`)
-) ENGINE=InnoDB;
+create index IF not exists idx_article_status on public.articles (is_published);
 
--- Insert default admin (username: admin, password: admin123)
-INSERT INTO `admin_users` (`username`, `email`, `password_hash`, `name`, `role`) VALUES
-('admin', 'admin@koawis.local', '$2y$10$YfHEpfxmHqYgpk3NZRUU.Oa8t9IKfyTwC5kTYvNqZ0qTQQvLfBmYm', 'Admin KO AWIS', 'admin');
+-- Table: admin_users (untuk login admin)
+create table if not exists public.admin_users (
+  id bigserial primary key,
+  username varchar(100) unique not null,
+  email varchar(100) unique not null,
+  password_hash varchar(255) not null,
+  name varchar(100),
+  role varchar(10) default 'editor' check (role in ('admin', 'editor')),
+  is_active boolean default true,
+  last_login timestamptz null,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
 
--- INDEXES untuk optimasi query
-CREATE INDEX `idx_module_status` ON `modules`(`is_published`);
-CREATE INDEX `idx_article_status` ON `articles`(`is_published`);
+create index IF not exists idx_admin_username on public.admin_users (username);
+
+create index IF not exists idx_admin_email on public.admin_users (email);
+
+-- Sample seed data (use Supabase SQL or the dashboard Insert Row feature)
+insert into
+  public.tracks (
+    slug,
+    title,
+    subtitle,
+    icon,
+    color_class,
+    description,
+    lesson_count
+  )
+values
+  (
+    'hilir',
+    'KO AWIS Hilir',
+    'Optimalisasi Produk & Pasca Panen',
+    '🏭',
+    'card-hilir',
+    'Pelajari teknik pengolahan kakao modern untuk meningkatkan nilai produk',
+    7
+  ),
+  (
+    'entrepreneur',
+    'KO AWIS Entrepreneur',
+    'Pembangunan Mentalitas Bisnis',
+    '💰',
+    'card-entre',
+    'Kembangkan keterampilan bisnis dan entrepreneurship Anda',
+    7
+  ),
+  (
+    'digital',
+    'KO AWIS Digital',
+    'Transformasi Teknologi & Konten',
+    '💻',
+    'card-digital',
+    'Kuasai teknologi digital untuk memasarkan produk kakao',
+    6
+  ),
+  (
+    'sirkular',
+    'KO AWIS Sirkular',
+    'Ekosistem Ramah Lingkungan',
+    '♻️',
+    'card-sirkular',
+    'Pembangunan berkelanjutan dan ekonomi sirkular untuk kakao',
+    6
+  );
+
+-- Sample modules for Hilir track (assumes track id 1 exists)
+insert into
+  public.modules (
+    track_id,
+    title,
+    slug,
+    subtitle,
+    description,
+    content,
+    "order",
+    is_published
+  )
+values
+  (
+    (
+      select
+        id
+      from
+        public.tracks
+      where
+        slug = 'hilir'
+      limit
+        1
+    ),
+    'Standar Kualitas Kakao',
+    'standar-kualitas-kakao',
+    'Memahami standar internasional',
+    'Pelajari standar ISO dan SOP pengolahan kakao berkualitas tinggi',
+    '<h2>Standar Kualitas Kakao</h2><p>Kakao berkualitas tinggi memerlukan standar tertentu...</p>',
+    1,
+    true
+  ),
+  (
+    (
+      select
+        id
+      from
+        public.tracks
+      where
+        slug = 'hilir'
+      limit
+        1
+    ),
+    'Fermentasi & Pengeringan',
+    'fermentasi-pengeringan',
+    'Teknik dasar pengolahan',
+    'Proses fermentasi dan pengeringan yang tepat untuk hasil optimal',
+    '<h2>Fermentasi & Pengeringan</h2><p>Fermentasi adalah kunci utama...</p>',
+    2,
+    true
+  );
+
+-- Insert default admin (username: admin, password: admin123) — replace password_hash with a secure bcrypt hash before production
+insert into
+  public.admin_users (username, email, password_hash, name, role)
+values
+  (
+    'admin',
+    'admin@koawis.local',
+    '$2y$10$YfHEpfxmHqYgpk3NZRUU.Oa8t9IKfyTwC5kTYvNqZ0qTQQvLfBmYm',
+    'Admin KO AWIS',
+    'admin'
+  );
