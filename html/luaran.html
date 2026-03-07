@@ -3,13 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Jejak Karya & Luaran — KO AWIS</title>
+  <title>Luaran — KO AWIS</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png">
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* 1. HERO IMPACT - Lebih elegan & modern */
+    /* 1. HERO IMPACT */
     .impact-hero {
       background: var(--cream);
       padding: 9rem 2rem 4rem;
@@ -30,37 +29,61 @@
       margin: 0 auto 3rem; line-height: 1.8;
     }
 
-    /* 2. STATS BAR - Clean Numbering */
+    /* 2. STATS BAR */
     .impact-stats {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 3rem;
-      background: var(--white); padding: 2.5rem; border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md); max-width: 1000px; margin: -5rem auto 4rem;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 4rem;
+      background: var(--white); padding: 2.5rem 4rem; border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md); width: fit-content; max-width: 1000px; margin: -5rem auto 4rem;
       position: relative; z-index: 10; border: 1px solid var(--cream-dark);
     }
     .impact-stat-item { text-align: center; }
     .impact-stat-num { font-size: 3rem; font-weight: 900; color: var(--brown-600); line-height: 1; margin-bottom: 0.5rem; }
     .impact-stat-label { font-size: 0.9rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; }
 
-    /* 3. SHOWCASE ZIG-ZAG (Untuk Karya Unggulan) */
-    .showcase-row {
-      display: flex; align-items: center; gap: 4rem; margin-bottom: 6rem;
-    }
-    .showcase-row.reverse { flex-direction: row-reverse; }
-    .showcase-img {
-      flex: 1; border-radius: var(--radius-xl); overflow: hidden;
-      box-shadow: var(--shadow-lg); position: relative;
-    }
-    .showcase-img img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; }
-    .showcase-content { flex: 1; }
-    .showcase-tag {
-      display: inline-block; padding: 0.4rem 1rem; background: var(--brown-100);
-      color: var(--brown-700); font-size: 0.8rem; font-weight: 700;
-      border-radius: 50px; margin-bottom: 1rem; letter-spacing: 0.05em;
-    }
-    .showcase-title { font-size: 2.2rem; font-weight: 800; color: var(--brown-900); margin-bottom: 1rem; line-height: 1.2; }
-    .showcase-desc { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.5rem; }
+    /* 3. EDITORIAL ZIG-ZAG (Elegan + Dinamis) */
+    .editorial-section { padding: 2rem 0 6rem 0; }
+    .editorial-list { display: flex; flex-direction: column; max-width: 1000px; margin: 0 auto; }
     
-    /* 4. BENTO GRID (Untuk Arsip & Dokumen) - Beda dari Grid Biasa! */
+    /* Layout Normal: Angka - Teks - Gambar */
+    .editorial-item {
+      display: grid; grid-template-columns: 80px 1fr 400px; gap: 3rem;
+      align-items: center; padding: 4.5rem 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .editorial-item:last-child { border-bottom: none; }
+    
+    /* Layout Reverse (Zig-Zag): Gambar - Teks - Angka */
+    .editorial-item.reverse {
+      grid-template-columns: 400px 1fr 80px;
+    }
+    .editorial-item.reverse .ed-content { text-align: left; } 
+    .editorial-item.reverse .ed-number { text-align: right; }
+
+    .ed-number {
+      font-size: 4.5rem; font-weight: 900; color: var(--cream); 
+      line-height: 1; font-family: 'Georgia', serif; opacity: 0.8;
+    }
+    .ed-content { display: flex; flex-direction: column; gap: 0.8rem; }
+    .ed-title { font-size: 1.8rem; font-weight: 800; color: var(--brown-900); margin: 0; }
+    .ed-desc { font-size: 1.05rem; color: var(--text-mid); line-height: 1.7; margin: 0; }
+    
+    .ed-image {
+      width: 100%; height: 300px; border-radius: var(--radius-md);
+      overflow: hidden; box-shadow: var(--shadow-sm);
+    }
+    .ed-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .editorial-item:hover .ed-image img { transform: scale(1.05); }
+
+    /* Mobile Responsive untuk Editorial Zig-Zag */
+    @media (max-width: 900px) {
+      .editorial-item, .editorial-item.reverse { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 0; }
+      .editorial-item.reverse .ed-content, .editorial-item.reverse .ed-number { text-align: left; }
+      .ed-number { font-size: 3.5rem; margin-bottom: -1rem; }
+      .editorial-item .ed-image { order: -1; height: 200px; } /* Gambar selalu di atas saat di HP */
+      .editorial-item.reverse .ed-image { order: -1; }
+    }
+
+    /* 4. BENTO GRID (Untuk Arsip & Dokumen) */
     .bento-grid {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
       grid-auto-rows: 250px; margin-top: 3rem;
@@ -68,26 +91,21 @@
     .bento-card {
       background: var(--white); border-radius: var(--radius-lg); padding: 2rem;
       border: 1px solid var(--cream-dark); display: flex; flex-direction: column;
-      justify-content: space-between; transition: var(--transition); overflow: hidden;
-      position: relative;
+      justify-content: space-between; transition: var(--transition); overflow: hidden; position: relative;
     }
     .bento-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--brown-300); }
     .bento-icon { font-size: 2.5rem; margin-bottom: 1rem; display: inline-block; }
     .bento-title { font-size: 1.25rem; font-weight: 800; color: var(--brown-900); margin-bottom: 0.5rem; line-height: 1.3; z-index: 2; position: relative;}
     .bento-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; z-index: 2; position: relative;}
-    
-    /* Ukuran Asimetris Bento */
     .bento-wide { grid-column: span 2; background: linear-gradient(135deg, var(--brown-800), var(--brown-600)); color: white; }
     .bento-wide .bento-title, .bento-wide .bento-desc { color: white; }
     .bento-tall { grid-row: span 2; }
-    
     .bento-bg-img {
       position: absolute; right: -20px; bottom: -20px; font-size: 10rem; opacity: 0.05; transform: rotate(-15deg); pointer-events: none;
     }
 
     /* Mobile Responsive */
     @media (max-width: 900px) {
-      .showcase-row, .showcase-row.reverse { flex-direction: column; gap: 2rem; margin-bottom: 4rem; }
       .bento-grid { grid-template-columns: 1fr 1fr; }
       .bento-wide, .bento-tall { grid-column: span 1; grid-row: span 1; }
     }
@@ -118,126 +136,80 @@
         <div class="impact-stat-num">26</div>
         <div class="impact-stat-label">Modul Edukasi</div>
       </div>
-      <div class="impact-stat-item">
-        <div class="impact-stat-num">10+</div>
+      <!-- <div class="impact-stat-item">
+        <div class="impact-stat-num">10+</div>
         <div class="impact-stat-label">Dokumen Legal & SOP</div>
-      </div>
-      <div class="impact-stat-item">
-        <div class="impact-stat-num">1</div>
-        <div class="impact-stat-label">Pusat Literasi</div>
-      </div>
+      </div>
+      <div class="impact-stat-item">
+        <div class="impact-stat-num">1</div>
+        <div class="impact-stat-label">Pusat Literasi</div>
+      </div> --> <!--hapus dulu, biar lebih clean dan fokus ke karya utama -->
     </div>
 
-    <section class="section">
+    <section class="editorial-section">
       <div class="container">
-        
-        <div class="showcase-row reveal">
-          <div class="showcase-img">
-            <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80" alt="Buku Pedoman KO AWIS">
-          </div>
-          <div class="showcase-content">
-            <div class="showcase-tag">📘 LUARAN INTELEKTUAL</div>
-            <h2 class="showcase-title"><i class="fas fa-book"></i> Buku Pedoman Ekosistem KO AWIS</h2>
-            <p class="showcase-desc">Buku panduan program KO AWIS yang merangkum materi pembelajaran dari setiap pilar secara sistematis — dirancang praktis agar mudah dipahami dan langsung diterapkan oleh masyarakat Desa Ngawis.</p>
-            <ul style="list-style: none; padding: 0; color: var(--text-mid); font-size: 0.95rem;">
-              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> Terdaftar dengan hak cipta (HKI).</li>
-              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> Bahasa aplikatif yang mudah dicerna warga.</li>
-              <li><i class="fas fa-check-circle"></i> Dilengkapi ilustrasi proses dan kerangka kerja.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="showcase-row reverse reveal">
-          <div class="showcase-img">
-            <img src="https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=800&q=80" alt="Produksi Kakao">
-          </div>
-          <div class="showcase-content">
-            <div class="showcase-tag">⚙️ LUARAN TERAPAN</div>
-            <h2 class="showcase-title"><i class="fas fa-cogs"></i> Standar Operasional (SOP) & CPPDB</h2>
-            <p class="showcase-desc">KO AWIS merumuskan SOP baku serta dokumen Cara Produksi Pangan Olahan yang Baik (CPPDB) untuk memastikan keamanan, higienitas, dan kualitas ekspor pada setiap butir kakao Ngawis.</p>
-            <ul style="list-style: none; padding: 0; color: var(--text-mid); font-size: 0.95rem;">
-              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> SOP Fermentasi dan Pengeringan Berstandar.</li>
-              <li style="margin-bottom: 0.5rem;"><i class="fas fa-check-circle"></i> Desain tata letak "Factory Sharing" skala desa.</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="section section-alt">
-      <div class="container">
-        <div class="text-center reveal">
-          <span class="section-label">Arsip & Publikasi</span>
-          <h2 class="section-title">Meluaskan <span>Dampak</span></h2>
-          <p class="section-sub">Setiap hasil kerja program KO AWIS didokumentasikan dan dipublikasikan agar manfaatnya bisa dirasakan lebih luas.</p>
-        </div>
-
-        <div class="bento-grid">
+        <div class="editorial-list">
           
-          <div class="bento-card bento-wide reveal reveal-delay-1">
-            <div class="bento-bg-img"><i class="fas fa-video"></i></div>
-            <div class="bento-icon"><i class="fas fa-film"></i></div>
-            <div>
-              <h3 class="bento-title">Video Dokumenter Eksklusif</h3>
-              <p class="bento-desc" style="color: rgba(255,255,255,0.8);">Merekam setiap kegiatan warga Desa Ngawis.</p>
+          <div class="editorial-item reveal">
+            <div class="ed-number">01</div>
+            <div class="ed-content">
+              <h2 class="ed-title"><i class="fas fa-file-invoice" style="color: var(--brown-600); margin-right: 5px;"></i> Sublaporan Akhir</h2>
+              <p class="ed-desc">Dokumentasi menyeluruh perjalanan program — mulai dari capaian kegiatan, laporan keuangan, hingga berita acara serah terima sebagai bentuk transparansi dan akuntabilitas program KO AWIS.</p>
+            </div>
+            <div class="ed-image">
+              <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80" alt="Sublaporan Akhir">
             </div>
           </div>
 
-          <div class="bento-card reveal reveal-delay-2">
-            <div class="bento-bg-img" style="color: var(--brown-50);"><i class="fas fa-graduation-cap"></i></div>
-            <div class="bento-icon"><i class="fas fa-file-alt"></i></div>
-            <div>
-              <h3 class="bento-title">Publikasi Jurnal Ilmiah</h3>
-              <p class="bento-desc">Diterbitkan pada jurnal nasional.</p>
+          <div class="editorial-item reverse reveal">
+            <div class="ed-image">
+              <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80" alt="Media Sosial Instagram">
+            </div>
+            <div class="ed-content">
+              <h2 class="ed-title"><i class="fab fa-instagram" style="color: var(--brown-600); margin-right: 5px;"></i> Akun Media Sosial</h2>
+              <p class="ed-desc">Seluruh kegiatan program KO AWIS didokumentasikan dan dibagikan secara terbuka melalui Instagram, TikTok, YouTube, dan LinkedIn sebagai ruang berbagi praktik baik kepada publik.</p>
+            </div>
+            <div class="ed-number">02</div>
+          </div>
+
+          <div class="editorial-item reveal">
+            <div class="ed-number">03</div>
+            <div class="ed-content">
+              <h2 class="ed-title"><i class="fas fa-book" style="color: var(--brown-600); margin-right: 5px;"></i> Buku Refleksi</h2>
+              <p class="ed-desc">Buku Refleksi berjudul <em>“KO AWIS: Pojok Literasi Terpadu di Desa Ngawis”</em>. Buku ini membahas mengenai overview dan perkembangan program pojok literasi terpadu yang meliputi perkembangan hard skill dan soft skill, capaian output dan outcome, capaian hasil dan praktik baik, serta evaluasi pelaksanaan program.</p>
+            </div>
+            <div class="ed-image">
+              <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80" alt="Buku Refleksi">
             </div>
           </div>
 
-          <div class="bento-card reveal reveal-delay-3">
-            <div class="bento-bg-img" style="color: var(--brown-50);"><i class="fas fa-mobile-alt"></i></div>
-            <div class="bento-icon"><i class="fas fa-globe"></i></div>
-            <div>
-              <h3 class="bento-title">Platform Website</h3>
-              <p class="bento-desc">Sistem informasi cerdas untuk akses modul gratis 24/7 tanpa batas.</p>
+          <div class="editorial-item reverse reveal">
+            <div class="ed-image">
+              <img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=800&q=80" alt="Video Dokumenter">
             </div>
+            <div class="ed-content">
+              <h2 class="ed-title"><i class="fas fa-video" style="color: var(--brown-600); margin-right: 5px;"></i> Video Dokumenter</h2>
+              <p class="ed-desc">Sebuah film dokumenter yang merekam perjalanan KO AWIS — dari profil Desa Ngawis, mekanisme program, hingga peran nyata masing-masing anggota CENTRIS dalam pemberdayaan masyarakat. Dapat ditonton secara publik di YouTube.</p>
+            </div>
+            <div class="ed-number">04</div>
           </div>
 
-          <div class="bento-card reveal reveal-delay-1">
-            <div class="bento-bg-img" style="color: var(--brown-50);"><i class="fas fa-image"></i></div>
-            <div class="bento-icon"><i class="fas fa-palette"></i></div>
-            <div>
-              <h3 class="bento-title">Poster Edukasi Visual</h3>
-              <p class="bento-desc">Visualisasi alur produksi dan bisnis yang ditempel di Pojok Literasi agar mudah dipahami berbagai usia.</p>
+          <div class="editorial-item reveal">
+            <div class="ed-number">05</div>
+            <div class="ed-content">
+              <h2 class="ed-title"><i class="fas fa-image" style="color: var(--brown-600); margin-right: 5px;"></i> Poster Publikasi</h2>
+              <p class="ed-desc">Hasil program KO AWIS disebarluaskan melalui poster dan brosur — menjangkau lingkungan kampus, organisasi mahasiswa, hingga masyarakat luas sebagai bentuk diseminasi program.</p>
             </div>
-          </div>
-
-          <div class="bento-card bento-wide reveal reveal-delay-2" style="background: var(--cream);">
-            <div class="bento-bg-img" style="color: var(--white);"><i class="fas fa-newspaper"></i></div>
-            <div class="bento-icon"><i class="fas fa-scroll"></i></div>
-            <div>
-              <h3 class="bento-title">Liputan & Media</h3>
-              <p class="bento-desc">Program KO AWIS diliput di  portal informasi KO AWIS dan aktif berbagi konten edukatif seputar kakao Desa Ngawis di Instagram dan TikTok.</p>
+            <div class="ed-image">
+              <img src="https://images.unsplash.com/photo-1588694931342-a7204193d56d?w=800&q=80" alt="Poster Publikasi">
             </div>
           </div>
 
         </div>
-
       </div>
     </section>
 
-    <div class="section" style="padding-top: 0;">
-      <div class="container">
-        <div style="background: var(--brown-800); border-radius: var(--radius-xl); padding: 4rem; text-align: center; color: white; position: relative; overflow: hidden;" class="reveal">
-          <div style="position: relative; z-index: 2;">
-            <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem;">Seluruh luaran program KO AWIS terbuka untuk masyarakat — karena perubahan nyata dimulai dari akses yang merata.</h2>
-            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">Semua luaran ini didedikasikan sepenuhnya untuk kemajuan masyarakat. Eksplorasi materi kami secara gratis.</p>
-            <button class="btn-primary" style="background: var(--white); color: var(--brown-900);" onclick="location.href='modul.html'">Buka Akses Modul</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
+    </main>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => { 
