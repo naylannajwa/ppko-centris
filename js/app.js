@@ -74,7 +74,7 @@ async function showModulList(track) {
 
     if (modulError) throw modulError;
 
-    document.getElementById('modullist-count').innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ${modules.length} Modul Tersedia`;
+    document.getElementById('modullist-count').innerHTML = `<i class="fas fa-book"></i> ${modules.length} Modul Tersedia`;
 
     if (modules.length === 0) {
       grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted);">Belum ada modul di pilar ini.</div>`;
@@ -91,7 +91,7 @@ async function showModulList(track) {
             <div class="modul-meta">
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               45 Menit
-              ${completedModuls.has(track + '-' + m.id) ? '<span style="color:var(--green-500);margin-left:0.5rem;">✅ Selesai</span>' : ''}
+              ${completedModuls.has(track + '-' + m.id) ? '<span style="color:var(--green-500);margin-left:0.5rem;"><i class="fas fa-check-circle"></i> Selesai</span>' : ''}
             </div>
             <button class="btn-buka">
               Buka Materi →
@@ -169,7 +169,7 @@ function renderSidebar(trackData, modules, currentIndex) {
 
   // Buttons
   document.getElementById('btnPrev').style.display = currentIndex <= 0 ? 'none' : 'flex';
-  document.getElementById('btnNext').textContent = currentIndex >= total - 1 ? '✅ Selesaikan Track' : 'Selesai & Lanjut ke Modul Berikutnya →';
+  document.getElementById('btnNext').innerHTML = currentIndex >= total - 1 ? '<i class="fas fa-check-circle"></i> Selesaikan Track' : 'Selesai & Lanjut ke Modul Berikutnya →';
 }
 
 function renderContent(trackData, modul, modulNum) {
@@ -205,7 +205,7 @@ async function navigateModul(dir) {
   } else {
     // End of track
     if (dir === 1) {
-      showToast('🎉 Selamat! Anda telah menyelesaikan track ini!');
+      showToast('<i class="fas fa-check-circle"></i> Selamat! Anda telah menyelesaikan track ini!');
       setTimeout(() => showModulList(currentTrackSlug), 1500);
       return;
     }
@@ -231,7 +231,7 @@ async function renderArticles(filter) {
 
     if (!articles || articles.length === 0) {
       grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-light);">
-        <div style="font-size:3rem;margin-bottom:1rem;">📭</div>
+        <div style="font-size:3rem;margin-bottom:1rem;"><i class="fas fa-inbox"></i></div>
         <p>Belum ada artikel untuk kategori ini.</p>
       </div>`;
       return;
@@ -245,8 +245,8 @@ async function renderArticles(filter) {
         </div>
         <div class="article-body">
           <div class="article-meta">
-            <span>📅 ${new Date(a.created_at).toLocaleDateString('id-ID')}</span>
-            <span>⏱️ ${a.read_time || 5} min baca</span>
+            <span><i class="far fa-calendar-alt"></i> ${new Date(a.created_at).toLocaleDateString('id-ID')}</span>
+            <span><i class="far fa-clock"></i> ${a.read_time || 5} min baca</span>
           </div>
           <div class="article-title">${a.title}</div>
           <p class="article-excerpt">${a.excerpt}</p>
@@ -279,10 +279,10 @@ function handleFormSubmit() {
   const msg = document.querySelector('.form-textarea').value;
 
   if (!name || !email || !msg) {
-    showToast('⚠️ Mohon isi semua field terlebih dahulu.');
+    showToast('<i class="fas fa-exclamation-triangle"></i> Mohon isi semua field terlebih dahulu.');
     return;
   }
-  showToast('✅ Pesan berhasil dikirim! Tim kami akan menghubungi Anda segera.');
+  showToast('<i class="fas fa-check-circle"></i> Pesan berhasil dikirim! Tim kami akan menghubungi Anda segera.');
   document.querySelectorAll('.form-input, .form-textarea').forEach(el => el.value = '');
 }
 

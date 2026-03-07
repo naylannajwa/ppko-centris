@@ -9,6 +9,8 @@
   <!-- Library -->
   <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; margin: 0; color: #333; }
@@ -81,7 +83,7 @@
 
   <div class="admin-container">
     <div class="card">
-      <h2>📝 Tambah / Edit Modul</h2>
+      <h2><i class="fas fa-edit"></i> Tambah / Edit Modul</h2>
       <div id="alertBox" class="alert"></div>
       
       <form id="moduleForm">
@@ -122,14 +124,14 @@
         </div>
 
         <div style="display:flex; gap:10px;">
-          <button type="submit" class="btn btn-primary" id="btnSave">💾 Simpan Modul</button>
-          <button type="button" class="btn btn-secondary" id="btnCancel" style="display:none;" onclick="resetForm()">❌ Batal</button>
+          <button type="submit" class="btn btn-primary" id="btnSave"><i class="fas fa-save"></i> Simpan Modul</button>
+          <button type="button" class="btn btn-secondary" id="btnCancel" style="display:none;" onclick="resetForm()"><i class="fas fa-times"></i> Batal</button>
         </div>
       </form>
     </div>
 
     <div class="card">
-      <h2>📚 Daftar Modul</h2>
+      <h2><i class="fas fa-book"></i> Daftar Modul</h2>
       <table>
         <thead>
           <tr>
@@ -183,8 +185,8 @@
           <td>${m.tracks?.title || '-'}</td>
           <td>${m.is_published ? '<span style="color:green;">Terbit</span>' : '<span style="color:orange;">Draft</span>'}</td>
           <td>
-            <button class="btn btn-edit" onclick="editModule(${m.id})">Edit</button>
-            <button class="btn btn-danger" onclick="deleteModule(${m.id})">Hapus</button>
+            <button class="btn btn-edit" onclick="editModule(${m.id})"><i class="fas fa-edit"></i> Edit</button>
+            <button class="btn btn-danger" onclick="deleteModule(${m.id})"><i class="fas fa-trash"></i> Hapus</button>
           </td>
         </tr>`).join('');
     }
@@ -199,7 +201,7 @@
         document.getElementById('orderInput').value = data.order || 1;
         document.getElementById('descInput').value = data.description || '';
         editorInstance.setData(data.content || '');
-        document.getElementById('btnSave').textContent = '🔄 Update Modul';
+        document.getElementById('btnSave').innerHTML = '<i class="fas fa-sync-alt"></i> Update Modul';
         document.getElementById('btnCancel').style.display = 'inline-block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -220,11 +222,11 @@
         description: document.getElementById('descInput').value, content: editorInstance.getData(), is_published: true
       };
       const { error } = id ? await supabase.from('modules').update(payload).eq('id', id) : await supabase.from('modules').insert([payload]);
-      if (!error) { showAlert('success', '✅ Data berhasil disimpan!'); resetForm(); loadModules(); } 
-      else { showAlert('error', '❌ Error: ' + error.message); }
+      if (!error) { showAlert('success', '<i class="fas fa-check-circle"></i> Data berhasil disimpan!'); resetForm(); loadModules(); } 
+      else { showAlert('error', '<i class="fas fa-exclamation-circle"></i> Error: ' + error.message); }
     });
 
-    function resetForm() { document.getElementById('moduleForm').reset(); document.getElementById('moduleId').value = ''; editorInstance.setData(''); document.getElementById('btnSave').textContent = '💾 Simpan Modul'; document.getElementById('btnCancel').style.display = 'none'; }
+    function resetForm() { document.getElementById('moduleForm').reset(); document.getElementById('moduleId').value = ''; editorInstance.setData(''); document.getElementById('btnSave').innerHTML = '<i class="fas fa-save"></i> Simpan Modul'; document.getElementById('btnCancel').style.display = 'none'; }
     function showAlert(type, msg) { const box = document.getElementById('alertBox'); box.className = `alert ${type}`; box.textContent = msg; setTimeout(() => { box.style.display = 'none'; }, 3000); }
   </script>
 </body>

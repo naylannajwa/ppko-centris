@@ -9,9 +9,12 @@
   <!-- Library -->
   <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background: #f4f6f8; margin: 0; color: #333; }
+    body { font-family: 'Poppins', sans-serif; background: #f4f6f8; margin: 0; color: #333; }
     
     /* Navbar Admin */
     .admin-nav { background: #fff; padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
@@ -71,7 +74,7 @@
       <img src="../assets/logo-koawis-brand.png" alt="Logo">
       <span>Admin Panel</span>
     </a>
-    <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
+    <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')"><i class="fas fa-bars"></i></button>
     <div class="nav-menu" id="navMenu">
       <a href="index.html" class="nav-item">Dashboard</a>
       <a href="modul.html" class="nav-item">Kelola Modul</a>
@@ -82,7 +85,7 @@
 
   <div class="admin-container">
     <div class="card">
-      <h2>📰 Tambah / Edit Berita</h2>
+      <h2><i class="fas fa-newspaper"></i> Tambah / Edit Berita</h2>
       <div id="alertBox" class="alert"></div>
       
       <form id="articleForm">
@@ -145,14 +148,14 @@
         </div>
 
         <div style="display:flex; gap:10px; margin-top: 1rem;">
-          <button type="submit" class="btn btn-primary" id="btnSave">💾 Simpan Berita</button>
-          <button type="button" class="btn btn-secondary" id="btnCancel" style="display:none;" onclick="resetForm()">❌ Batal</button>
+          <button type="submit" class="btn btn-primary" id="btnSave"><i class="fas fa-save"></i> Simpan Berita</button>
+          <button type="button" class="btn btn-secondary" id="btnCancel" style="display:none;" onclick="resetForm()"><i class="fas fa-times"></i> Batal</button>
         </div>
       </form>
     </div>
 
     <div class="card">
-      <h2>📚 Daftar Berita</h2>
+      <h2><i class="fas fa-list"></i> Daftar Berita</h2>
       <table>
         <thead>
           <tr>
@@ -203,8 +206,8 @@
           <td>${a.author || '-'}</td>
           <td>${a.is_published ? '<span style="color:green;">Terbit</span>' : '<span style="color:orange;">Draft</span>'}</td>
           <td>
-            <button class="btn btn-edit" onclick="editArticle(${a.id})">Edit</button>
-            <button class="btn btn-danger" onclick="deleteArticle(${a.id})">Hapus</button>
+            <button class="btn btn-edit" onclick="editArticle(${a.id})"><i class="fas fa-edit"></i> Edit</button>
+            <button class="btn btn-danger" onclick="deleteArticle(${a.id})"><i class="fas fa-trash"></i> Hapus</button>
           </td>
         </tr>`).join('');
       }
@@ -222,7 +225,7 @@
         document.getElementById('imageUrlInput').value = data.image_url || '';
         document.getElementById('readTimeInput').value = data.read_time || 5;
         document.getElementById('isPublishedInput').checked = data.is_published;
-        document.getElementById('btnSave').textContent = '🔄 Update Berita';
+        document.getElementById('btnSave').innerHTML = '<i class="fas fa-sync-alt"></i> Update Berita';
         document.getElementById('btnCancel').style.display = 'inline-block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -231,7 +234,7 @@
     async function deleteArticle(id) {
       if (!confirm('Yakin hapus berita ini?')) return;
       const { error } = await supabase.from('articles').delete().eq('id', id);
-      if (!error) { showAlert('success', '✅ Berita berhasil dihapus!'); loadArticles(); }
+      if (!error) { showAlert('success', '<i class="fas fa-check-circle"></i> Berita berhasil dihapus!'); loadArticles(); }
       else showAlert('error', 'Gagal hapus: ' + error.message);
     }
 
@@ -246,8 +249,8 @@
         is_published: document.getElementById('isPublishedInput').checked
       };
       const { error } = id ? await supabase.from('articles').update(payload).eq('id', id) : await supabase.from('articles').insert([payload]);
-      if (!error) { showAlert('success', '✅ Data berita berhasil disimpan!'); resetForm(); loadArticles(); } 
-      else { showAlert('error', '❌ Error: ' + error.message); }
+      if (!error) { showAlert('success', '<i class="fas fa-check-circle"></i> Data berita berhasil disimpan!'); resetForm(); loadArticles(); } 
+      else { showAlert('error', '<i class="fas fa-exclamation-circle"></i> Error: ' + error.message); }
     });
 
     function resetForm() {
@@ -255,14 +258,14 @@
       document.getElementById('articleId').value = '';
       editorInstance.setData('');
       document.getElementById('isPublishedInput').checked = true;
-      document.getElementById('btnSave').textContent = '💾 Simpan Berita';
+      document.getElementById('btnSave').innerHTML = '<i class="fas fa-save"></i> Simpan Berita';
       document.getElementById('btnCancel').style.display = 'none';
     }
 
     function showAlert(type, msg) {
       const box = document.getElementById('alertBox');
       box.className = `alert ${type}`;
-      box.textContent = msg;
+      box.innerHTML = msg;
       box.style.display = 'block';
       setTimeout(() => { box.style.display = 'none'; }, 3000);
     }

@@ -7,6 +7,8 @@
   <title>KO AWIS — PPK ORMAWA DESA NGAWIS</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png" style="height: 165px; width: auto;">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
 
@@ -52,10 +54,10 @@
 
       <div class="category-tabs">
         <button class="tab-btn active" onclick="filterArticles('semua', this)">Semua Berita</button>
-        <button class="tab-btn" onclick="filterArticles('pertanian', this)">🌱 Pertanian</button>
-        <button class="tab-btn" onclick="filterArticles('program', this)">🏘️ Program Desa</button>
-        <button class="tab-btn" onclick="filterArticles('komunitas', this)">👥 Komunitas</button>
-        <button class="tab-btn" onclick="filterArticles('pasar', this)">📈 Pasar Kakao</button>
+        <button class="tab-btn" onclick="filterArticles('pertanian', this)"><i class="fas fa-seedling"></i> Pertanian</button>
+        <button class="tab-btn" onclick="filterArticles('program', this)"><i class="fas fa-home"></i> Program Desa</button>
+        <button class="tab-btn" onclick="filterArticles('komunitas', this)"><i class="fas fa-users"></i> Komunitas</button>
+        <button class="tab-btn" onclick="filterArticles('pasar', this)"><i class="fas fa-chart-line"></i> Pasar Kakao</button>
       </div>
 
       <div class="px-2 pb-1">
@@ -67,13 +69,13 @@
       </div>
 
       <div class="pagination">
-        <div class="page-arrow">‹</div>
+        <div class="page-arrow"><i class="fas fa-chevron-left"></i></div>
         <div class="page-num active">1</div>
         <div class="page-num" onclick="showToast('Halaman 2 akan tersedia segera!')">2</div>
         <div class="page-num" onclick="showToast('Halaman 3 akan tersedia segera!')">3</div>
         <div class="page-num">…</div>
         <div class="page-num" onclick="showToast('Masih dalam pengembangan!')">12</div>
-        <div class="page-arrow">›</div>
+        <div class="page-arrow"><i class="fas fa-chevron-right"></i></div>
       </div>
     </div>
   </div>
@@ -90,19 +92,19 @@
           </p>
           <div class="flex-col gap-075">
             <div class="flex items-center gap-075 fs-095 text-mid">
-              <span class="check-icon">✅</span>
+              <span class="check-icon"><i class="fas fa-check-circle"></i></span>
               Pengembangan Kakao — Peningkatan kualitas panen
             </div>
             <div class="flex items-center gap-075 fs-095 text-mid">
-              <span class="check-icon">✅</span>
+              <span class="check-icon"><i class="fas fa-check-circle"></i></span>
               Kewirausahaan — Pembentukan unit bisnis komunitas
             </div>
             <div class="flex items-center gap-075 fs-095 text-mid">
-              <span class="check-icon">✅</span>
+              <span class="check-icon"><i class="fas fa-check-circle"></i></span>
               Transformasi Digital — Efisiensi rantai pasok
             </div>
             <div class="flex items-center gap-075 fs-095 text-mid">
-              <span class="check-icon">✅</span>
+              <span class="check-icon"><i class="fas fa-check-circle"></i></span>
               Ekonomi Sirkular — Pengelolaan limbah bernilai tambah
             </div>
           </div>
@@ -110,7 +112,7 @@
         <div class="reveal reveal-delay-2">
           <div class="bg-brown-800 text-white rounded-xl p-2 pos-relative overflow-hidden">
             <div class="decor-circle"></div>
-            <div class="fs-3rem mb-1">🍫</div>
+            <div class="fs-3rem mb-1"><i class="fas fa-leaf"></i></div>
             <div class="playfair-strong">Sejak 2026</div>
             <p class="text-white-muted fs-095 mb-3">
               Berkomitmen meningkatkan taraf hidup petani kakao Desa Ngawis melalui edukasi berkelanjutan dan teknologi.
@@ -140,17 +142,17 @@
       </div>
       <div class="features-grid">
         <div class="feature-card reveal reveal-delay-1">
-          <div class="feature-icon">📖</div>
+          <div class="feature-icon"><i class="fas fa-book-open"></i></div>
           <div class="feature-title">Kurikulum Berbasis Potensi Lokal</div>
           <p class="feature-desc">Materi dirancang sesuai kondisi dan potensi kakao Desa Ngawis.</p>
         </div>
         <div class="feature-card reveal reveal-delay-2">
-          <div class="feature-icon">👨‍🏫</div>
+          <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
           <div class="feature-title">Pendampingan Langsung</div>
           <p class="feature-desc">Didampingi tim mahasiswa secara langsung di lapangan.</p>
         </div>
         <div class="feature-card reveal reveal-delay-3">
-          <div class="feature-icon">🏆</div>
+          <div class="feature-icon"><i class="fas fa-trophy"></i></div>
           <div class="feature-title">Dampak Nyata di Desa Ngawis</div>
           <p class="feature-desc">Berorientasi pada hasil yang langsung dirasakan masyarakat Desa Ngawis.</p>
         </div>
@@ -191,7 +193,7 @@
           <!-- Hilir -->
           <div class="kurikulum-card">
             <div class="kurikulum-header">
-              <div class="k-icon bg-brown-100 k-icon-lg">🏭</div>
+              <div class="k-icon bg-brown-100 k-icon-lg"><i class="fas fa-industry"></i></div>
               <div>
                 <div class="k-title text-brown-600">KO AWIS Hilir</div>
                 <div class="k-sub">Optimalisasi Produk & Pasca Panen</div>
@@ -235,7 +237,7 @@
           <!-- Entrepreneur -->
           <div class="kurikulum-card">
             <div class="kurikulum-header">
-              <div class="k-icon bg-brown-50 k-icon-lg">💰</div>
+              <div class="k-icon bg-brown-50 k-icon-lg"><i class="fas fa-coins"></i></div>
               <div>
                 <div class="k-title text-brown-700">KO AWIS Entrepreneur</div>
                 <div class="k-sub">Pembangunan Mentalitas Bisnis</div>
@@ -280,7 +282,7 @@
           <!-- Digital -->
           <div class="kurikulum-card">
             <div class="kurikulum-header">
-              <div class="k-icon bg-brown-100 k-icon-lg">💻</div>
+              <div class="k-icon bg-brown-100 k-icon-lg"><i class="fas fa-laptop-code"></i></div>
               <div>
                 <div class="k-title text-brown-500">KO AWIS Digital</div>
                 <div class="k-sub">Transformasi Teknologi & Konten</div>
@@ -321,7 +323,7 @@
           <!-- Sirkular -->
           <div class="kurikulum-card">
             <div class="kurikulum-header">
-              <div class="k-icon bg-brown-50 k-icon-lg">♻️</div>
+              <div class="k-icon bg-brown-50 k-icon-lg"><i class="fas fa-recycle"></i></div>
               <div>
                 <div class="k-title text-brown-600">KO AWIS Sirkular</div>
                 <div class="k-sub">Ekosistem Ramah Lingkungan</div>
@@ -372,7 +374,7 @@
       <div class="modul-list-header">
         <div class="container">
           <div class="breadcrumb">
-            <a onclick="showPage('home')">🏠 Beranda</a>
+            <a onclick="showPage('home')"><i class="fas fa-home"></i> Beranda</a>
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M9 18l6-6-6-6" />
             </svg>
@@ -464,10 +466,10 @@
 
       <div class="category-tabs">
         <button class="tab-btn active" onclick="filterArticles('semua', this)">Semua Berita</button>
-        <button class="tab-btn" onclick="filterArticles('pertanian', this)">🌱 Pertanian</button>
-        <button class="tab-btn" onclick="filterArticles('program', this)">🏘️ Program Desa</button>
-        <button class="tab-btn" onclick="filterArticles('komunitas', this)">👥 Komunitas</button>
-        <button class="tab-btn" onclick="filterArticles('pasar', this)">📈 Pasar Kakao</button>
+        <button class="tab-btn" onclick="filterArticles('pertanian', this)"><i class="fas fa-seedling"></i> Pertanian</button>
+        <button class="tab-btn" onclick="filterArticles('program', this)"><i class="fas fa-home"></i> Program Desa</button>
+        <button class="tab-btn" onclick="filterArticles('komunitas', this)"><i class="fas fa-users"></i> Komunitas</button>
+        <button class="tab-btn" onclick="filterArticles('pasar', this)"><i class="fas fa-chart-line"></i> Pasar Kakao</button>
       </div>
 
       <div class="px-2 pb-1">
@@ -479,13 +481,13 @@
       </div>
 
       <div class="pagination">
-        <div class="page-arrow">‹</div>
+        <div class="page-arrow"><i class="fas fa-chevron-left"></i></div>
         <div class="page-num active">1</div>
         <div class="page-num" onclick="showToast('Halaman 2 akan tersedia segera!')">2</div>
         <div class="page-num" onclick="showToast('Halaman 3 akan tersedia segera!')">3</div>
         <div class="page-num">…</div>
         <div class="page-num" onclick="showToast('Masih dalam pengembangan!')">12</div>
-        <div class="page-arrow">›</div>
+        <div class="page-arrow"><i class="fas fa-chevron-right"></i></div>
       </div>
     </div>
 
@@ -514,20 +516,20 @@
         </div>
         <div class="vision-misi-grid">
           <div class="visi-card">
-            <div class="vm-icon">👁️</div>
+            <div class="vm-icon"><i class="fas fa-eye"></i></div>
             <div class="vm-title">Visi</div>
             <p class="vm-text">Menjadi platform edukasi terdepan yang memberdayakan potensi setiap individu melalui
               akses informasi dan pengetahuan yang setara dan berkelanjutan di seluruh Indonesia.</p>
           </div>
           <div class="misi-card">
-            <div class="vm-icon">🚀</div>
+            <div class="vm-icon"><i class="fas fa-rocket"></i></div>
             <div class="vm-title">Misi</div>
             <div class="vm-list">
-              <div class="vm-list-item"><span class="vm-check">✅</span> Mengembangkan kurikulum pembelajaran yang
+              <div class="vm-list-item"><span class="vm-check"><i class="fas fa-check"></i></span> Mengembangkan kurikulum pembelajaran yang
                 adaptif dan relevan dengan perkembangan industri terkini.</div>
-              <div class="vm-list-item"><span class="vm-check">✅</span> Menyediakan akses platform yang ramah pengguna
+              <div class="vm-list-item"><span class="vm-check"><i class="fas fa-check"></i></span> Menyediakan akses platform yang ramah pengguna
                 untuk memastikan keberlanjutan proses belajar.</div>
-              <div class="vm-list-item"><span class="vm-check">✅</span> Membangun komunitas pembelajaran yang saling
+              <div class="vm-list-item"><span class="vm-check"><i class="fas fa-check"></i></span> Membangun komunitas pembelajaran yang saling
                 mendukung dan berbagi wawasan.</div>
             </div>
           </div>
@@ -582,13 +584,13 @@
         <p>Punya pertanyaan atau ingin bekerja sama? Jangan ragu untuk menghubungi tim kami.</p>
         <div class="contact-items">
           <div class="contact-item">
-            <div class="contact-item-icon">📧</div> kontak@koawis.id
+            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div> kontak@koawis.id
           </div>
           <div class="contact-item">
-            <div class="contact-item-icon">📞</div> +62 21 555 0123
+            <div class="contact-item-icon"><i class="fas fa-phone"></i></div> +62 21 555 0123
           </div>
           <div class="contact-item">
-            <div class="contact-item-icon">📍</div> Desa Merak, Jawa Barat
+            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div> Desa Merak, Jawa Barat
           </div>
         </div>
       </div>
@@ -613,7 +615,7 @@
 
   <!-- Toast Notification -->
   <div class="toast" id="toast">
-    <span>✅</span>
+    <span><i class="fas fa-check-circle"></i></span>
     <span id="toastMsg">Pesan</span>
   </div>
 

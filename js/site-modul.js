@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (modulError) throw modulError;
 
       if (modules && modules.length > 0) {
-        if (countEl) countEl.innerHTML = `📚 ${modules.length} Modul Tersedia`;
+        if (countEl) countEl.innerHTML = `<i class="fas fa-book"></i> ${modules.length} Modul Tersedia`;
 
         grid.innerHTML = modules.map((m, i) => `
           <div class="modul-card-item">
@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="modul-card-body">
               <div class="modul-card-title">${m.title}</div>
               <div class="modul-card-desc">${m.description || ''}</div>
-              <div class="modul-meta">⏱️ Estimasi 45 Menit</div>
+              <div class="modul-meta"><i class="far fa-clock"></i> Estimasi 45 Menit</div>
               <a class="btn-buka" href="isimodul.html?id=${m.id}">Buka Materi →</a>
             </div>
           </div>
         `).join('');
       } else {
-        if (countEl) countEl.innerHTML = `📚 0 Modul Tersedia`;
+        if (countEl) countEl.innerHTML = `<i class="fas fa-book"></i> 0 Modul Tersedia`;
         grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted);">Belum ada modul di pilar ini.</div>`;
       }
     }

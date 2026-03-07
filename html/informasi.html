@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png" style="height: 165px; width: auto;">
 
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <!-- Navbar injected at runtime (no login/register buttons) -->
@@ -26,10 +29,10 @@
 
     <div class="category-tabs" style="margin-top:1rem;">
       <button class="tab-btn active" onclick="filterArticles('semua', this)">Semua Berita</button>
-      <button class="tab-btn" onclick="filterArticles('pertanian', this)">🌱 Pertanian</button>
-      <button class="tab-btn" onclick="filterArticles('program', this)">🏘️ Program Desa</button>
-      <button class="tab-btn" onclick="filterArticles('komunitas', this)">👥 Komunitas</button>
-      <button class="tab-btn" onclick="filterArticles('pasar', this)">📈 Pasar Kakao</button>
+      <button class="tab-btn" onclick="filterArticles('pertanian', this)"><i class="fas fa-seedling"></i> Pertanian</button>
+      <button class="tab-btn" onclick="filterArticles('program', this)"><i class="fas fa-home"></i> Program Desa</button>
+      <button class="tab-btn" onclick="filterArticles('komunitas', this)"><i class="fas fa-users"></i> Komunitas</button>
+      <button class="tab-btn" onclick="filterArticles('pasar', this)"><i class="fas fa-chart-line"></i> Pasar Kakao</button>
     </div>
 
     <div style="padding: 0 2rem 1rem;">
@@ -41,13 +44,13 @@
     </div>
 
     <div class="pagination" style="padding-bottom:2rem;">
-      <div class="page-arrow">‹</div>
+      <div class="page-arrow"><i class="fas fa-chevron-left"></i></div>
       <div class="page-num active">1</div>
       <div class="page-num" onclick="alert('Halaman 2 akan tersedia segera!')">2</div>
       <div class="page-num" onclick="alert('Halaman 3 akan tersedia segera!')">3</div>
       <div class="page-num">…</div>
       <div class="page-num" onclick="alert('Masih dalam pengembangan!')">12</div>
-      <div class="page-arrow">›</div>
+      <div class="page-arrow"><i class="fas fa-chevron-right"></i></div>
     </div>
   </main>
 
@@ -72,7 +75,7 @@
         if (error) throw error;
         
         if (!articles || articles.length === 0) {
-        grid.innerHTML = `<div class="no-articles" style="grid-column:1/-1;text-align:center;padding:3rem;"><div style="font-size:3rem;margin-bottom:1rem;">📭</div><p class="text-muted">Belum ada artikel untuk kategori ini.</p></div>`;
+        grid.innerHTML = `<div class="no-articles" style="grid-column:1/-1;text-align:center;padding:3rem;"><div style="font-size:3rem;margin-bottom:1rem;color:#ccc;"><i class="fas fa-newspaper"></i></div><p class="text-muted">Belum ada artikel untuk kategori ini.</p></div>`;
         return;
       }
       
@@ -80,10 +83,10 @@
         <div class="article-card" onclick="alert('Membuka artikel: ${a.title.substring(0,30)}...')">
           <div class="article-img"><img src="${a.image_url || 'https://via.placeholder.com/400x200'}" alt="${a.title}" loading="lazy"><span class="article-cat-badge">${a.category}</span></div>
           <div class="article-body">
-            <div class="article-meta"><span>📅 ${new Date(a.created_at).toLocaleDateString('id-ID')}</span><span>⏱️ ${a.read_time || 5} min baca</span></div>
+            <div class="article-meta"><span><i class="far fa-calendar-alt"></i> ${new Date(a.created_at).toLocaleDateString('id-ID')}</span><span><i class="far fa-clock"></i> ${a.read_time || 5} min baca</span></div>
             <div class="article-title">${a.title}</div>
             <p class="article-excerpt">${a.excerpt}</p>
-            <div class="article-footer"><div class="article-author"><div class="author-avatar">${(a.author || 'A').charAt(0)}</div><span>${a.author || 'Admin'}</span></div><span class="article-link">Selengkapnya ›</span></div>
+            <div class="article-footer"><div class="article-author"><div class="author-avatar">${(a.author || 'A').charAt(0)}</div><span>${a.author || 'Admin'}</span></div><span class="article-link">Selengkapnya <i class="fas fa-chevron-right" style="font-size:0.8em;"></i></span></div>
           </div>
         </div>
       `).join('');

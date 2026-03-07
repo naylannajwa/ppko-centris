@@ -6,7 +6,7 @@ const SITE_DATA = {
       desc: 'Daftar modul pembelajaran kategori Hilir yang dirancang khusus untuk penguatan kompetensi pengolahan pasca panen dan rantai nilai kakao.',
       count: '7 Modul Tersedia',
       color: '#7B4520',
-      icon: '🏭',
+      icon: '<i class="fas fa-industry"></i>',
       modules: [
         { num: '01', title: 'Konsep Hilirisasi dan Value Chain Kakao', desc: 'Memahami dasar dan urgensi hilirisasi industri untuk peningkatan nilai tambah kakao dari biji hingga produk jadi.', time: '45 Menit', img: 'https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=80' },
         { num: '02', title: 'Kakao Pasca Panen', desc: 'Teknik fermentasi, pengeringan, dan sangrai yang optimal untuk menghasilkan biji kakao berkualitas ekspor.', time: '60 Menit', img: 'https://images.unsplash.com/photo-1606913084603-3e7702b01627?w=400&q=80' },
@@ -22,11 +22,11 @@ const SITE_DATA = {
       desc: 'Pembangunan model bisnis dan perencanaan usaha mandiri untuk wirausahawan kakao desa.',
       count: '7 Modul Tersedia',
       color: '#B8860B',
-      icon: '💰',
+      icon: '<i class="fas fa-coins"></i>',
       modules: []
     },
-    digital: { title: 'KO AWIS Digital', desc: 'Literasi digital dan pemasaran online untuk jangkauan pemasaran yang lebih luas.', count: '6 Modul Tersedia', color: '#9A5F35', icon: '💻', modules: [] },
-    sirkular: { title: 'KO AWIS Sirkular', desc: 'Pengelolaan limbah dan ekonomi sirkular yang ramah lingkungan untuk keberlanjutan ekosistem desa.', count: '6 Modul Tersedia', color: '#C4885A', icon: '♻️', modules: [] }
+    digital: { title: 'KO AWIS Digital', desc: 'Literasi digital dan pemasaran online untuk jangkauan pemasaran yang lebih luas.', count: '6 Modul Tersedia', color: '#9A5F35', icon: '<i class="fas fa-laptop-code"></i>', modules: [] },
+    sirkular: { title: 'KO AWIS Sirkular', desc: 'Pengelolaan limbah dan ekonomi sirkular yang ramah lingkungan untuk keberlanjutan ekosistem desa.', count: '6 Modul Tersedia', color: '#C4885A', icon: '<i class="fas fa-recycle"></i>', modules: [] }
   },
   ARTICLES: [
     { cat: 'pertanian', catLabel: 'PERTANIAN', date: '24 Mei 2024', readTime: '5 min baca', title: 'Teknik Fermentasi Kakao Unggulan untuk Kualitas Ekspor', excerpt: 'Pelajari langkah-langkah fermentasi yang tepat untuk menghasilkan biji kakao dengan aroma dan profil rasa terbaik.', author: 'Agus Hidayat', img: 'https://images.unsplash.com/photo-1606913084603-3e7702b01627?w=400&q=80' },
