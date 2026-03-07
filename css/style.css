@@ -232,17 +232,36 @@ h1,h2,h3,h4,h5,h6, .playfair-strong, .section-article-title, .footer-logo {
 .mobile-menu {
   display: none; flex-direction: column; gap: 0.5rem;
   padding: 1rem 2rem; background: var(--cream);
-  border-bottom: 1px solid var(--cream-dark);
+  border-bottom: 1px solid var(--cream-dark); 
+  
+  /* --- TAMBAHAN KUNCIAN UNTUK MOBILE --- */
+  position: fixed; /* Mengunci menu agar menempel di layar */
+  top: 68px; /* Memulai menu tepat di bawah navbar (tinggi navbar 68px) */
+  left: 0;
+  right: 0;
+  z-index: 99; /* Ditaruh sedikit di bawah z-index navbar (100) */
+  box-shadow: 0 10px 15px -3px rgba(44, 26, 14, 0.1); /* Efek bayangan */
+  max-height: calc(100vh - 68px); /* Mencegah menu bablas jika terlalu panjang */
+  overflow-y: auto; /* Bisa di-scroll jika layar HP pendek */
 }
 .mobile-menu.open { display: flex; }
 .mobile-menu a {
   padding: 0.75rem 0;
-  font-size: 1rem; font-weight: 500;
+  font-size: 1rem; font-weight: 600;
   color: var(--text-mid);
   border-bottom: 1px solid var(--cream-dark);
   cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: var(--radius-sm, 8px);
+  margin: 5px 15px;
 }
 .mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover, 
+.mobile-menu a:active {
+    background-color: rgba(196, 136, 90, 0.12);
+    color: var(--brown-700);
+    padding-left: 1rem;
+}
 
 /* ---- Responsive: show hamburger on small screens ---- */
 @media (max-width: 900px) {

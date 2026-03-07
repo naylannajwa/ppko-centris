@@ -187,7 +187,14 @@
       });
     });
 
+<<<<<<< HEAD
     async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login'; }
+=======
+    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login.html'; }
+
+    async function loadArticles() {
+      const tbody = document.getElementById('tableBody');
+>>>>>>> 712c81ee0106bbce7a2e6719c6469ee4782b0c08
 
     async function loadArticles() {
       const tbody = document.getElementById('tableBody');

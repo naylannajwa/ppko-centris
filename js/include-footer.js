@@ -5,26 +5,32 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // Fetch footer from partials
-  fetch('../html/partials/footer.html?v=2')
-    .then(response => response.text())
-    .then(html => {
-      // Find all existing footers or create a footer container if none exist
-      const existingFooters = document.querySelectorAll('footer');
+  fetch('../html/partials/footer.html?v=6')
+  .then(response => response.text())
+  .then(text => {
+    document.body.insertAdjacentHTML('beforeend', text);
+
+    const footerLogo = document.querySelector('.footer-logo');
+    
+    if (footerLogo) {
+      let clickCount = 0;
+      let clickTimer;
       
-      if (existingFooters.length > 0) {
-        // Replace the first footer found with the centralized one
-        existingFooters[0].outerHTML = html;
+      footerLogo.addEventListener('click', () => {
+        clickCount++;
         
-        // Remove any duplicate footers
-        document.querySelectorAll('footer').forEach((footer, idx) => {
-          if (idx > 0) footer.remove();
-        });
-      } else {
-        // If no footer exists, inject it before the closing body tag
-        const footerContainer = document.createElement('div');
-        footerContainer.innerHTML = html;
-        document.body.appendChild(footerContainer.firstElementChild);
-      }
-    })
-    .catch(err => console.warn('Failed to load footer:', err));
+        if (clickCount === 1) {
+          clickTimer = setTimeout(() => { 
+            clickCount = 0; 
+          }, 2000); 
+        }
+        
+        if (clickCount === 4) {
+          clearTimeout(clickTimer);
+          window.location.href = '../admin/login.html';
+        }
+      });
+    }
+  })
+  .catch(error => console.error('Error loading the footer:', error));
 });
