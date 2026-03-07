@@ -153,23 +153,39 @@ h1,h2,h3,h4,h5,h6, .playfair-strong, .section-article-title, .footer-logo {
 
 /* ---- Navbar ---- */
 .navbar {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(250, 246, 241, 0.95);
+  position: fixed; /* Ubah dari sticky ke fixed agar mengambang di atas background */
+  top: 1rem; /* Mengambang dari atas */
+  left: 50%; /* Pusatkan horizontal */
+  transform: translateX(-50%); /* Pusatkan horizontal */
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.75); /* Transparan untuk efek kaca */
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(196, 136, 90, 0.15);
-  padding: 0 2rem;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 68px;
-  transition: var(--transition);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px; /* Sudut membulat (Rounded Rectangle) */
+  margin: 0; /* Hapus margin auto karena sudah pakai transform */
+  width: 92%; /* Tidak full width agar terlihat mengambang */
+  max-width: 1200px;
+  padding: 0.7rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex; justify-content: center; /* Center content wrapper */
 }
 .navbar.scrolled {
-  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 .nav-brand {
   display: flex; align-items: center; gap: 10px;
   font-size: 1.4rem; font-weight: 700;
   color: var(--brown-800);
   cursor: pointer;
+}
+.nav-brand img {
+  height: 45px; width: auto; transition: height 0.3s ease;
+}
+.navbar .container-wide {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
 }
 .nav-brand .brand-icon {
   width: 40px; height: 40px; border-radius: 10px;
@@ -223,35 +239,75 @@ h1,h2,h3,h4,h5,h6, .playfair-strong, .section-article-title, .footer-logo {
 .btn-daftar:hover { background: var(--brown-700); transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
 .hamburger {
-  display: none; flex-direction: column; gap: 5px; padding: 5px; cursor: pointer;
+  display: none; flex-direction: column; gap: 6px; padding: 5px; cursor: pointer; z-index: 101;
 }
 .hamburger span {
-  width: 24px; height: 2px; background: var(--brown-800); border-radius: 2px;
+  width: 28px; height: 3px; background: var(--brown-800); border-radius: 3px;
+  transition: all 0.3s ease-in-out; transform-origin: center;
+}
+/* Hamburger Animation */
+.hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* ---- New Mobile Menu (Overlay Style) ---- */
+.mobile-nav-overlay {
+  position: fixed; inset: 0;
+  background: rgba(255, 255, 255, 0.98); /* Background lebih solid agar tulisan terbaca */
+  backdrop-filter: blur(20px);
+  z-index: 999; /* Di bawah navbar agar tombol hamburger tetap bisa diklik */
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 2rem;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+}
+
+.mobile-nav-overlay.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-link {
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--brown-800);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.5rem 1rem;
   transition: var(--transition);
+  opacity: 0; transform: translateY(20px); /* For stagger animation */
 }
-.mobile-menu {
-  display: none; flex-direction: column; gap: 0.5rem;
-  padding: 1rem 2rem; background: var(--cream);
-  border-bottom: 1px solid var(--cream-dark);
+
+.mobile-nav-overlay.open .mobile-nav-link {
+  opacity: 1; transform: translateY(0);
+  transition-delay: 0.2s;
 }
-.mobile-menu.open { display: flex; }
-.mobile-menu a {
-  padding: 0.75rem 0;
-  font-size: 1rem; font-weight: 500;
-  color: var(--text-mid);
-  border-bottom: 1px solid var(--cream-dark);
-  cursor: pointer;
+/* Stagger delays */
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(1) { transition-delay: 0.1s; }
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(2) { transition-delay: 0.2s; }
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(3) { transition-delay: 0.3s; }
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(4) { transition-delay: 0.4s; }
+.mobile-nav-overlay.open .mobile-nav-link:nth-child(5) { transition-delay: 0.5s; }
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: var(--brown-500); transform: scale(1.05);
 }
-.mobile-menu a:last-child { border-bottom: none; }
+.mobile-nav-link i { width: 30px; text-align: center; }
 
 /* ---- Responsive: show hamburger on small screens ---- */
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-actions { display: none; }
   .hamburger { display: flex; }
-  .mobile-menu { display: none; }
-  .mobile-menu.open { display: flex; }
-  .navbar { padding: 0 1rem; }
+  .navbar { 
+    width: 95%; /* Lebih lebar di mobile */
+    top: 0.5rem; 
+    padding: 0.5rem 1.2rem;
+  }
+  .nav-brand img { height: 36px; } /* Logo sedikit lebih kecil di mobile */
 }
 
 /* ---- Hero Section ---- */
@@ -554,7 +610,7 @@ footer {
 /* ===== PAGE: MODUL KO AWIS ===== */
 .page-header {
   background: linear-gradient(135deg, var(--brown-900) 0%, var(--brown-700) 100%);
-  padding: 4rem 2rem; text-align: center; position: relative; overflow: hidden;
+  padding: 9rem 2rem 4rem; /* Tambah padding atas agar konten tidak tertutup navbar */ text-align: center; position: relative; overflow: hidden;
 }
 .page-header::after {
   content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
@@ -622,7 +678,7 @@ footer {
 .btn-explore:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
 /* ===== PAGE: DAFTAR MODUL HILIR ===== */
-.modul-list-page { background: var(--cream); min-height: 100vh; }
+.modul-list-page { background: var(--cream); min-height: 100vh; padding-top: 8rem; /* Tambah padding untuk navbar fixed */ }
 .modul-list-header {
   padding: 2rem;
   border-bottom: 1px solid var(--cream-dark);
@@ -692,12 +748,12 @@ footer {
 /* ===== PAGE: ISI MODUL ===== */
 .isi-modul-layout {
   display: grid; grid-template-columns: 260px 1fr;
-  min-height: 100vh;
+  min-height: 100vh; padding-top: 7rem; /* Tambah padding untuk navbar fixed */
 }
 .sidebar-modul {
   background: var(--white);
   border-right: 1px solid var(--cream-dark);
-  padding: 1.5rem; position: sticky; top: 68px;
+  padding: 1.5rem; position: sticky; top: 100px; /* Sesuaikan posisi sticky sidebar */
   height: calc(100vh - 68px); overflow-y: auto;
   flex-shrink: 0;
 }
@@ -879,7 +935,7 @@ modul-content h1 {
 /* ===== PAGE: INFORMASI ===== */
 .info-hero {
   border-radius: var(--radius-xl); overflow: hidden;
-  position: relative; margin: 2rem 2rem 0;
+  position: relative; margin: 8rem 2rem 0; /* Tambah margin atas agar tidak tertutup navbar */
   min-height: 300px; display: flex; align-items: flex-end;
 }
 .info-hero-bg {
@@ -990,7 +1046,7 @@ modul-content h1 {
 
 /* ===== PAGE: TENTANG KAMI ===== */
 .about-hero {
-  border-radius: var(--radius-xl); overflow: hidden; margin: 2rem;
+  border-radius: var(--radius-xl); overflow: hidden; margin: 8rem 2rem 2rem; /* Tambah margin atas */
   min-height: 280px; position: relative;
   display: flex; align-items: flex-end;
 }

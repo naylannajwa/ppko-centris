@@ -295,10 +295,39 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 3500);
 }
 
-// ---- MOBILE MENU ----
-function toggleMobile() {
-  const menu = document.getElementById('mobileMenu');
-  menu.classList.toggle('open');
+// ---- NAVBAR LOGIC (Replaces include-navbar.js) ----
+function initNavbar() {
+  // 1. Active State Logic
+  const path = window.location.pathname;
+  const page = path.split('/').pop() || 'index.html';
+  
+  // Remove previous active classes
+  document.querySelectorAll('.nav-links a, .mobile-nav-link').forEach(a => a.classList.remove('active'));
+
+  // Helper to add active class
+  const setActive = (id) => {
+    document.getElementById('nav-' + id)?.classList.add('active');
+    document.getElementById('mob-' + id)?.classList.add('active');
+  };
+
+  if (page.includes('modul') || page.includes('isimodul')) setActive('modul');
+  else if (page.includes('luaran')) setActive('luaran');
+  else if (page.includes('informasi')) setActive('informasi');
+  else if (page.includes('tentang')) setActive('tentang');
+  else setActive('home');
+
+  // 2. Mobile Menu Toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      // Prevent scrolling when menu is open
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+  }
 }
 
 // ---- NAVBAR SCROLL ----
@@ -321,6 +350,7 @@ function triggerReveal() {
 
 // ---- INIT ----
 document.addEventListener('DOMContentLoaded', () => {
+  initNavbar(); // Initialize Navbar Logic
   showPage('home');
   renderArticles('semua');
   setTimeout(triggerReveal, 100);
