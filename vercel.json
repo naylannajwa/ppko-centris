@@ -1,5 +1,4 @@
 {
-  "cleanUrls": true,
   "functions": {
     "**/*.php": { "runtime": "vercel-php@0.7.2" }
   },
