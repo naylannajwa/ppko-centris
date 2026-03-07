@@ -4,13 +4,13 @@
     <nav class="navbar" id="navbar">
       <div class="container-wide">
         <a href="index.html" class="nav-brand">
-          <img src="../assets/logo-koawis-rectangle2.png" alt="Logo KO AWIS" style="width: 130px; height: auto;">
+          <img src="../assets/logo-koawis-rectangle.png" alt="Logo KO AWIS" style="width: 130px; height: auto;">
         </a>
         <div class="nav-links">
           <a href="index.html" id="nav-home">Beranda</a>
           <a href="modul.html" id="nav-modul">Modul KO AWIS</a>
           <a href="luaran.html" id="nav-luaran">Luaran</a>
-          <a href="informasi.html" id="nav-informasi">Informasi</a>
+          <a href="informasi.html" id="nav-informasi">Galeri Kegiatan</a>
           <a href="tentang.html" id="nav-tentang">Tentang Kami</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -24,7 +24,7 @@
       <a href="index.html" class="mobile-nav-link" id="mob-home"><i class="fas fa-home"></i> Beranda</a>
       <a href="modul.html" class="mobile-nav-link" id="mob-modul"><i class="fas fa-book"></i> Modul KO AWIS</a>
       <a href="luaran.html" class="mobile-nav-link" id="mob-luaran"><i class="fas fa-trophy"></i> Luaran</a>
-      <a href="informasi.html" class="mobile-nav-link" id="mob-informasi"><i class="fas fa-newspaper"></i> Informasi</a>
+      <a href="informasi.html" class="mobile-nav-link" id="mob-informasi"><i class="fas fa-newspaper"></i>Galeri Kegiatan</a>
       <a href="tentang.html" class="mobile-nav-link" id="mob-tentang"><i class="fas fa-users"></i> Tentang Kami</a>
     </div>
   `;

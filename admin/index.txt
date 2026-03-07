@@ -25,7 +25,7 @@ $admin_username = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin');
 <body>
   <div class="admin-container">
     <div class="admin-header">
-      <img src="../assets/logo-koawis-rectangle2.png" alt="Logo KO AWIS" style="height: 120px; margin-bottom: 0px;">
+      <img src="../assets/logo-koawis-rectangle.png" alt="Logo KO AWIS" style="height: 120px; margin-bottom: 0px;">
       <h1 style="margin-top: 0; color: #3D2314; font-size: 1.5rem;">Admin Dashboard</h1>
       <p>Halo, <strong><?= $admin_username ?></strong>! Kelola modul pembelajaran dan konten.</p>
       
