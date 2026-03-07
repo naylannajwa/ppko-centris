@@ -1,4 +1,5 @@
 {
+  "cleanUrls": true,
   "functions": {
     "**/*.php": { "runtime": "vercel-php@0.7.2" }
   },
@@ -9,7 +10,7 @@
     { "source": "/modullist.html", "destination": "/html/modullist.html" },
     { "source": "/isimodul.html", "destination": "/html/isimodul.html" },
     { "source": "/informasi.html", "destination": "/html/informasi.html" },
-    { "source": "/tentang.html", "destination": "/html/tentang.html" },
+    { "source": "/tentang", "destination": "/html/tentang.html" },
     { "source": "/luaran.html", "destination": "/html/luaran.html" },
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/admin/", "destination": "/admin/index.html" },
