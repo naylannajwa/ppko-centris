@@ -73,7 +73,10 @@
     </a>
     <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
     <div class="nav-menu" id="navMenu">
-      <a href="indexk="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
+      <a href="index" class="nav-item">Dashboard</a>
+      <a href="modul" class="nav-item">Kelola Modul</a>
+      <a href="berita" class="nav-item active">Kelola Berita</a>
+      <button onclick="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
     </div>
   </nav>
 
@@ -176,7 +179,7 @@
 
     document.addEventListener('DOMContentLoaded', async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { window.location.href = 'login.html'; return; }
+      if (!session) { window.location.href = 'login'; return; }
 
       loadArticles();
       document.getElementById('titleInput').addEventListener('input', function() {
@@ -184,10 +187,10 @@
       });
     });
 
-    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login.html'; }
+    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login'; }
 
-    asy      const tbody = document.getElementById('tableBody');
-
+    async function loadArticles() {
+      const tbody = document.getElementById('tableBody');
       const { data, error } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
 
       if (error) { tbody.innerHTML = `<tr><td colspan="5" style="color:red;">Error: ${error.message}</td></tr>`; return; }
@@ -204,7 +207,7 @@
             <button class="btn btn-danger" onclick="deleteArticle(${a.id})">Hapus</button>
           </td>
         </tr>`).join('');
-    }
+      }
 
     async function editArticle(id) {
       const { data } = await supabase.from('articles').select('*').eq('id', id).single();

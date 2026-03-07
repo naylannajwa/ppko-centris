@@ -77,13 +77,13 @@
     };
 
     // 1. Render Default "Login Admin" SEGERA
-    renderButton('Login Admin', '../admin/login.html');
+    renderButton('Login Admin', '../admin/login');
 
     // 2. Cek Supabase (Async) -> Update jadi "Dashboard" kalau login
     if (typeof supabase !== 'undefined' && supabase.auth) {
         supabase.auth.getSession().then(({ data }) => {
             if (data?.session) {
-                renderButton('Dashboard', '../admin/index.html');
+                renderButton('Dashboard', '../admin/index');
             }
         });
     }
