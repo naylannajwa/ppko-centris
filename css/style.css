@@ -158,11 +158,11 @@ h1,h2,h3,h4,h5,h6, .playfair-strong, .section-article-title, .footer-logo {
   left: 50%; /* Pusatkan horizontal */
   transform: translateX(-50%); /* Pusatkan horizontal */
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.75); /* Transparan untuk efek kaca */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 24px; /* Sudut membulat (Rounded Rectangle) */
+  background: rgba(255, 255, 255, 0.5); /* Lebih transparan (Glassmorphism) */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 100px; /* Full Rounded (Pill Shape) */
   margin: 0; /* Hapus margin auto karena sudah pakai transform */
   width: 92%; /* Tidak full width agar terlihat mengambang */
   max-width: 1200px;
@@ -198,22 +198,25 @@ h1,h2,h3,h4,h5,h6, .playfair-strong, .section-article-title, .footer-logo {
   display: flex; align-items: center; gap: 0.5rem;
 }
 .nav-links a {
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius-sm);
-  font-size: 1rem; font-weight: 600;
-  color: var(--text-mid);
-  transition: var(--transition);
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px; /* Modern Pill Shape */
+  font-size: 0.95rem; font-weight: 500;
+  color: var(--brown-800);
+  transition: all 0.3s ease;
   cursor: pointer;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.03);
-  backdrop-filter: blur(6px);
+  background: transparent;
 }
-.nav-links a:hover,
+.nav-links a:hover {
+  background: rgba(255,255,255,0.6);
+  color: var(--brown-600);
+  transform: translateY(-1px);
+}
 .nav-links a.active {
-  color: var(--brown-700);
-  background: rgba(196, 136, 90, 0.12);
+  background: var(--brown-800);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(61, 35, 20, 0.25);
+  font-weight: 600;
 }
-.nav-links a.active { font-weight: 600; }
 
 .nav-actions {
   display: flex; align-items: center; gap: 0.75rem;

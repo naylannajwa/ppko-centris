@@ -4,7 +4,7 @@
     <nav class="navbar" id="navbar">
       <div class="container-wide">
         <a href="index.html" class="nav-brand">
-          <img src="../assets/logo-koawis-rectangle2.png" alt="Logo KO AWIS" style="width: 165px; height: auto;">
+          <img src="../assets/logo-koawis-rectangle2.png" alt="Logo KO AWIS" style="width: 130px; height: auto;">
         </a>
         <div class="nav-links">
           <a href="index.html" id="nav-home">Beranda</a>
