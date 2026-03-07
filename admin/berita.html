@@ -73,9 +73,9 @@
     </a>
     <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
     <div class="nav-menu" id="navMenu">
-      <a href="index" class="nav-item">Dashboard</a>
-      <a href="modul" class="nav-item">Kelola Modul</a>
-      <a href="berita" class="nav-item active">Kelola Berita</a>
+      <a href="index.html" class="nav-item">Dashboard</a>
+      <a href="modul.html" class="nav-item">Kelola Modul</a>
+      <a href="berita.html" class="nav-item active">Kelola Berita</a>
       <button onclick="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
     </div>
   </nav>
@@ -179,7 +179,7 @@
 
     document.addEventListener('DOMContentLoaded', async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) { window.location.href = 'login'; return; }
+      if (!session) { window.location.href = 'login.html'; return; }
 
       loadArticles();
       document.getElementById('titleInput').addEventListener('input', function() {
@@ -187,14 +187,7 @@
       });
     });
 
-<<<<<<< HEAD
-    async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login'; }
-=======
     async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login.html'; }
-
-    async function loadArticles() {
-      const tbody = document.getElementById('tableBody');
->>>>>>> 712c81ee0106bbce7a2e6719c6469ee4782b0c08
 
     async function loadArticles() {
       const tbody = document.getElementById('tableBody');
