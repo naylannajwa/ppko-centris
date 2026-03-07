@@ -1,20 +1,20 @@
 (async function(){
   try{
-    const mobileResp = await fetch('../html/partials/mobile-menu.html?v=2');
+    const mobileResp = await fetch('../html/partials/mobile-menu.html?v=3');
     if (!mobileResp.ok) throw new Error(`Gagal load mobile-menu: ${mobileResp.status}`);
     const mobileHtml = await mobileResp.text();
     
-    const navResp = await fetch('../html/partials/navbar.html?v=2');
+    const navResp = await fetch('../html/partials/navbar.html?v=3');
     if (!navResp.ok) throw new Error(`Gagal load navbar: ${navResp.status}`);
     const navHtml = await navResp.text();
 
-    // 1. Hapus navbar/mobile-menu hardcoded jika ada (agar navbar satu aja)
+    // 1. Hapus navbar/mobile-menu hardcoded jika ada
     const existingNav = document.querySelector('.navbar');
     if (existingNav) existingNav.remove();
     const existingMobile = document.getElementById('mobileMenu');
     if (existingMobile) existingMobile.remove();
 
-    // insert so order is: nav then mobile
+    // Insert
     document.body.insertAdjacentHTML('afterbegin', mobileHtml);
     document.body.insertAdjacentHTML('afterbegin', navHtml);
 
@@ -30,67 +30,9 @@
       });
     }
 
-    // 2. Inject Tombol Login Admin (Desktop & Mobile)
-    // --- PERBAIKAN: Render tombol langsung (jangan tunggu cek login) ---
-    const renderButton = (text, url) => {
-        // Desktop
-        let navActions = document.querySelector('.nav-actions');
-        // Buat container jika hilang
-        if (!navActions) {
-            const navbar = document.querySelector('.navbar');
-            if (navbar) {
-                navActions = document.createElement('div');
-                navActions.className = 'nav-actions';
-                const hamburger = document.querySelector('.hamburger');
-                if (hamburger) navbar.insertBefore(navActions, hamburger);
-                else navbar.appendChild(navActions);
-            }
-        }
-
-        if (navActions) {
-            // Cari tombol lama atau buat baru
-            let btn = navActions.querySelector('#btn-login-dynamic');
-            if (!btn) {
-                btn = document.createElement('a');
-                btn.id = 'btn-login-dynamic';
-                btn.className = 'btn-masuk';
-                btn.style.marginLeft = '0.5rem';
-                navActions.appendChild(btn);
-            }
-            btn.textContent = text;
-            btn.href = url;
-        }
-
-        // Mobile
-        if (mobileMenu) {
-            let link = mobileMenu.querySelector('#link-login-dynamic');
-            if (!link) {
-                link = document.createElement('a');
-                link.id = 'link-login-dynamic';
-                link.style.color = 'var(--brown-700)';
-                link.style.fontWeight = '700';
-                mobileMenu.appendChild(link);
-            }
-            link.textContent = text;
-            link.href = url;
-        }
-    };
-
-    // 1. Render Default "Login Admin" SEGERA
-    renderButton('Login Admin', '../admin/login.html');
-
-    // 2. Cek Supabase (Async) -> Update jadi "Dashboard" kalau login
-    if (typeof supabase !== 'undefined' && supabase.auth) {
-        supabase.auth.getSession().then(({ data }) => {
-            if (data?.session) {
-                renderButton('Dashboard', '../admin/index.html');
-            }
-        });
-    }
-
-    // mark active link based on pathname (works for static pages)
+    // 2. Tandai Menu Aktif
     const path = location.pathname;
-    const page = path.split('/').pop(); // Ambil nama file (misal: modul.html)
+    const page = path.split('/').pop(); 
 
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
     
@@ -98,7 +40,7 @@
     else if (page.includes('informasi')) document.getElementById('nav-informasi')?.classList.add('active');
     else if (page.includes('tentang')) document.getElementById('nav-tentang')?.classList.add('active');
     else if (page.includes('luaran')) document.getElementById('nav-luaran')?.classList.add('active');
-    else document.getElementById('nav-home')?.classList.add('active'); // Default home
+    else document.getElementById('nav-home')?.classList.add('active'); 
 
   } catch(e) { console.error('include-navbar failed', e); }
 })();

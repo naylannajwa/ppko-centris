@@ -177,14 +177,13 @@ values
     true
   );
 
--- Insert default admin (username: admin, email: admin@koawis.com, password: adminCentris) — replace password_hash with a secure bcrypt hash before production
 insert into
   public.admin_users (username, email, password_hash, name, role)
 values
   (
     'admin',
     'admin@koawis.com',
-    '$2y$10$fA8T5cfPTgS.gqG5g3j9a.zL5d3bK9W.xY.vU.tS.rQ.pOnMlKjIhG', -- Hash for 'adminCentris'
+    '$2y$10$fA8T5cfPTgS.gqG5g3j9a.zL5d3bK9W.xY.vU.tS.rQ.pOnMlKjIhG',
     'Admin KO AWIS',
     'admin'
   );

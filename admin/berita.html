@@ -73,7 +73,10 @@
     </a>
     <button class="nav-toggle" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
     <div class="nav-menu" id="navMenu">
-      <a href="indexk="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
+      <a href="index.html" class="nav-item">Dashboard</a>
+      <a href="modul.html" class="nav-item">Kelola Modul</a>
+      <a href="berita.html" class="nav-item active">Kelola Berita</a>
+      <button onclick="handleLogout()" class="nav-item btn-logout-nav">Logout</button>
     </div>
   </nav>
 
@@ -186,7 +189,8 @@
 
     async function handleLogout() { await supabase.auth.signOut(); window.location.href = 'login.html'; }
 
-    asy      const tbody = document.getElementById('tableBody');
+    async function loadArticles() {
+      const tbody = document.getElementById('tableBody');
 
       const { data, error } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
 

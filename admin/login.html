@@ -6,6 +6,7 @@
   <title>Admin Login — KO AWIS</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" type="image/png" href="../assets/logo-koawis-brand.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body { background: var(--brown-100); display: flex; align-items: center; justify-content: center; min-height: 100vh; }
     .login-card { background: var(--white); padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: 100%; max-width: 400px; text-align: center; }
@@ -27,11 +28,14 @@
     <form id="loginForm">
       <div class="form-group">
         <label class="form-label">Email</label>
-        <input type="email" id="email" class="form-input" placeholder="admin@koawis.com" required>
+        <input type="email" id="email" class="form-input" placeholder="Masukkan email admin" required>
       </div>
       <div class="form-group">
         <label class="form-label">Password</label>
-        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+        <div style="position: relative;">
+          <input type="password" id="password" class="form-input" placeholder="••••••••" required style="padding-right: 40px;">
+          <i id="togglePassword" class="fa-solid fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-light);"></i>
+        </div>
       </div>
       <button type="submit" class="btn-daftar btn-full" id="btnSubmit">Masuk</button>
     </form>
@@ -49,6 +53,18 @@
     const loginForm = document.getElementById('loginForm');
     const errorMsg = document.getElementById('errorMsg');
     const btnSubmit = document.getElementById('btnSubmit');
+    // --- FITUR LIHAT PASSWORD ---
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+      // Toggle type
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      // Toggle class icon Font Awesome
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
 
     // Cek jika sudah login
     document.addEventListener('DOMContentLoaded', async () => {
