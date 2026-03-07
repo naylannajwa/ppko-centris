@@ -76,11 +76,39 @@
 
     /* Mobile Responsive untuk Editorial Zig-Zag */
     @media (max-width: 900px) {
-      .editorial-item, .editorial-item.reverse { grid-template-columns: 1fr; gap: 1.5rem; padding: 3rem 0; }
-      .editorial-item.reverse .ed-content, .editorial-item.reverse .ed-number { text-align: left; }
-      .ed-number { font-size: 3.5rem; margin-bottom: -1rem; }
-      .editorial-item .ed-image { order: -1; height: 200px; } /* Gambar selalu di atas saat di HP */
-      .editorial-item.reverse .ed-image { order: -1; }
+      .editorial-item, .editorial-item.reverse { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 1.5rem; /* Jarak antara gambar, angka, dan teks sedikit dilegakan */
+        
+        padding: 3rem 2rem; 
+        
+        align-items: flex-start; 
+      }
+      
+      .editorial-item.reverse .ed-content, .editorial-item.reverse .ed-number { 
+        text-align: left; 
+      }
+      
+      .editorial-item .ed-image, .editorial-item.reverse .ed-image { 
+        order: 1; 
+        width: 100%; 
+        height: 240px; 
+      }
+      
+      .editorial-item .ed-number, .editorial-item.reverse .ed-number { 
+        order: 2; 
+        font-size: 3.5rem; 
+        margin-bottom: -0.5rem; 
+      }
+      
+      .editorial-item .ed-content, .editorial-item.reverse .ed-content { 
+        order: 3; 
+        width: 100%; 
+      }
+      
+      .ed-title { font-size: 1.6rem; }
+      .ed-desc { font-size: 1rem; }
     }
 
     /* 4. BENTO GRID (Untuk Arsip & Dokumen) */
