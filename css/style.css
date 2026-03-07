@@ -681,7 +681,7 @@ footer {
 .btn-explore:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
 /* ===== PAGE: DAFTAR MODUL HILIR ===== */
-.modul-list-page { background: var(--cream); min-height: 100vh; padding-top: 8rem; /* Tambah padding untuk navbar fixed */ }
+.modul-list-page { background: var(--cream); min-height: 100vh; padding-top: 9rem; /* Tambah padding untuk navbar fixed */ }
 .modul-list-header {
   padding: 2rem;
   border-bottom: 1px solid var(--cream-dark);
@@ -751,7 +751,7 @@ footer {
 /* ===== PAGE: ISI MODUL ===== */
 .isi-modul-layout {
   display: grid; grid-template-columns: 260px 1fr;
-  min-height: 100vh; padding-top: 7rem; /* Tambah padding untuk navbar fixed */
+  min-height: 100vh; padding-top: 9rem; /* Tambah padding untuk navbar fixed */
 }
 .sidebar-modul {
   background: var(--white);
@@ -938,7 +938,7 @@ modul-content h1 {
 /* ===== PAGE: INFORMASI ===== */
 .info-hero {
   border-radius: var(--radius-xl); overflow: hidden;
-  position: relative; margin: 8rem 2rem 0; /* Tambah margin atas agar tidak tertutup navbar */
+  position: relative; margin: 9rem 2rem 0; /* Tambah margin atas agar tidak tertutup navbar */
   min-height: 300px; display: flex; align-items: flex-end;
 }
 .info-hero-bg {
@@ -1049,7 +1049,7 @@ modul-content h1 {
 
 /* ===== PAGE: TENTANG KAMI ===== */
 .about-hero {
-  border-radius: var(--radius-xl); overflow: hidden; margin: 8rem 2rem 2rem; /* Tambah margin atas */
+  border-radius: var(--radius-xl); overflow: hidden; margin: 9rem 2rem 2rem; /* Tambah margin atas */
   min-height: 280px; position: relative;
   display: flex; align-items: flex-end;
 }
@@ -1175,8 +1175,9 @@ modul-content h1 {
   .modul-navigation { padding: 1rem 1.5rem; }
 
   .cta-section { margin: 0 1rem 3rem; padding: 2.5rem 1.5rem; }
-  .about-hero, .contact-section { margin: 1rem; }
-  .info-hero { margin: 1rem 1rem 0; }
+  .about-hero { margin: 3rem 1rem 2rem; }
+  .contact-section { margin: 2rem 1rem; }
+  .info-hero { margin: 3rem 1rem 0; }
   .modul-cards-grid { padding: 1rem; }
   .articles-grid { padding: 0 1rem 1rem; }
   .category-tabs { padding: 1rem; }
