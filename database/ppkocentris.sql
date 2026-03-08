@@ -27,6 +27,7 @@ create table if not exists public.modules (
   content text,
   "order" int default 0,
   icon varchar(50),
+  image_url varchar(255),
   is_published boolean default true,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
@@ -187,3 +188,28 @@ values
     'Admin KO AWIS',
     'admin'
   );
+
+-- =============================================
+-- STORAGE SETUP (Jalankan jika Bucket belum ada)
+-- =============================================
+-- Membuat bucket public 'article-images'
+insert into storage.buckets (id, name, public)
+values ('article-images', 'article-images', true)
+on conflict (id) do nothing;
+
+-- Policy: Semua orang boleh melihat gambar (SELECT)
+create policy "Public View Images"
+on storage.objects for select
+to public
+using ( bucket_id = 'article-images' );
+
+-- Policy: Hanya Admin (Authenticated) yang boleh upload (INSERT)
+create policy "Admin Upload Images"
+on storage.objects for insert
+to authenticated
+with check ( bucket_id = 'article-images' );
+
+-- =============================================
+-- UPDATE SCHEMA: Tambah kolom image_url ke modules
+-- =============================================
+ALTER TABLE public.modules ADD COLUMN IF NOT EXISTS image_url varchar(255);

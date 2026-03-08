@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         grid.innerHTML = modules.map((m, i) => `
           <div class="modul-card-item">
             <div class="modul-card-img">
-              <img src="https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=80" alt="${m.title}" loading="lazy">
+              <img src="${m.image_url || 'https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400&q=80'}" alt="${m.title}" loading="lazy">
               <div class="modul-badge">MODUL ${i + 1}</div>
             </div>
             <div class="modul-card-body">
