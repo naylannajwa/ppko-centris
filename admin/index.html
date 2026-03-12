@@ -24,7 +24,7 @@
       <div class="admin-nav">
         <button onclick="showSection('modules', this)" class="active">Manajemen Modul</button>
         <button onclick="showSection('articles', this)">Artikel</button>
-        <a href="logout.php"><button class="btn-logout">Logout</button></a>
+        <button onclick="handleLogout()" class="btn-logout">Logout</button>
       </div>
 
     </div>
@@ -209,6 +209,11 @@
         }
       });
     });
+
+    async function handleLogout() { 
+      await supabase.auth.signOut(); 
+      window.location.href = 'login.html'; 
+    }
     
     function showSection(section, btn) {
       document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
